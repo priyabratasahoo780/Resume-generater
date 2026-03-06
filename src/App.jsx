@@ -110,17 +110,36 @@ function App() {
     ]
   });
 
+  const [activeTab, setActiveTab] = useState('edit');
+
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
+    <div className="h-screen bg-slate-50 flex flex-col font-sans overflow-hidden">
       <Header 
         handlePrint={handleDownload}
         isDownloading={isDownloading}
         selectedTemplate={selectedTemplate} 
         setSelectedTemplate={setSelectedTemplate} 
       />
-      <main className="flex-1 flex flex-col lg:flex-row overflow-hidden max-w-[1600px] mx-auto w-full">
+      
+      {/* Mobile Tab Navigation */}
+      <div className="lg:hidden flex border-b border-slate-200 bg-white shrink-0 z-20">
+        <button 
+          onClick={() => setActiveTab('edit')}
+          className={`flex-1 py-3 text-sm font-semibold transition-colors ${activeTab === 'edit' ? 'text-indigo-600 border-b-2 border-indigo-600 bg-indigo-50/50' : 'text-slate-500 hover:bg-slate-50'}`}
+        >
+          Edit Resume
+        </button>
+        <button 
+          onClick={() => setActiveTab('preview')}
+          className={`flex-1 py-3 text-sm font-semibold transition-colors ${activeTab === 'preview' ? 'text-indigo-600 border-b-2 border-indigo-600 bg-indigo-50/50' : 'text-slate-500 hover:bg-slate-50'}`}
+        >
+          Live Preview
+        </button>
+      </div>
+
+      <main className="flex-1 flex flex-col lg:flex-row overflow-hidden max-w-[1600px] mx-auto w-full h-full relative">
         {/* Left Panel: Editor */}
-        <div className="w-full lg:w-1/2 lg:border-r border-slate-200 bg-white overflow-y-auto z-10 shadow-sm relative">
+        <div className={`w-full lg:w-1/2 lg:border-r border-slate-200 bg-white overflow-y-auto z-10 shadow-sm relative h-full flex-shrink-0 lg:flex-shrink ${activeTab === 'edit' ? 'block' : 'hidden lg:block'}`}>
           <EditorPanel 
             resumeData={resumeData} 
             setResumeData={setResumeData} 
@@ -132,7 +151,7 @@ function App() {
         </div>
 
         {/* Right Panel: Preview */}
-        <div className="w-full lg:w-1/2 bg-slate-100 overflow-y-auto p-4 md:p-8 flex justify-center items-start">
+        <div className={`w-full lg:w-1/2 bg-slate-100 overflow-y-auto p-4 sm:p-6 md:p-8 justify-center items-start h-full flex-shrink-0 lg:flex-shrink ${activeTab === 'preview' ? 'flex' : 'hidden lg:flex'}`}>
           <PreviewPanel resumeData={resumeData} selectedTemplate={selectedTemplate} ref={printRef} />
         </div>
       </main>
