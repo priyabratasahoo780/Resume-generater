@@ -251,11 +251,79 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
       </div>
 
       <div className="h-px w-full bg-slate-200" />
-
-      {/* ── Section 4: Projects ── */}
+ 
+      {/* ── Section 4: Experience ── */}
       <div>
         <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
           <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">4</span>
+          Work Experience
+        </h2>
+        <div className="flex flex-col gap-6">
+          {(resumeData.experience || []).map((exp, index) => (
+            <div key={index} className="p-4 border border-slate-200 rounded-lg bg-slate-50 flex flex-col gap-4 relative">
+              <button
+                onClick={() => {
+                  const newExp = [...resumeData.experience];
+                  newExp.splice(index, 1);
+                  setResumeData(prev => ({ ...prev, experience: newExp }));
+                }}
+                className="absolute top-2 right-2 text-red-500 hover:bg-red-50 p-1 rounded-md text-xs font-medium"
+              >
+                Remove
+              </button>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { label: 'Job Title / Company', key: 'title'  },
+                  { label: 'Duration (e.g. 2024-Present)', key: 'duration' },
+                ].map(({ label, key }) => (
+                  <div key={key} className="flex flex-col gap-1.5">
+                    <label className="text-sm font-medium text-slate-700">{label}</label>
+                    <input
+                      type="text"
+                      value={exp[key] || ''}
+                      onChange={(e) => {
+                        const newExp = [...resumeData.experience];
+                        newExp[index] = { ...newExp[index], [key]: e.target.value };
+                        setResumeData(prev => ({ ...prev, experience: newExp }));
+                      }}
+                      className="px-3 py-2 border border-slate-300 rounded-lg text-sm"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-sm font-medium text-slate-700">Description</label>
+                <textarea
+                  value={exp.description || ''}
+                  onChange={(e) => {
+                    const newExp = [...resumeData.experience];
+                    newExp[index] = { ...newExp[index], description: e.target.value };
+                    setResumeData(prev => ({ ...prev, experience: newExp }));
+                  }}
+                  rows={3}
+                  className="px-3 py-2 border border-slate-300 rounded-lg text-sm"
+                />
+              </div>
+            </div>
+          ))}
+          <button
+            onClick={() => setResumeData(prev => ({
+              ...prev,
+              experience: [...(prev.experience || []), { title: 'New Role', description: '', duration: '2024-Present' }]
+            }))}
+            className="w-full py-3 border-2 border-dashed border-indigo-200 rounded-lg text-indigo-600 font-medium hover:bg-indigo-50 transition-colors"
+          >
+            + Add Experience
+          </button>
+        </div>
+      </div>
+
+      <div className="h-px w-full bg-slate-200" />
+ 
+      {/* ── Section 5: Projects ── */}
+      <div>
+        <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+          <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">5</span>
           Projects
         </h2>
         <div className="flex flex-col gap-6">
@@ -321,10 +389,10 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
 
       <div className="h-px w-full bg-slate-200" />
 
-      {/* ── Section 5: Education ── */}
+      {/* ── Section 6: Education ── */}
       <div>
         <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-          <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">5</span>
+          <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">6</span>
           Education
         </h2>
         <div className="flex flex-col gap-6">
@@ -376,10 +444,10 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
         </div>
       </div>
 
-      {/* ── Section 6: Certificates ── */}
+      {/* ── Section 7: Certificates ── */}
       <div>
         <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-          <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">6</span>
+          <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">7</span>
           Certificates
         </h2>
         <div className="flex flex-col gap-1.5">
@@ -399,10 +467,10 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
 
       <div className="h-px w-full bg-slate-200" />
 
-      {/* ── Section 7: Achievements ── */}
+      {/* ── Section 8: Achievements ── */}
       <div>
         <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-          <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">7</span>
+          <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">8</span>
           Achievements
         </h2>
         <div className="flex flex-col gap-1.5">

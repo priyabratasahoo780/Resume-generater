@@ -2,7 +2,7 @@ import React from 'react';
 import { Phone, Mail, Github, Linkedin, MonitorSmartphone } from 'lucide-react';
 
 const ClassicTemplate = ({ data }) => {
-  const { personalInfo, aboutMe, skills, projects, education } = data;
+  const { personalInfo, aboutMe, skills, projects, experience, education } = data;
 
   return (
     <div className="w-full min-h-full bg-white p-12 text-slate-800 font-sans flex flex-col gap-6">
@@ -77,6 +77,28 @@ const ClassicTemplate = ({ data }) => {
               </li>
             ))}
           </ul>
+        </div>
+      )}
+
+      {/* Experience Section */}
+      {experience && experience.length > 0 && (
+        <div className="flex flex-col gap-3">
+          <h3 className="text-xl font-bold uppercase tracking-wider text-black border-b border-slate-300 pb-1">
+            Work Experience
+          </h3>
+          <div className="flex flex-col gap-5">
+            {experience.map((exp, index) => (
+              <div key={index} className="flex flex-col gap-1.5">
+                <div className="flex justify-between items-baseline mb-1">
+                  <h4 className="font-bold text-black text-base">{exp.title}</h4>
+                  <span className="text-xs font-bold text-slate-500">{exp.duration || '2024-Present'}</span>
+                </div>
+                <p className="text-sm leading-relaxed text-slate-700 text-justify">
+                  {exp.description}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

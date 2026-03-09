@@ -1,12 +1,104 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Lock } from 'lucide-react';
 import Header from './components/Header';
 import EditorPanel from './components/EditorPanel';
 import PreviewPanel from './components/PreviewPanel';
+import PasswordProtection from './components/PasswordProtection';
 
 function App() {
   const [selectedTemplate, setSelectedTemplate] = useState('classic');
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return sessionStorage.getItem('is_auth') === 'true';
+  });
+  const [showDevToolsWarning, setShowDevToolsWarning] = useState(false);
   const printRef = useRef();
+
+  useEffect(() => {
+    // Disable Right-Click
+    const handleContextMenu = (e) => e.preventDefault();
+    
+    // Disable Inspect Shortcuts
+    const handleKeyDown = (e) => {
+      if (
+        e.keyCode === 123 || 
+        (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) ||
+        (e.ctrlKey && e.keyCode === 85)
+      ) {
+        e.preventDefault();
+        setShowDevToolsWarning(true);
+      }
+    };
+
+    // Detect DevTools via Window Resize
+    const handleResize = () => {
+      // High threshold to avoid false positives from scrollbars or browser UI
+      const threshold = 250; 
+      const widthDiff = window.outerWidth - window.innerWidth > threshold;
+      const heightDiff = window.outerHeight - window.innerHeight > threshold;
+      
+      // Only trigger if we're authenticated, to avoid locking the login screen itself
+      if ((widthDiff || heightDiff) && isAuthenticated) {
+        setShowDevToolsWarning(true);
+      }
+    };
+
+    window.addEventListener('contextmenu', handleContextMenu);
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('resize', handleResize);
+
+    // 🔒 Advanced Multi-Layer Detection
+    const interval = setInterval(function SECURITY_CHECK_BY_PRIYABRATA_SAHOO() {
+      /*
+        ********************************************************************************
+        *                                                                              *
+        *   🔒  SECURITY ALERT: ACCESS RESTRICTED                                      *
+        *                                                                              *
+        *   TO INSPECT OR MODIFY THIS CODEBASE, PLEASE CONTACT:                       *
+        *   ----------------------------------------------------                       *
+        *   Priyabrata Sahoo                                                           *
+        *                                                                              *
+        ********************************************************************************
+      */
+      
+      // Layer 1: Debugger Speed Trap 
+      // We only run this if NOT already showing the warning to prevent loops
+      if (!showDevToolsWarning) {
+        const start = Date.now();
+        debugger;
+        const end = Date.now();
+        
+        // Increase time to 200ms to allow for some system stutter
+        if (end - start > 200) {
+          setShowDevToolsWarning(true);
+        }
+      }
+
+      // Layer 2: Console Styling Trigger (Safe to keep, but only logs if warning is active)
+      if (showDevToolsWarning) {
+        console.clear();
+        console.log(
+          "%cBUILT BY PRIYABRATA SAHOO",
+          "color: #ff4d4d; font-size: 50px; font-weight: bold; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-shadow: 3px 3px 0px rgba(0,0,0,0.2);"
+        );
+        console.log(
+          "%cStealing code is not cool baby! If you wanna learn, ask me from the contact page 😉",
+          "color: #ffffff; font-size: 18px; font-family: 'Segoe UI', sans-serif; margin-top: 10px;"
+        );
+        console.log(
+          "%c→ https://github.com/Kalpan2007/jobfusion",
+          "color: #6366f1; font-size: 16px; text-decoration: underline; margin-top: 5px;"
+        );
+      }
+    }, 1000);
+
+    return () => {
+      window.removeEventListener('contextmenu', handleContextMenu);
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('resize', handleResize);
+      clearInterval(interval);
+    };
+  }, []);
 
   const handleDownload = () => {
     const element = printRef.current;
@@ -87,18 +179,20 @@ function App() {
     skills: ['HTML5', 'CSS3', 'JAVASCRIPT', 'Version Control- Git , GitHub', 'TAILWIND CSS', 'NODE', 'REACT', 'EXPRESS', 'MongoDB', 'MUI', 'RESTful APIs', 'JWT', 'FIGMA', 'C++'],
     projects: [
       {
+        title: 'React API Project (React + 4 APIs)',
+        github: 'https://github.com/Kalpan2007/React-Api-Project',
+        deploy: 'https://react-api-project-1lql.vercel.app',
+        description: 'The React API Project is a web application that integrates four distinct APIs—Cocktails API, Meals API, Bank API, and Harry Potter API—to create a dynamic user experience. The project allows users to explore and interact with each API to view cocktail recipes, meal suggestions, bank details, and information about Harry Potter characters. Built with React.js, this project demonstrates real-time data integration and API consumption to provide a seamless user experience.'
+      }
+    ],
+    experience: [
+      {
         title: 'JobFusion – Job Portal & Resume Builder (CURRENTLY WORKING)',
         github: 'https://github.com/Kalpan2007/jobfusion',
         figma: 'Link',
         deploy: 'Link to Live Site',
         pullRequests: 'Link',
         description: 'JobFusion is a comprehensive job portal and resume builder designed to help users search and apply for live job listings through the Adzuna API, featuring advanced search filters by category, location, and salary. The platform ensures secure user authentication with JWT-based authentication and offers a modern, responsive UI built with Tailwind CSS & Material UI. A resume builder tool is in progress, designed to help users create ATS-friendly resumes. My role includes designing and developing both frontend (React.js) and backend (Node.js, Express.js), integrating the Adzuna API for real-time job postings, and building the AI-powered resume builder to optimize job applications.'
-      },
-      {
-        title: 'React API Project (React + 4 APIs)',
-        github: 'https://github.com/Kalpan2007/React-Api-Project',
-        deploy: 'https://react-api-project-1lql.vercel.app',
-        description: 'The React API Project is a web application that integrates four distinct APIs—Cocktails API, Meals API, Bank API, and Harry Potter API—to create a dynamic user experience. The project allows users to explore and interact with each API to view cocktail recipes, meal suggestions, bank details, and information about Harry Potter characters. Built with React.js, this project demonstrates real-time data integration and API consumption to provide a seamless user experience.'
       }
     ],
     education: [
@@ -122,6 +216,62 @@ function App() {
   });
 
   const [activeTab, setActiveTab] = useState('edit');
+
+  const handleAuth = () => {
+    setIsAuthenticated(true);
+    sessionStorage.setItem('is_auth', 'true');
+  };
+
+  if (!isAuthenticated) {
+    return <PasswordProtection onAuthenticated={handleAuth} />;
+  }
+
+  if (showDevToolsWarning) {
+    return (
+      <div className="fixed inset-0 z-[200] flex items-center justify-center bg-[#0a0a0a] p-6 text-center">
+        <div className="max-w-md w-full space-y-8 relative z-10 bg-[#121212] p-10 rounded-[2.5rem] border border-white/5 shadow-2xl">
+          <div className="flex flex-col items-center">
+            <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mb-6 border border-white/10">
+              <Lock className="w-8 h-8 text-white/60" />
+            </div>
+            
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-2">Access Restricted</span>
+            <h2 className="text-4xl font-black text-white tracking-tight flex flex-col gap-2">
+              <span>DEV TOOLS</span>
+              <span className="text-white/40 italic font-medium text-3xl">detected</span>
+            </h2>
+            
+            <p className="text-white/40 text-sm mt-6 max-w-[200px] leading-relaxed">
+              Curious about how this was built? Let's connect and chat about it.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3 pt-4">
+            <button 
+              onClick={() => {
+                setShowDevToolsWarning(false);
+                window.location.reload();
+              }}
+              className="w-full py-4 bg-white text-black font-bold rounded-full hover:bg-white/90 transition-all flex items-center justify-center gap-2 text-sm"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+              Return Home
+            </button>
+          </div>
+
+          <div className="flex items-center justify-center gap-8 pt-4">
+            <span className="text-[10px] text-white/20 uppercase tracking-widest font-bold">Privacy</span>
+            <span className="text-[10px] text-white/20 uppercase tracking-widest font-bold">Terms</span>
+            <span className="text-[10px] text-white/20 uppercase tracking-widest font-bold">About</span>
+          </div>
+          
+          <div className="text-[10px] text-white/10 font-medium">© 2025 Priyabrata Sahoo</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-screen bg-slate-50 flex flex-col font-sans overflow-hidden">

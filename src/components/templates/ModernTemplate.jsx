@@ -23,6 +23,7 @@ const ModernTemplate = ({ data }) => {
     aboutMe, 
     skills, 
     projects, 
+    experience,
     education, 
     certificates, 
     achievements,
@@ -206,6 +207,40 @@ const ModernTemplate = ({ data }) => {
               <p className="text-[15px] leading-[1.8] text-slate-600 text-justify font-medium">
                 {aboutMe}
               </p>
+            </div>
+          </div>
+        )}
+
+        {/* Work Experience Section */}
+        {experience && experience.length > 0 && (
+          <div className="flex flex-col gap-8 relative z-10">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-indigo-900 text-white rounded-2xl shadow-lg ring-4 ring-indigo-50">
+                <ExternalLink className="w-6 h-6" />
+              </div>
+              <h3 className="text-2xl font-black uppercase tracking-widest text-indigo-950">
+                Work Experience
+              </h3>
+            </div>
+            <div className="flex flex-col gap-12 ml-6">
+              {experience.map((exp, index) => (
+                <div key={index} className="flex flex-col gap-4 relative pl-10 border-l-4 border-slate-50 group hover:border-indigo-100 transition-all">
+                  <div className="absolute w-6 h-6 bg-white border-4 border-indigo-600 rounded-2xl -left-[14px] top-1 group-hover:rotate-12 group-hover:bg-indigo-600 transition-all shadow-md"></div>
+                  
+                  <div className="flex justify-between items-start">
+                    <div className="flex flex-col gap-1">
+                      <h4 className="font-black text-slate-900 text-xl group-hover:text-indigo-700 transition-colors">
+                        {exp.title}
+                      </h4>
+                      <span className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">{exp.duration || '2024-Present'}</span>
+                    </div>
+                  </div>
+
+                  <p className="text-[14px] leading-relaxed text-slate-600 text-justify font-medium bg-slate-50/50 p-5 rounded-2xl border border-slate-100/50">
+                    {exp.description}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         )}

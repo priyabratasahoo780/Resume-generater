@@ -8,6 +8,7 @@ const ProfessionalTemplate = ({ data }) => {
     aboutMe,
     skills,
     projects,
+    experience,
     education,
     certificates,
     achievements,
@@ -73,11 +74,11 @@ const ProfessionalTemplate = ({ data }) => {
           </section>
         )}
 
-        {/* Work Experience / Projects Split (Simplified as one list in this view) */}
+        {/* Projects Section - RENDERED FIRST */}
         {projects && projects.length > 0 && (
           <section>
             <h2 className="bg-indigo-50 text-indigo-900 px-3 py-1 font-bold uppercase text-xs tracking-widest mb-3 inline-block rounded">
-              Experience & Projects
+              Key Projects
             </h2>
             <div className="flex flex-col gap-4 ml-1">
               {projects.map((project, index) => (
@@ -89,15 +90,38 @@ const ProfessionalTemplate = ({ data }) => {
                     <h3 className="font-bold text-slate-900 text-sm uppercase">
                       {project.title}
                     </h3>
-                    <span className="text-[10px] font-bold text-slate-400">
-                      2024-Present
-                    </span>
                   </div>
-                  <p className="text-[12px] text-slate-600 leading-relaxed italic mb-1">
-                    Developer & Contributor
-                  </p>
                   <p className="text-[12px] leading-snug text-slate-500 text-justify">
                     {project.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Work Experience Section - RENDERED SECOND */}
+        {experience && experience.length > 0 && (
+          <section>
+            <h2 className="bg-indigo-50 text-indigo-900 px-3 py-1 font-bold uppercase text-xs tracking-widest mb-3 inline-block rounded">
+              Work Experience
+            </h2>
+            <div className="flex flex-col gap-4 ml-1">
+              {experience.map((exp, index) => (
+                <div
+                  key={index}
+                  className="border-l-2 border-slate-100 pl-4 pb-1"
+                >
+                  <div className="flex justify-between items-baseline mb-1">
+                    <h3 className="font-bold text-slate-900 text-sm uppercase">
+                      {exp.title}
+                    </h3>
+                    <span className="text-[10px] font-bold text-slate-400">
+                      {exp.duration || '2024-Present'}
+                    </span>
+                  </div>
+                  <p className="text-[12px] leading-snug text-slate-500 text-justify">
+                    {exp.description}
                   </p>
                 </div>
               ))}
