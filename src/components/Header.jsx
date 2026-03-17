@@ -1,7 +1,7 @@
 import React from 'react';
-import { FileText, Download, Loader2 } from 'lucide-react';
+import { FileText, Download, Loader2, Eye, EyeOff } from 'lucide-react';
 
-const Header = ({ handlePrint, isDownloading, selectedTemplate, setSelectedTemplate }) => {
+const Header = ({ handlePrint, isDownloading, selectedTemplate, setSelectedTemplate, isEditorHidden, setIsEditorHidden }) => {
   return (
     <header className="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-50 shadow-sm">
       <div className="flex items-center gap-2">
@@ -33,7 +33,26 @@ const Header = ({ handlePrint, isDownloading, selectedTemplate, setSelectedTempl
           >
             Professional
           </button>
+          <button 
+            onClick={() => setSelectedTemplate('creative')}
+            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${selectedTemplate === 'creative' ? 'bg-white shadow-sm text-indigo-700' : 'text-slate-600 hover:text-slate-900'}`}
+          >
+            Creative
+          </button>
+          <button 
+            onClick={() => setSelectedTemplate('timeline')}
+            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${selectedTemplate === 'timeline' ? 'bg-white shadow-sm text-indigo-700' : 'text-slate-600 hover:text-slate-900'}`}
+          >
+            Timeline
+          </button>
         </div>
+        <button 
+          onClick={() => setIsEditorHidden(!isEditorHidden)}
+          className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-all shadow-sm hidden lg:flex ${isEditorHidden ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'}`}
+        >
+          {isEditorHidden ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+          <span>{isEditorHidden ? 'Show Editor' : 'Preview Mode'}</span>
+        </button>
         <button 
           onClick={handlePrint}
           disabled={isDownloading}

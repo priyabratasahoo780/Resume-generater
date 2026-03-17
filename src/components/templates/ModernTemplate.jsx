@@ -35,7 +35,7 @@ const ModernTemplate = ({ data }) => {
     <div className="w-full min-h-full bg-white text-slate-800 font-sans flex drop-shadow-2xl overflow-hidden border border-slate-200">
       
       {/* Left Sidebar */}
-      <div className="w-[35%] bg-indigo-900 text-indigo-50 p-8 flex flex-col gap-8 h-full relative overflow-hidden">
+      <div className="w-[35%] bg-indigo-900 text-indigo-50 p-5 flex flex-col gap-5 h-full relative overflow-hidden">
         
         {/* Advanced Decorative Background Shapes */}
         <div className="absolute top-[-5%] left-[-10%] w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -50,7 +50,7 @@ const ModernTemplate = ({ data }) => {
         </div>
 
         {/* Profile Header */}
-        <div className="flex flex-col items-center text-center gap-5 py-6 relative z-10">
+        <div className="flex flex-col items-center text-center gap-3 py-4 relative z-10">
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-tr from-indigo-400 to-purple-400 rounded-3xl blur-xl opacity-50 scale-110 animate-pulse" />
             <div className="w-28 h-28 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center shadow-2xl ring-4 ring-indigo-800/80 relative z-10 transform -rotate-3 hover:rotate-0 transition-all duration-500">
@@ -58,7 +58,7 @@ const ModernTemplate = ({ data }) => {
             </div>
           </div>
           <div className="flex flex-col gap-2 mt-2">
-            <h1 className="text-4xl font-black leading-tight tracking-tight text-white drop-shadow-sm">
+            <h1 className="text-3xl font-black leading-tight tracking-tight text-white drop-shadow-sm">
               {personalInfo?.name || 'Your Name'}
             </h1>
             <div className="h-1 w-12 bg-indigo-400 mx-auto rounded-full mb-1"></div>
@@ -172,7 +172,7 @@ const ModernTemplate = ({ data }) => {
         </div>
 
         {/* Decorative Graphic at Bottom Sidebar */}
-        <div className="mt-auto pt-10 pb-4 relative z-10 flex justify-center">
+        <div className="mt-auto pt-6 pb-4 relative z-10 flex justify-center">
            <div className="w-full h-24 border-2 border-dashed border-indigo-700/30 rounded-3xl flex flex-col items-center justify-center gap-2 opacity-60">
               <Zap className="w-6 h-6 text-indigo-500" />
               <span className="text-[9px] font-black uppercase tracking-widest text-indigo-400">Innovation Driven</span>
@@ -182,7 +182,7 @@ const ModernTemplate = ({ data }) => {
       </div>
 
       {/* Right Content */}
-      <div className="w-[65%] p-12 flex flex-col gap-14 h-full bg-white relative overflow-y-auto">
+      <div className="w-[65%] p-6 flex flex-col gap-6 h-full bg-white relative overflow-y-auto">
         
         {/* Subtle grid pattern background for the right side */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-0 bg-[radial-gradient(#4f46e5_1.5px,transparent_1.5px)] [background-size:24px_24px]" />
@@ -198,13 +198,13 @@ const ModernTemplate = ({ data }) => {
               <div className="p-3 bg-indigo-900 text-white rounded-2xl shadow-lg ring-4 ring-indigo-50">
                 <User className="w-6 h-6" />
               </div>
-              <h3 className="text-2xl font-black uppercase tracking-widest text-indigo-950">
+              <h3 className="text-xl font-black uppercase tracking-widest text-indigo-950">
                 Professional Bio
               </h3>
             </div>
             <div className="pl-10 space-y-4">
               <div className="w-16 h-1 bg-gradient-to-r from-indigo-900 to-purple-600 rounded-full" />
-              <p className="text-[15px] leading-[1.8] text-slate-600 text-justify font-medium">
+              <p className="text-[14px] leading-relaxed text-slate-600 text-justify font-medium">
                 {aboutMe}
               </p>
             </div>
@@ -218,11 +218,11 @@ const ModernTemplate = ({ data }) => {
               <div className="p-3 bg-indigo-900 text-white rounded-2xl shadow-lg ring-4 ring-indigo-50">
                 <ExternalLink className="w-6 h-6" />
               </div>
-              <h3 className="text-2xl font-black uppercase tracking-widest text-indigo-950">
+              <h3 className="text-xl font-black uppercase tracking-widest text-indigo-950">
                 Work Experience
               </h3>
             </div>
-            <div className="flex flex-col gap-12 ml-6">
+            <div className="flex flex-col gap-6 ml-6">
               {experience.map((exp, index) => (
                 <div key={index} className="flex flex-col gap-4 relative pl-10 border-l-4 border-slate-50 group hover:border-indigo-100 transition-all">
                   <div className="absolute w-6 h-6 bg-white border-4 border-indigo-600 rounded-2xl -left-[14px] top-1 group-hover:rotate-12 group-hover:bg-indigo-600 transition-all shadow-md"></div>
@@ -252,11 +252,11 @@ const ModernTemplate = ({ data }) => {
               <div className="p-3 bg-indigo-900 text-white rounded-2xl shadow-lg ring-4 ring-indigo-50">
                 <Zap className="w-6 h-6" />
               </div>
-              <h3 className="text-2xl font-black uppercase tracking-widest text-indigo-950">
+              <h3 className="text-xl font-black uppercase tracking-widest text-indigo-950">
                 Top Contributions
               </h3>
             </div>
-            <div className="flex flex-col gap-12 ml-6">
+            <div className="flex flex-col gap-6 ml-6">
               {projects.map((project, index) => (
                 <div key={index} className="flex flex-col gap-4 relative pl-10 border-l-4 border-slate-50 group hover:border-indigo-100 transition-all">
                   <div className="absolute w-6 h-6 bg-white border-4 border-indigo-600 rounded-2xl -left-[14px] top-1 group-hover:rotate-12 group-hover:bg-indigo-600 transition-all shadow-md"></div>
@@ -298,7 +298,7 @@ const ModernTemplate = ({ data }) => {
               <div className="p-3 bg-indigo-900 text-white rounded-2xl shadow-lg ring-4 ring-indigo-50">
                 <BookOpen className="w-6 h-6" />
               </div>
-              <h3 className="text-2xl font-black uppercase tracking-widest text-indigo-950">
+              <h3 className="text-xl font-black uppercase tracking-widest text-indigo-950">
                 Educational Path
               </h3>
             </div>
@@ -341,7 +341,7 @@ const ModernTemplate = ({ data }) => {
               <div className="p-3 bg-indigo-900 text-white rounded-2xl shadow-lg ring-4 ring-indigo-50">
                 <Trophy className="w-6 h-6" />
               </div>
-              <h3 className="text-2xl font-black uppercase tracking-widest text-indigo-950">
+              <h3 className="text-xl font-black uppercase tracking-widest text-indigo-950">
                 Key Accomplishments
               </h3>
             </div>
