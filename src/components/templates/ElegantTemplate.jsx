@@ -9,8 +9,8 @@ const ElegantTemplate = ({ data }) => {
       {/* ── Header ── */}
       <header className="px-10 pt-8 pb-3 flex flex-col items-start gap-4">
         <div className="flex flex-col gap-0.5 w-full">
-          <h1 className="text-[44px] font-bold text-[#1a1a1a] leading-none tracking-tight font-serif">
-            {personalInfo?.name || 'RIDHAM PATEL'}
+          <h1 className="text-[42px] font-bold text-[#1a1a1a] leading-none uppercase tracking-tight font-serif">
+            {personalInfo?.name?.toUpperCase() || 'RIDHAM PATEL'}
           </h1>
           <p className="text-[15px] font-sans font-black text-[#2D4A22] tracking-[0.25em] mt-2 uppercase">
             {personalInfo?.title || 'FULL STACK DEVELOPER'}
