@@ -81,14 +81,29 @@ const ModernTimelineTemplate = ({ data }) => {
             <h3 className="text-[16px] font-extrabold uppercase text-[#2d3748] tracking-[0.2em] border-b-[2px] border-slate-200 pb-1 w-full">
               Skills
             </h3>
-            <ul className="flex flex-col gap-2 pl-1">
-              {(skills || []).map((skill, idx) => (
-                <li key={idx} className="text-[12px] text-[#4a5568] font-bold flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 bg-[#444] rounded-full shrink-0 mt-1.5" />
-                  <span className="leading-tight">{skill}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="flex flex-col gap-4 pl-1">
+              {skills.map((skillGroup, index) => {
+                const parts = skillGroup.includes(':') ? skillGroup.split(':') : [null, skillGroup];
+                const category = parts[0];
+                const skillList = parts.slice(1).join(':').trim();
+
+                return (
+                  <div key={index} className="flex flex-col gap-2">
+                    {category && (
+                      <h4 className="text-[11px] font-black uppercase tracking-wider text-[#2d3748] opacity-70">{category}</h4>
+                    )}
+                    <ul className="flex flex-col gap-1.5 pl-1">
+                      {skillList.split(',').map((skill, sIdx) => (
+                        <li key={sIdx} className="text-[11.5px] text-[#4a5568] font-bold flex items-start gap-2.5">
+                          <span className="w-1 h-1 bg-indigo-400 rounded-full shrink-0 mt-1.5" />
+                          <span className="leading-tight">{skill.trim()}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
           </section>
 
           {/* Certificate */}

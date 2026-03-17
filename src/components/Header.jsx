@@ -14,37 +14,27 @@ const Header = ({ handlePrint, isDownloading, selectedTemplate, setSelectedTempl
       </div>
       
       <div className="flex items-center gap-3">
-        <div className="flex items-center bg-slate-100 rounded-lg p-1 mr-2">
-          <button 
-            onClick={() => setSelectedTemplate('classic')}
-            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${selectedTemplate === 'classic' ? 'bg-white shadow-sm text-indigo-700' : 'text-slate-600 hover:text-slate-900'}`}
-          >
-            Classic
-          </button>
-          <button 
-            onClick={() => setSelectedTemplate('modern')}
-            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${selectedTemplate === 'modern' ? 'bg-white shadow-sm text-indigo-700' : 'text-slate-600 hover:text-slate-900'}`}
-          >
-            Modern
-          </button>
-          <button 
-            onClick={() => setSelectedTemplate('professional')}
-            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${selectedTemplate === 'professional' ? 'bg-white shadow-sm text-indigo-700' : 'text-slate-600 hover:text-slate-900'}`}
-          >
-            Professional
-          </button>
-          <button 
-            onClick={() => setSelectedTemplate('creative')}
-            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${selectedTemplate === 'creative' ? 'bg-white shadow-sm text-indigo-700' : 'text-slate-600 hover:text-slate-900'}`}
-          >
-            Creative
-          </button>
-          <button 
-            onClick={() => setSelectedTemplate('timeline')}
-            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${selectedTemplate === 'timeline' ? 'bg-white shadow-sm text-indigo-700' : 'text-slate-600 hover:text-slate-900'}`}
-          >
-            Timeline
-          </button>
+        <div className="flex items-center bg-slate-100/80 backdrop-blur-sm rounded-xl p-1 shadow-inner border border-slate-200/50">
+          {[
+            { id: 'classic', name: 'Classic' },
+            { id: 'modern', name: 'Modern' },
+            { id: 'professional', name: 'Professional' },
+            { id: 'creative', name: 'Creative' },
+            { id: 'timeline', name: 'Timeline' },
+            { id: 'elegant', name: 'Elegant' }
+          ].map((template) => (
+            <button 
+              key={template.id}
+              onClick={() => setSelectedTemplate(template.id)}
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all duration-300 uppercase tracking-widest ${
+                selectedTemplate === template.id 
+                  ? 'bg-white shadow-md text-indigo-700 ring-1 ring-black/5' 
+                  : 'text-slate-500 hover:text-slate-800 hover:bg-white/50'
+              }`}
+            >
+              {template.name}
+            </button>
+          ))}
         </div>
         <button 
           onClick={() => setIsEditorHidden(!isEditorHidden)}
