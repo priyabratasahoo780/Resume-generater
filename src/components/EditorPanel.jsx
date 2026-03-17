@@ -371,11 +371,11 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
 
       <div className="h-px w-full bg-slate-200" />
 
-      {/* ── Section 4: Hackathon & Team Projects ── */}
+      {/* ── Section 4: Hackathons & Awards ── */}
       <div>
         <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
           <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">4</span>
-          Hackathon & Team Projects
+          Hackathons & Awards
           {selectedTemplate === 'classic' && (
             <span className="text-[10px] text-indigo-500 font-bold uppercase tracking-tight bg-indigo-50 px-2 py-1 rounded-full ml-2">Not in Classic</span>
           )}
@@ -406,6 +406,17 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
                 />
                 <input
                   type="text"
+                  placeholder="Subtitle (e.g. Jan 2026)"
+                  className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
+                  value={hack.subtitle || ''}
+                  onChange={(e) => {
+                    const newHack = [...resumeData.hackathons];
+                    newHack[index].subtitle = e.target.value;
+                    setResumeData({ ...resumeData, hackathons: newHack });
+                  }}
+                />
+                <input
+                  type="text"
                   placeholder="GitHub Link"
                   className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
                   value={hack.github || ''}
@@ -423,6 +434,17 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
                   onChange={(e) => {
                     const newHack = [...resumeData.hackathons];
                     newHack[index].deploy = e.target.value;
+                    setResumeData({ ...resumeData, hackathons: newHack });
+                  }}
+                />
+                <input
+                  type="text"
+                  placeholder="Certificate Link"
+                  className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
+                  value={hack.certificate || ''}
+                  onChange={(e) => {
+                    const newHack = [...resumeData.hackathons];
+                    newHack[index].certificate = e.target.value;
                     setResumeData({ ...resumeData, hackathons: newHack });
                   }}
                 />

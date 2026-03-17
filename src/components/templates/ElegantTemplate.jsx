@@ -60,28 +60,29 @@ const ElegantTemplate = ({ data }) => {
           
           {/* Skills Section */}
           <section className="flex flex-col gap-4 mt-2">
-            <h2 className="text-[21px] font-bold text-[#1a1a1a] border-b-[3px] border-[#2D4A22] pb-1 uppercase tracking-tight w-full">
+            <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b-[3px] border-[#2D4A22] pb-1 uppercase tracking-tight w-full font-sans">
               Skills
             </h2>
             <div className="flex flex-col gap-5">
-              {skills?.map((skillGroup, idx) => {
-                const parts = skillGroup.includes(':') 
-                  ? skillGroup.split(':') 
-                  : ['Skills', skillGroup];
-                const category = parts[0].trim();
-                const skillList = parts.slice(1).join(':').trim();
-                
-                return (
-                  <div key={idx} className="flex flex-col gap-1.5">
-                    <h3 className="text-[16px] font-sans font-bold text-[#2D4A22]">
-                      {category}
-                    </h3>
-                    <p className="text-[14px] font-sans text-slate-700 leading-relaxed font-medium">
-                      {skillList}
-                    </p>
-                  </div>
-                );
-              })}
+              {Object.entries(
+                skills?.reduce((acc, skill) => {
+                  const parts = skill.includes(':') ? skill.split(':') : ['Skills', skill];
+                  const category = parts[0].trim();
+                  const list = parts.slice(1).join(':').trim();
+                  if (!acc[category]) acc[category] = [];
+                  acc[category].push(list);
+                  return acc;
+                }, {}) || {}
+              ).map(([category, skillLists], idx) => (
+                <div key={idx} className="flex flex-col gap-1">
+                  <h3 className="text-[15px] font-sans font-bold text-[#2D4A22]">
+                    {category}
+                  </h3>
+                  <p className="text-[13px] font-sans text-slate-700 leading-relaxed font-medium">
+                    {skillLists.join(', ')}
+                  </p>
+                </div>
+              ))}
             </div>
           </section>
 
@@ -105,7 +106,7 @@ const ElegantTemplate = ({ data }) => {
                       {hack.description}
                     </p>
                     <div className="flex gap-3 ml-5 text-[11px] font-sans font-bold text-slate-500 underline decoration-slate-200 underline-offset-4 decoration-1">
-                      <a href="#">Certificate</a>
+                      <a href={hack.certificate || '#'}>Certificate</a>
                       <span className="text-slate-300 no-underline font-normal">|</span>
                       <a href={hack.github}>Github</a>
                       <span className="text-slate-300 no-underline font-normal">|</span>

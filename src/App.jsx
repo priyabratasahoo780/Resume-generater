@@ -193,8 +193,10 @@ function App() {
     hackathons: [
       {
         title: 'Corporate Expense Manager',
+        subtitle: 'International Grand Challenge | Jan 2026',
         github: 'https://github.com/',
         deploy: 'https://github.com/',
+        certificate: 'https://github.com/',
         video: 'https://youtube.com/',
         description: 'Developed a secure expense platform with OCR receipt scanning and automated approval workflows using Node.js & MongoDB.'
       }
