@@ -18,36 +18,36 @@ const ElegantTemplate = ({ data }) => {
         </div>
 
         {/* Contact Info Row */}
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px] font-sans font-medium text-slate-500 border-b border-slate-200 pb-4 w-full -mt-2">
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] font-sans font-medium text-slate-500 border-b border-slate-200 pb-4 w-full -mt-2">
            {personalInfo?.email && (
-             <div className="flex items-center gap-1">
-               <Mail className="w-3 h-3 text-slate-400" />
-               <span>{personalInfo.email}</span>
+             <div className="flex items-center gap-1.5">
+               <Mail className="w-3.5 h-3.5 text-slate-400" />
+               <span className="text-slate-600">{personalInfo.email}</span>
              </div>
            )}
            {personalInfo?.phone && (
-             <div className="flex items-center gap-1">
-               <Phone className="w-3 h-3 text-slate-400" />
-               <span>{personalInfo.phone}</span>
+             <div className="flex items-center gap-1.5">
+               <Phone className="w-3.5 h-3.5 text-slate-400" />
+               <span className="text-slate-600">{personalInfo.phone}</span>
              </div>
            )}
            {personalInfo?.location && (
-             <div className="flex items-center gap-1">
-               <MapPin className="w-3 h-3 text-slate-400" />
-               <span>{personalInfo.location}</span>
+             <div className="flex items-center gap-1.5">
+               <MapPin className="w-3.5 h-3.5 text-slate-400" />
+               <span className="text-slate-600">{personalInfo.location}</span>
              </div>
            )}
            <div className="flex items-center gap-2 ml-auto">
-             <Globe className="w-3 h-3 text-slate-400" />
-             <div className="flex gap-2 text-slate-600 underline decoration-slate-300 underline-offset-4 decoration-1">
+             <Globe className="w-3.5 h-3.5 text-slate-400" />
+             <div className="flex gap-2 text-slate-600 underline decoration-slate-300 underline-offset-4 decoration-1 font-bold">
                <a href={personalInfo?.linkedin}>LinkedIn</a>
-               <span className="text-slate-300 no-underline">|</span>
+               <span className="text-slate-300 no-underline font-normal">|</span>
                <a href={personalInfo?.github}>Github</a>
-               <span className="text-slate-300 no-underline">|</span>
+               <span className="text-slate-300 no-underline font-normal">|</span>
                <a href={personalInfo?.youtube}>Youtube</a>
-               <span className="text-slate-300 no-underline">|</span>
+               <span className="text-slate-300 no-underline font-normal">|</span>
                <a href={personalInfo?.portfolio}>Portfolio</a>
-               <span className="text-slate-300 no-underline">|</span>
+               <span className="text-slate-300 no-underline font-normal">|</span>
                <a href={personalInfo?.leetcode}>LeetCode</a>
              </div>
            </div>
@@ -60,10 +60,10 @@ const ElegantTemplate = ({ data }) => {
           
           {/* Skills Section */}
           <section className="flex flex-col gap-4 mt-2">
-            <h2 className="text-[18px] font-bold text-[#1a1a1a] border-b border-black pb-1 uppercase tracking-tight w-full">
+            <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b-[3px] border-[#2D4A22] pb-1 uppercase tracking-tight w-full">
               Skills
             </h2>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-5">
               {skills?.map((skillGroup, idx) => {
                 const parts = skillGroup.includes(':') 
                   ? skillGroup.split(':') 
@@ -72,11 +72,11 @@ const ElegantTemplate = ({ data }) => {
                 const skillList = parts.slice(1).join(':').trim();
                 
                 return (
-                  <div key={idx} className="flex flex-col gap-1">
-                    <h3 className="text-[14px] font-sans font-bold text-[#487D39] border-b border-transparent hover:border-[#487D39] w-fit">
+                  <div key={idx} className="flex flex-col gap-1.5">
+                    <h3 className="text-[17px] font-sans font-bold text-[#2D4A22]">
                       {category}
                     </h3>
-                    <p className="text-[12px] font-sans text-slate-600 leading-relaxed font-medium">
+                    <p className="text-[14px] font-sans text-slate-700 leading-relaxed font-medium">
                       {skillList}
                     </p>
                   </div>
