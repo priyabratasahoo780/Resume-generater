@@ -135,15 +135,23 @@ const ProfessionalTemplate = ({ data }) => {
             <h2 className="bg-indigo-50 text-indigo-900 px-3 py-1 font-bold uppercase text-xs tracking-widest mb-3 inline-block rounded">
               Skills
             </h2>
-            <div className="grid grid-cols-5 gap-y-2 gap-x-4 border-l-2 border-indigo-100 pl-4 ml-1">
-              {skills.slice(0, 15).map((skill, index) => (
-                <div key={index} className="flex items-center gap-2">
-                  <span className="w-1 h-1 bg-indigo-400 rounded-full"></span>
-                  <span className="text-[11px] font-medium text-slate-700">
-                    {skill}
-                  </span>
-                </div>
-              ))}
+            <div className="flex flex-col gap-4 border-l-2 border-indigo-100 pl-4 ml-1">
+              {skills.slice(0, 10).map((skillGroup, index) => {
+                const parts = skillGroup.includes(':') ? skillGroup.split(':') : [null, skillGroup];
+                const category = parts[0];
+                const skillList = parts.slice(1).join(':').trim();
+
+                return (
+                  <div key={index} className="flex flex-col gap-1">
+                    {category && (
+                      <h4 className="text-[11px] font-black uppercase text-indigo-900">{category}</h4>
+                    )}
+                    <p className="text-[11px] font-medium text-slate-600 leading-relaxed font-sans">
+                      {skillList}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </section>
         )}

@@ -69,14 +69,24 @@ const ClassicTemplate = ({ data }) => {
           <h3 className="text-xl font-bold uppercase tracking-wider text-black border-b border-slate-300 pb-1">
             Skills
           </h3>
-          <ul className="grid grid-cols-2 md:grid-cols-3 gap-y-2 gap-x-4">
-            {skills.map((skill, index) => (
-              <li key={index} className="flex items-center gap-2 text-sm text-slate-700">
-                <span className="w-1.5 h-1.5 bg-slate-800 rounded-full"></span>
-                {skill}
-              </li>
-            ))}
-          </ul>
+          <div className="flex flex-col gap-4">
+            {skills.map((skillGroup, index) => {
+              const parts = skillGroup.includes(':') ? skillGroup.split(':') : [null, skillGroup];
+              const category = parts[0];
+              const skillList = parts.slice(1).join(':').trim();
+              
+              return (
+                <div key={index} className="flex flex-col gap-1">
+                  {category && (
+                    <h4 className="text-sm font-bold text-black uppercase tracking-tight">{category}</h4>
+                  )}
+                  <p className="text-sm text-slate-700 leading-relaxed">
+                    {skillList}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
 

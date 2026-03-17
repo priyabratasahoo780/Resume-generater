@@ -350,22 +350,73 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
 
       {/* ── Section 3: Skills ── */}
       <div>
-        <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-          <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">3</span>
-          Skills
-        </h2>
-        <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-medium text-slate-700">Comma-separated skills (e.g. React, Node.js, HTML5)</label>
-          <input
-            type="text"
-            value={resumeData.skills.join(', ')}
-            onChange={(e) => {
-              const skillsArray = e.target.value.split(',').map(s => s.trim()).filter(s => s !== '');
-              setResumeData(prev => ({ ...prev, skills: skillsArray }));
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
+            <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">3</span>
+            Skills
+          </h2>
+          <button
+            onClick={() => {
+              setResumeData(prev => ({
+                ...prev,
+                skills: [...(prev.skills || []), 'New Category: Skill 1, Skill 2']
+              }));
             }}
-            className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
-            placeholder="React, CSS3, JavaScript..."
-          />
+            className="text-xs font-bold text-indigo-600 hover:text-indigo-700 underline decoration-indigo-200 underline-offset-4"
+          >
+            + Add Category
+          </button>
+        </div>
+        
+        <div className="flex flex-col gap-5">
+          {(resumeData.skills || []).map((skillGroup, index) => {
+             const parts = skillGroup.includes(':') ? skillGroup.split(':') : ['Skills', skillGroup];
+             const category = parts[0].trim();
+             const list = parts.slice(1).join(':').trim();
+
+             return (
+               <div key={index} className="p-4 border border-slate-200 rounded-xl bg-slate-50/30 flex flex-col gap-4 relative group">
+                  <button
+                    onClick={() => {
+                      const newSkills = resumeData.skills.filter((_, i) => i !== index);
+                      setResumeData({ ...resumeData, skills: newSkills });
+                    }}
+                    className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg z-10"
+                  >
+                    ×
+                  </button>
+                  <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[11px] font-black uppercase tracking-wider text-slate-400">Category Name</label>
+                      <input
+                        type="text"
+                        placeholder="e.g. Languages & Frameworks"
+                        className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm font-bold text-slate-700"
+                        value={category}
+                        onChange={(e) => {
+                          const newSkills = [...resumeData.skills];
+                          newSkills[index] = `${e.target.value}: ${list}`;
+                          setResumeData({ ...resumeData, skills: newSkills });
+                        }}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[11px] font-black uppercase tracking-wider text-slate-400">Skills (comma separated)</label>
+                      <textarea
+                        placeholder="React, Node.js, etc."
+                        className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm min-h-[80px]"
+                        value={list}
+                        onChange={(e) => {
+                          const newSkills = [...resumeData.skills];
+                          newSkills[index] = `${category}: ${e.target.value}`;
+                          setResumeData({ ...resumeData, skills: newSkills });
+                        }}
+                      />
+                    </div>
+                  </div>
+               </div>
+             );
+          })}
         </div>
       </div>
 

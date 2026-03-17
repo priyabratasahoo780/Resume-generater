@@ -124,13 +124,28 @@ const ModernTemplate = ({ data }) => {
             <h3 className="text-[10px] font-black uppercase tracking-[0.25em] text-indigo-400 border-b border-indigo-800/50 pb-3 flex items-center gap-2">
               <Award className="w-4 h-4" /> Core Expertise
             </h3>
-            <div className="flex flex-wrap gap-2.5">
-              {skills.map((skill, index) => (
-                <div key={index} className="px-3 py-1.5 bg-indigo-800/30 text-indigo-100 rounded-xl text-[10px] font-black border border-indigo-700/50 hover:bg-indigo-600 transition-all shadow-sm flex items-center gap-2 capitalize">
-                  <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-pulse" />
-                  {skill}
-                </div>
-              ))}
+            <div className="flex flex-col gap-4">
+              {skills.map((skillGroup, index) => {
+                const parts = skillGroup.includes(':') ? skillGroup.split(':') : [null, skillGroup];
+                const category = parts[0];
+                const skillList = parts.slice(1).join(':').trim();
+                
+                return (
+                  <div key={index} className="flex flex-col gap-2">
+                    {category && (
+                      <h4 className="text-[10px] font-black uppercase tracking-widest text-indigo-300 ml-1">{category}</h4>
+                    )}
+                    <div className="flex flex-wrap gap-2">
+                      {skillList.split(',').map((skill, sIdx) => (
+                        <div key={sIdx} className="px-3 py-1 bg-indigo-800/40 text-indigo-100 rounded-lg text-[9px] font-black border border-indigo-700/50 hover:bg-indigo-600 transition-all shadow-sm flex items-center gap-1.5 capitalize">
+                          <div className="w-1 h-1 bg-indigo-400 rounded-full" />
+                          {skill.trim()}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}

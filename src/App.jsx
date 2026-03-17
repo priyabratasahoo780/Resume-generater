@@ -181,7 +181,12 @@ function App() {
       youtube: 'https://youtube.com/@xyz'
     },
     aboutMe: 'Full-stack MERN developer with a passion for building dynamic, scalable, and user-friendly web applications. Proficient in React, Node.js, Express.js, and MongoDB, with a strong foundation in both front-end and back-end development. Skilled in optimizing workflows and integrating modern technologies, including AI-powered tools, to enhance development efficiency. Constantly exploring new advancements to write clean, maintainable code. Eager to contribute my skills to innovative projects and grow as a developer.',
-    skills: ['HTML5', 'CSS3', 'JAVASCRIPT', 'Version Control- Git , GitHub', 'TAILWIND CSS', 'NODE', 'REACT', 'EXPRESS', 'MongoDB', 'MUI', 'RESTful APIs', 'JWT', 'FIGMA', 'C++'],
+    skills: [
+      'Languages & Frameworks: JavaScript (ES6+), C++, React.js, Tailwind CSS, HTML5, CSS3',
+      'Databases & Backend: MongoDB, Mongoose, REST APIs, Cloudinary, Node.js, Express.js',
+      'Tools & Platforms: Git, GitHub, Postman, npm, Vercel, Netlify, Render',
+      'UI/UX Design: Figma, Wireframing, Prototyping'
+    ],
     projects: [
       {
         title: 'React API Project (React + 4 APIs)',
