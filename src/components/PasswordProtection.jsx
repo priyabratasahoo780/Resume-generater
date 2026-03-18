@@ -9,7 +9,7 @@ const PasswordProtection = ({ onAuthenticated }) => {
 
   // In a real application, this should be handled by a backend
   // For this static site, we'll use a simple hardcoded check
-  const ADMIN_PASSWORD = "24@11@2006";
+  const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
 
   const handleSubmit = (e) => {
     e.preventDefault();
