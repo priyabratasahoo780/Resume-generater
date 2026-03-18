@@ -558,6 +558,8 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
                   { label: 'Project Title', key: 'title'  },
                   { label: 'GitHub Link',   key: 'github' },
                   { label: 'Live Link',     key: 'deploy' },
+                  { label: 'Role',          key: 'role'   },
+                  { label: 'Tech Stack',    key: 'techStack' },
                 ].map(({ label, key }) => (
                   <div key={key} className="flex flex-col gap-1.5">
                     <label className="text-sm font-medium text-slate-700">{label}</label>

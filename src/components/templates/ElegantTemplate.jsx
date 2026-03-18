@@ -89,7 +89,7 @@ const ElegantTemplate = ({ data }) => {
           {/* Hackathons & Awards (Left) */}
           {(hackathons && hackathons.length > 0) && (
             <section className="flex flex-col gap-4">
-              <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b border-black pb-1 uppercase tracking-tight w-full">
+              <h2 className="text-[20px] font-bold text-[#1a1a1a] pb-1 uppercase tracking-tight w-full">
                 Hackathons & Awards
               </h2>
               <div className="flex flex-col gap-5">
@@ -100,6 +100,7 @@ const ElegantTemplate = ({ data }) => {
                       <div className="flex flex-col gap-0.5">
                          <h4 className="text-[16px] font-bold text-[#1a1a1a] leading-tight font-serif">{hack.title}</h4>
                          <p className="text-[12px] font-sans text-slate-500 font-medium italic">{hack.subtitle || 'International Grand Challenge | Jan 2026'}</p>
+                         {hack.subtitle2 && <p className="text-[12px] font-sans text-slate-500 font-medium italic -mt-1">{hack.subtitle2}</p>}
                       </div>
                     </div>
                     <p className="text-[13px] font-sans text-slate-600 leading-snug font-medium ml-5">
@@ -150,7 +151,7 @@ const ElegantTemplate = ({ data }) => {
         <main className="flex-1 flex flex-col gap-6 mt-2">
           
           {/* Expertise & Summary Box - Pixel Perfect Borders */}
-          <section className="bg-[#f9fafb] border-l-[5px] border-[#2D4A22] border-t-[3.5px] border-t-slate-800 p-5 shadow-sm">
+          <section className="bg-[#f9fafb] border-t-[3.5px] border-t-slate-800 p-5 shadow-sm">
             <h2 className="text-[17px] font-bold text-[#1a1a1a] uppercase tracking-widest mb-3">
               Expertise & Summary
             </h2>
@@ -180,130 +181,140 @@ const ElegantTemplate = ({ data }) => {
           </section>
 
           {/* Education & Award */}
-          <section className="flex flex-col gap-4">
-             <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b border-black pb-1 uppercase tracking-tight w-full">
-              Education & Award
-            </h2>
-            <div className="flex flex-col gap-5">
-              {education?.map((edu, idx) => (
-                <div key={idx} className="flex flex-col gap-1">
-                  <div className="flex justify-between items-baseline">
-                    <h4 className="text-[16px] font-bold text-[#1a1a1a] font-serif">{edu.school || edu.institution}</h4>
-                    <span className="text-[14px] font-sans font-black text-[#487D39]">{edu.duration}</span>
+          {(education && education.length > 0) && (
+            <section className="flex flex-col gap-4">
+               <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b border-black pb-1 uppercase tracking-tight w-full">
+                Education & Award
+              </h2>
+              <div className="flex flex-col gap-5">
+                {education?.map((edu, idx) => (
+                  <div key={idx} className="flex flex-col gap-1">
+                    <div className="flex justify-between items-baseline">
+                      <h4 className="text-[16px] font-bold text-[#1a1a1a] font-serif">{edu.school || edu.institution}</h4>
+                      <span className="text-[14px] font-sans font-black text-[#487D39]">{edu.duration}</span>
+                    </div>
+                    <p className="text-[13px] font-sans text-slate-500 italic font-bold">{edu.degree}</p>
                   </div>
-                  <p className="text-[13px] font-sans text-slate-500 italic font-bold">{edu.degree}</p>
-                </div>
-              ))}
-            </div>
-          </section>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Hackathons & Awards (Right/Projects) */}
-          <section className="flex flex-col gap-4">
-            <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b border-black pb-1 uppercase tracking-tight w-full">
-              Hackathons & Awards
-            </h2>
-            <div className="flex flex-col gap-6">
-              {hackathons?.slice(3, 5).map((proj, idx) => (
-                <div key={idx} className="flex flex-col gap-1 group">
-                  <h4 className="text-[16px] font-bold text-[#1a1a1a] font-serif leading-tight">
-                    {proj.title}
-                  </h4>
-                  <p className="text-[13px] font-sans text-slate-500 leading-snug font-bold italic">
-                    {proj.description || 'Toul-Repeatable table layouts with the Tab-1/7. Cool design page...'}
-                  </p>
-                  <div className="flex gap-3 text-[11px] font-sans font-bold text-slate-500 underline decoration-slate-200 underline-offset-4 decoration-1 mt-1">
-                    <a href={proj.github}>Github</a>
-                    <span className="text-slate-300 no-underline font-normal">|</span>
-                    <a href={proj.github}>FMT</a>
-                    <span className="text-slate-300 no-underline font-normal">|</span>
-                    <a href={proj.deploy}>Website</a>
+          {(hackathons && hackathons.length > 3) && (
+            <section className="flex flex-col gap-4">
+              <h2 className="text-[20px] font-bold text-[#1a1a1a] pb-1 uppercase tracking-tight w-full">
+                Hackathons & Awards
+              </h2>
+              <div className="flex flex-col gap-6">
+                {hackathons?.slice(3, 5).map((proj, idx) => (
+                  <div key={idx} className="flex flex-col gap-1 group">
+                    <h4 className="text-[16px] font-bold text-[#1a1a1a] font-serif leading-tight">
+                      {proj.title}
+                    </h4>
+                    <p className="text-[13px] font-sans text-slate-500 leading-snug font-bold italic">
+                      {proj.description || 'Toul-Repeatable table layouts with the Tab-1/7. Cool design page...'}
+                    </p>
+                    <div className="flex gap-3 text-[11px] font-sans font-bold text-slate-500 underline decoration-slate-200 underline-offset-4 decoration-1 mt-1">
+                      <a href={proj.github}>Github</a>
+                      <span className="text-slate-300 no-underline font-normal">|</span>
+                      <a href={proj.github}>FMT</a>
+                      <span className="text-slate-300 no-underline font-normal">|</span>
+                      <a href={proj.deploy}>Website</a>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </section>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Open Source */}
-          <section className="flex flex-col gap-4">
-             <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b border-black pb-1 uppercase tracking-tight w-full">
-              Open Source
-            </h2>
-            <div className="flex flex-col gap-5">
-              {projects?.filter(p => !p.category || p.category === 'Open Source').slice(0, 2).map((proj, idx) => (
-                <div key={idx} className="flex flex-col gap-1.5">
-                  <h4 className="text-[16px] font-bold text-[#1a1a1a] font-serif leading-tight">
-                    {proj.title}
-                  </h4>
-                  <p className="text-[13px] font-sans text-slate-600 leading-snug font-bold">
-                    {proj.description || 'Top metalged tool using React and Fabric.js state management.'}
-                  </p>
-                  <div className="flex gap-3 text-[11px] font-sans font-bold text-slate-500 underline decoration-slate-200 underline-offset-4 decoration-1 mt-1">
-                    <a href={proj.github}>Github</a>
-                    <span className="text-slate-300 no-underline font-normal">|</span>
-                    <a href={proj.deploy}>FMT</a>
-                    <span className="text-slate-300 no-underline font-normal">|</span>
-                    <a href={proj.deploy}>Freeing</a>
+          {projects?.some(p => !p.category || p.category === 'Open Source') && (
+            <section className="flex flex-col gap-4">
+               <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b border-black pb-1 uppercase tracking-tight w-full">
+                Open Source
+              </h2>
+              <div className="flex flex-col gap-5">
+                {projects?.filter(p => !p.category || p.category === 'Open Source').slice(0, 2).map((proj, idx) => (
+                  <div key={idx} className="flex flex-col gap-1.5">
+                    <h4 className="text-[16px] font-bold text-[#1a1a1a] font-serif leading-tight">
+                      {proj.title}
+                    </h4>
+                    <p className="text-[13px] font-sans text-slate-600 leading-snug font-bold">
+                      {proj.description || 'Top metalged tool using React and Fabric.js state management.'}
+                    </p>
+                    <div className="flex gap-3 text-[11px] font-sans font-bold text-slate-500 underline decoration-slate-200 underline-offset-4 decoration-1 mt-1">
+                      <a href={proj.github}>Github</a>
+                      <span className="text-slate-300 no-underline font-normal">|</span>
+                      <a href={proj.deploy}>FMT</a>
+                      <span className="text-slate-300 no-underline font-normal">|</span>
+                      <a href={proj.deploy}>Freeing</a>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </section>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Professional Projects */}
-          <section className="flex flex-col gap-4">
-             <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b border-black pb-1 uppercase tracking-tight w-full">
-              Professional Projects
-            </h2>
-            <div className="flex flex-col gap-5">
-              {projects?.slice(0, 2).map((proj, idx) => (
-                <div key={idx} className="flex flex-col gap-1.5">
-                  <h4 className="text-[16px] font-bold text-[#1a1a1a] font-serif leading-tight">
-                    {proj.title}
-                  </h4>
-                  <p className="text-[13px] font-sans text-slate-600 leading-snug font-bold">
-                    {proj.description || 'Full stack web application built with React, Node.js, Express.js and MongoDB.'}
-                  </p>
-                  <div className="flex gap-3 text-[11px] font-sans font-bold text-slate-500 underline decoration-slate-200 underline-offset-4 decoration-1 mt-1">
-                    <a href={proj.github}>Github</a>
-                    <span className="text-slate-300 no-underline font-normal">|</span>
-                    <a href={proj.deploy}>Demo</a>
-                    <span className="text-slate-300 no-underline font-normal">|</span>
-                    <a href={proj.github}>PRs</a>
+          {(projects && projects.length > 0) && (
+            <section className="flex flex-col gap-4">
+               <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b border-black pb-1 uppercase tracking-tight w-full">
+                Professional Projects
+              </h2>
+              <div className="flex flex-col gap-5">
+                {projects?.slice(0, 2).map((proj, idx) => (
+                  <div key={idx} className="flex flex-col gap-1.5">
+                    <h4 className="text-[16px] font-bold text-[#1a1a1a] font-serif leading-tight">
+                      {proj.title}
+                    </h4>
+                    <p className="text-[13px] font-sans text-slate-600 leading-snug font-bold">
+                      {proj.description || 'Full stack web application built with React, Node.js, Express.js and MongoDB.'}
+                    </p>
+                    <div className="flex gap-3 text-[11px] font-sans font-bold text-slate-500 underline decoration-slate-200 underline-offset-4 decoration-1 mt-1">
+                      <a href={proj.github}>Github</a>
+                      <span className="text-slate-300 no-underline font-normal">|</span>
+                      <a href={proj.deploy}>Demo</a>
+                      <span className="text-slate-300 no-underline font-normal">|</span>
+                      <a href={proj.github}>PRs</a>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </section>
+                ))}
+              </div>
+            </section>
+          )}
 
            {/* Frontend & UI/UX Projects */}
-           <section className="flex flex-col gap-4">
-             <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b border-black pb-1 uppercase tracking-tight w-full">
-              Frontend & UI/UX Projects
-            </h2>
-            <div className="flex flex-col gap-5">
-              {uiux?.slice(0, 2).map((proj, idx) => (
-                <div key={idx} className="flex flex-col gap-1.5">
-                  <h4 className="text-[16px] font-bold text-[#1a1a1a] font-serif leading-tight">
-                    {proj.title}
-                  </h4>
-                  <p className="text-[13px] font-sans text-slate-600 leading-snug font-bold">
-                    {proj.description}
-                  </p>
-                  <div className="flex gap-3 text-[11px] font-sans font-bold text-slate-500 underline decoration-slate-200 underline-offset-4 decoration-1 mt-1">
-                    <a href={proj.figma}>Figma</a>
-                    <span className="text-slate-300 no-underline font-normal">|</span>
-                    <a href={proj.link}>Demo</a>
-                    <span className="text-slate-300 no-underline font-normal">|</span>
-                    <a href={proj.github}>Github</a>
-                    <span className="text-slate-300 no-underline font-normal">|</span>
-                    <a href={proj.link}>Postman</a>
-                    <span className="text-slate-300 no-underline font-normal">|</span>
-                    <a href={proj.link}>Checklist</a>
+           {(uiux && uiux.length > 0) && (
+             <section className="flex flex-col gap-4">
+               <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b border-black pb-1 uppercase tracking-tight w-full">
+                Frontend & UI/UX Projects
+              </h2>
+              <div className="flex flex-col gap-5">
+                {uiux?.slice(0, 2).map((proj, idx) => (
+                  <div key={idx} className="flex flex-col gap-1.5">
+                    <h4 className="text-[16px] font-bold text-[#1a1a1a] font-serif leading-tight">
+                      {proj.title}
+                    </h4>
+                    <p className="text-[13px] font-sans text-slate-600 leading-snug font-bold">
+                      {proj.description}
+                    </p>
+                    <div className="flex gap-3 text-[11px] font-sans font-bold text-slate-500 underline decoration-slate-200 underline-offset-4 decoration-1 mt-1">
+                      <a href={proj.figma}>Figma</a>
+                      <span className="text-slate-300 no-underline font-normal">|</span>
+                      <a href={proj.link}>Demo</a>
+                      <span className="text-slate-300 no-underline font-normal">|</span>
+                      <a href={proj.github}>Github</a>
+                      <span className="text-slate-300 no-underline font-normal">|</span>
+                      <a href={proj.link}>Postman</a>
+                      <span className="text-slate-300 no-underline font-normal">|</span>
+                      <a href={proj.link}>Checklist</a>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </section>
+                ))}
+              </div>
+            </section>
+           )}
         </main>
       </div>
 

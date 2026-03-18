@@ -1,310 +1,297 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Mail, Github, Linkedin, Code, Globe, Trophy, Briefcase, GraduationCap, Languages, Link as LinkIcon } from 'lucide-react';
+import React from 'react';
+import { 
+  Github, 
+  Linkedin, 
+  Globe, 
+  Mail, 
+  Trophy, 
+  Briefcase, 
+  Palette, 
+  ExternalLink, 
+  Zap, 
+  Code,
+  GraduationCap,
+  PlayCircle
+} from 'lucide-react';
 
 const ModernTimelineTemplate = ({ data }) => {
-  const { personalInfo, aboutMe, skills, projects, hackathons, uiux, experience, education, certificates, achievements, languages } = data;
-  const [sidebarWidth, setSidebarWidth] = useState(30);
-  const isDragging = useRef(false);
+  const { 
+    personalInfo, 
+    skills, 
+    projects, 
+    hackathons, 
+    uiux, 
+    certificates, 
+    languages 
+  } = data || {};
 
-  const startResizing = () => {
-    isDragging.current = true;
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', stopResizing);
-    document.body.style.cursor = 'col-resize';
-  };
+  const [isPlaying, setIsPlaying] = React.useState(false);
+  const audioRef = React.useRef(null);
 
-  const stopResizing = () => {
-    isDragging.current = false;
-    document.removeEventListener('mousemove', handleMouseMove);
-    document.removeEventListener('mouseup', stopResizing);
-    document.body.style.cursor = 'default';
-  };
+  // Initialize audio only once
+  React.useEffect(() => {
+    audioRef.current = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+    audioRef.current.loop = true;
+    
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
 
-  const handleMouseMove = (e) => {
-    if (!isDragging.current) return;
-    const container = document.getElementById('resume-container');
-    if (!container) return;
-    const containerRect = container.getBoundingClientRect();
-    const newWidth = ((e.clientX - containerRect.left) / containerRect.width) * 100;
-    if (newWidth > 20 && newWidth < 45) {
-      setSidebarWidth(newWidth);
+  const toggleMusic = () => {
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play().catch(err => console.error("Audio play failed:", err));
     }
+    setIsPlaying(!isPlaying);
   };
+
+  // Helper to render section title with line
+  const SectionHeader = ({ title, showLinks }) => (
+    <div className="flex items-center justify-between border-b border-gray-300 pb-1 mb-3">
+      <h2 className="text-[16px] font-black uppercase tracking-widest text-gray-800">
+        {title}
+      </h2>
+      {showLinks && (
+        <span className="text-[12px] font-bold text-gray-500 underline uppercase tracking-tight">Links</span>
+      )}
+    </div>
+  );
 
   return (
-    <div id="resume-container" className="w-full min-h-full bg-white text-[#333] font-sans flex flex-col shadow-inner border border-slate-200 relative" style={{ fontFamily: "'Inter', sans-serif" }}>
-      
+    <div className="w-full min-h-full bg-white text-gray-800 font-sans p-10 flex flex-col gap-6 leading-tight select-none">
       {/* ── Header ── */}
-      <header className="px-14 py-3 border-b-[3px] border-[#3d4a5e] mx-14 mt-2 flex flex-col gap-0.5 overflow-hidden">
-        <h1 className="text-[36px] font-[900] text-[#3d4a5e] leading-none tracking-tight whitespace-nowrap">
-          {personalInfo?.name?.toUpperCase() || 'ARJUN DIVRANIYA'}
+      <header className="flex flex-col gap-1 relative">
+        {/* Music Toggle */}
+        <button 
+          onClick={toggleMusic}
+          className={`absolute right-0 top-0 p-2 rounded-full transition-all duration-300 ${
+            isPlaying ? 'bg-amber-100 text-amber-600 animate-pulse' : 'bg-yellow-50 text-amber-500 hover:bg-yellow-100'
+          }`}
+          title={isPlaying ? "Click to Pause Music" : "Click to Play Music"}
+        >
+          {isPlaying ? (
+            <PlayCircle className="w-6 h-6 fill-amber-200" />
+          ) : (
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+            </svg>
+          )}
+        </button>
+
+        <h1 className="text-[36px] font-black uppercase tracking-tight text-gray-900 border-b-none pr-12">
+          {personalInfo?.name || 'NAME SURNAME'}
         </h1>
-        <p className="text-[16px] text-[#4a5568] font-bold tracking-wide mt-0.5 whitespace-nowrap">
-          {personalInfo?.title || 'Aspiring Full Stack Developer'}
+        <p className="text-[16px] font-medium text-gray-600 tracking-wide">
+          {personalInfo?.title || 'Job Title'}
         </p>
+        <div className="h-px bg-gray-300 w-full mt-2" />
       </header>
 
-      <div className="flex px-14 py-3 gap-0 flex-1 relative">
-        
-        {/* ── Left Sidebar ── */}
-        <aside style={{ width: `${sidebarWidth}%` }} className="flex flex-col gap-6 pr-8 transition-[width] duration-75">
+      <div className="flex gap-10">
+        {/* ── Left Sidebar (33%) ── */}
+        <aside className="w-[33%] flex flex-col gap-8">
           
           {/* Contact */}
-          <section className="flex flex-col gap-3">
-            <h3 className="text-[16px] font-extrabold uppercase text-[#2d3748] tracking-[0.2em] border-b-[2px] border-slate-200 pb-1 w-full">
-              Contact
-            </h3>
-            <div className="flex flex-col gap-3 text-[#4a5568] font-bold">
-              <div className="flex items-center gap-2.5">
-                <Mail className="w-3.5 h-3.5 text-[#1a202c] shrink-0 fill-current" />
-                <span className="text-[12px] font-bold text-[#4a5568] truncate">{personalInfo?.email || 'arjundivraniya8@gmail.com'}</span>
-              </div>
-              
-              <div className="grid grid-cols-1 xl:grid-cols-2 gap-y-3 gap-x-2.5">
-                {[
-                  { icon: Globe, label: 'Portfolio', link: personalInfo?.portfolio },
-                  { icon: Github, label: 'GitHub', link: personalInfo?.github },
-                  { icon: Linkedin, label: 'LinkedIn', link: personalInfo?.linkedin },
-                  { icon: Code, label: 'LeetCode', link: personalInfo?.leetcode }
-                ].filter(i => i.link).map((item, idx) => (
-                  <a key={idx} href={item.link} target="_blank" rel="noreferrer" className="flex items-center gap-2 group">
-                    <item.icon className="w-3.5 h-3.5 text-[#1a202c] shrink-0" />
-                    <span className="text-[11.5px] font-bold text-[#4a5568] border-b border-slate-200 leading-tight whitespace-nowrap">{item.label}</span>
-                  </a>
-                ))}
-              </div>
+          <section>
+            <SectionHeader title="Contact" />
+            <div className="flex flex-col gap-3">
+              {personalInfo?.email && (
+                <div className="flex items-center gap-3">
+                  <div className="p-1 rounded-sm bg-blue-50">
+                    <Mail className="w-3.5 h-3.5 text-blue-500 fill-blue-500/10" />
+                  </div>
+                  <span className="text-[13px] font-medium text-gray-700 truncate">{personalInfo.email}</span>
+                </div>
+              )}
+              {personalInfo?.portfolio && (
+                <div className="flex items-center gap-3">
+                  <div className="p-1 rounded-sm bg-cyan-50">
+                    <Globe className="w-3.5 h-3.5 text-cyan-600" />
+                  </div>
+                  <a href={personalInfo.portfolio} className="text-[13px] font-bold text-gray-700 hover:text-indigo-600">Portfolio</a>
+                </div>
+              )}
+              {personalInfo?.linkedin && (
+                <div className="flex items-center gap-3">
+                  <div className="p-1 rounded-sm overflow-hidden">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#0077b5">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                  </div>
+                  <a href={personalInfo.linkedin} className="text-[13px] font-bold text-gray-700 hover:text-indigo-600">LinkedIn</a>
+                </div>
+              )}
+              {personalInfo?.github && (
+                <div className="flex items-center gap-3">
+                  <div className="p-1 rounded-sm overflow-hidden">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#181717">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                  </div>
+                  <a href={personalInfo.github} className="text-[13px] font-bold text-gray-700 hover:text-indigo-600">GitHub</a>
+                </div>
+              )}
+              {personalInfo?.leetcode && (
+                <div className="flex items-center gap-3">
+                  <div className="p-1 rounded-sm overflow-hidden">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#FFA116">
+                      <path d="M13.483 0a1.374 1.374 0 0 0-.961.414l-4.68 4.68a1.375 1.375 0 1 0 1.944 1.944l4.68-4.68a1.374 1.374 0 0 0-1.944-1.944zM24 10.625l-6.29 6.29a3.11 3.11 0 1 1-4.398-4.398l6.29-6.29A3.11 3.11 0 1 1 24 10.625zM12.43 14.436l-3.328 3.328a1.375 1.375 0 1 0 1.944 1.944l3.328-3.328a1.375 1.375 0 1 0-1.944-1.944zM4.73 14.436l-3.328 3.328a1.375 1.375 0 1 0 1.944 1.944l3.328-3.328a1.375 1.375 0 1 0-1.944-1.944z"/>
+                    </svg>
+                  </div>
+                  <a href={personalInfo.leetcode} className="text-[13px] font-bold text-gray-700 hover:text-indigo-600">LeetCode</a>
+                </div>
+              )}
             </div>
           </section>
 
           {/* Skills */}
-          <section className="flex flex-col gap-5">
-            <h3 className="text-[16px] font-extrabold uppercase text-[#2d3748] tracking-[0.2em] border-b-[2px] border-slate-200 pb-1 w-full">
-              Skills
-            </h3>
-            <div className="flex flex-col gap-4 pl-1">
-              {skills.map((skillGroup, index) => {
-                const parts = skillGroup.includes(':') ? skillGroup.split(':') : [null, skillGroup];
-                const category = parts[0];
-                const skillList = parts.slice(1).join(':').trim();
-
-                return (
-                  <div key={index} className="flex flex-col gap-2">
-                    {category && (
-                      <h4 className="text-[11px] font-black uppercase tracking-wider text-[#2d3748] opacity-70">{category}</h4>
-                    )}
-                    <ul className="flex flex-col gap-1.5 pl-1">
-                      {skillList.split(',').map((skill, sIdx) => (
-                        <li key={sIdx} className="text-[11.5px] text-[#4a5568] font-bold flex items-start gap-2.5">
-                          <span className="w-1 h-1 bg-indigo-400 rounded-full shrink-0 mt-1.5" />
-                          <span className="leading-tight">{skill.trim()}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                );
-              })}
-            </div>
+          <section>
+            <SectionHeader title="Skills" />
+            <ul className="flex flex-col gap-1.5 list-disc ml-4">
+              {skills?.map((skill, idx) => (
+                <li key={idx} className="text-[13px] font-medium text-gray-700">
+                  {skill.includes(':') ? skill.split(':')[1].trim() : skill}
+                </li>
+              ))}
+            </ul>
           </section>
 
-          {/* Certificate */}
-          <section className="flex flex-col gap-5">
-            <div className="flex justify-between items-baseline border-b-[2px] border-slate-200 pb-1">
-              <h3 className="text-[16px] font-extrabold uppercase text-[#2d3748] tracking-[0.2em]">Certificates</h3>
-              <span className="text-[10px] font-bold text-[#666] border-b border-slate-200 leading-none">Links</span>
-            </div>
-            <ul className="flex flex-col gap-2.5 pl-2">
-              {(certificates || []).map((cert, idx) => (
-                <li key={idx} className="flex items-start gap-2.5 text-[12px] font-bold text-[#4a5568] leading-snug">
-                  <span className="w-1.5 h-1.5 bg-[#444] rounded-full shrink-0 mt-1.5" />
+          {/* Certificates */}
+          <section>
+            <SectionHeader title="Certificate" showLinks />
+            <ul className="flex flex-col gap-1.5 list-disc ml-4">
+              {certificates?.map((cert, idx) => (
+                <li key={idx} className="text-[13px] font-medium text-gray-700">
                   {cert}
                 </li>
               ))}
             </ul>
           </section>
 
-          {/* Education */}
-          <section className="flex flex-col gap-5">
-            <h3 className="text-[16px] font-extrabold uppercase text-[#2d3748] tracking-[0.2em] border-b-[2px] border-slate-200 pb-1 w-full">
-              Education
-            </h3>
-            <div className="flex flex-col gap-5 pl-1">
-              {(education || []).map((edu, idx) => (
-                <div key={idx} className="flex flex-col gap-1 text-[#4a5568]">
-                  <h4 className="text-[13px] font-bold text-[#2d3748]">{edu.degree}</h4>
-                  <p className="text-[12px] font-bold opacity-80">{edu.institution}</p>
-                  <p className="text-[11px] font-bold mt-0.5 opacity-60">{edu.score || edu.duration}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
           {/* Languages */}
-          {languages && languages.length > 0 && (
-            <section className="flex flex-col gap-5">
-              <h3 className="text-[16px] font-extrabold uppercase text-[#2d3748] tracking-[0.2em] border-b-[2px] border-slate-200 pb-1 w-full">
-                Languages
-              </h3>
-              <ul className="flex flex-col gap-2.5 pl-1">
-                {languages.map((lang, idx) => (
-                  <li key={idx} className="text-[12px] text-[#4a5568] font-bold flex items-center gap-2.5">
-                    <span className="w-1.5 h-1.5 bg-[#444] rounded-full shrink-0" />
-                    {lang}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
+          <section>
+            <SectionHeader title="Languages" />
+            <ul className="flex flex-col gap-1.5 list-disc ml-4">
+              {languages?.map((lang, idx) => (
+                <li key={idx} className="text-[13px] font-medium text-gray-700 uppercase">
+                  {lang}
+                </li>
+              ))}
+            </ul>
+          </section>
         </aside>
 
-        {/* ── Resize Handle ── */}
-        <div 
-          onMouseDown={startResizing}
-          className="w-8 -mx-4 relative z-[100] cursor-col-resize group flex items-center justify-center print:hidden"
-        >
-          <div className="w-[1px] h-full bg-slate-100 group-hover:bg-indigo-300 transition-colors" />
-          <div className="absolute top-1/2 -translate-y-1/2 w-4 h-8 bg-white border border-slate-200 rounded-md flex items-center justify-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity shadow-sm">
-             <div className="w-px h-3 bg-slate-400" />
-             <div className="w-px h-3 bg-slate-400" />
-          </div>
-        </div>
-
-        {/* ── Right Content (Timeline) ── */}
-        <main className="flex-1 flex flex-col gap-6 relative pt-1 pl-8">
+        {/* ── Right Content (67%) ── */}
+        <main className="flex-1 flex flex-col gap-0 relative">
           
-          {/* Timeline Line */}
-          <div className="absolute left-[54px] top-4 bottom-4 w-[1.5px] bg-[#cbd5e0]" />
+          {/* Vertical Timeline Line */}
+          <div className="absolute left-[13.5px] top-[20px] bottom-10 w-[1px] bg-gray-300" />
 
-          <div className="flex flex-col gap-6 relative">
-            
-            {/* Hackathon & Team Projects */}
-            <section className="flex flex-col gap-4 relative z-10">
-              <div className="flex items-center gap-6">
-                <div className="w-9 h-9 rounded-lg bg-white border-2 border-[#1a202c] flex items-center justify-center shrink-0 shadow-sm relative z-20">
-                   <div className="absolute -left-1 -top-1 w-3.5 h-3.5 bg-white rounded-full flex items-center justify-center p-0.5 ring-2 ring-white">
-                      <Code className="w-full h-full text-[#1a202c]" />
-                   </div>
-                   <Trophy className="w-5 h-5 text-[#1a202c]" />
-                </div>
-                <h3 className="text-[20px] font-black uppercase text-[#1a202c] tracking-tighter leading-none flex-1 border-b-[3px] border-slate-200 pb-1 whitespace-nowrap overflow-hidden text-ellipsis">
-                  Hackathon & Team Projects
-                </h3>
+          {/* Hackathons & Team Projects */}
+          {hackathons && hackathons.length > 0 && (
+            <section className="mb-6 relative pl-10 text-left">
+              <div className="absolute left-0 top-0 w-7 h-7 bg-white border border-gray-200 shadow-sm rounded-full flex items-center justify-center z-10 overflow-hidden p-1.5">
+                <Code className="w-full h-full text-indigo-600" />
               </div>
-
-              <div className="flex flex-col gap-4 pl-[72px]">
-                {(hackathons || []).map((hack, idx) => (
-                  <div key={idx} className="relative flex flex-col gap-2">
-                    <div className="absolute -left-[56px] top-[8px] w-3 h-3 rounded-full bg-white border-2 border-[#cbd5e0] z-20" />
-                    <div className="flex items-center gap-2.5 flex-nowrap overflow-hidden">
-                      <h4 className="text-[14.5px] font-bold text-[#2d3748] leading-tight whitespace-nowrap shrink-0 overflow-hidden text-ellipsis">
-                        {hack.title}:
-                      </h4>
-                      <div className="flex gap-3 text-[12.5px] font-bold text-[#4a5568] whitespace-nowrap shrink-0">
-                        {['Demo', 'Video', 'GitHub'].map(label => {
-                          const key = label === 'Demo' ? 'deploy' : label.toLowerCase();
-                          return hack[key] && (
-                            <a key={label} href={hack[key]} target="_blank" rel="noreferrer" className="underline underline-offset-[3px] decoration-[#cbd5e0] hover:text-[#1a202c] transition-colors">{label}</a>
-                          );
-                        })}
+              <h2 className="text-[16px] font-black uppercase tracking-widest text-gray-800 border-b border-gray-300 pb-1 mb-4">
+                Hackathon & Team Projects
+              </h2>
+              <div className="flex flex-col gap-6">
+                {hackathons.map((hack, idx) => (
+                  <div key={idx} className="flex flex-col gap-2">
+                    <div className="flex items-center gap-3">
+                      <h3 className="text-[15px] font-black text-gray-900">{hack.title}:</h3>
+                      <div className="flex gap-2 text-[12px] font-bold text-gray-500 underline underline-offset-2 cursor-pointer">
+                        {hack.deploy && <a href={hack.deploy}>Demo</a>}
+                        {hack.video && <a href={hack.video}>Video</a>}
+                        {hack.github && <a href={hack.github}>GitHub</a>}
                       </div>
                     </div>
-                    <p className="text-[12.5px] font-medium text-[#4a5568] leading-relaxed text-left">
+                    <p className="text-[13px] leading-relaxed text-gray-700 font-medium">
                       {hack.description}
                     </p>
                   </div>
                 ))}
               </div>
             </section>
+          )}
 
-            {/* Projects Section */}
-            <section className="flex flex-col gap-6 relative z-10">
-              <div className="flex items-center gap-6">
-                <div className="w-9 h-9 rounded-full bg-[#1a202c] flex items-center justify-center shrink-0 shadow-sm overflow-hidden z-20 transition-transform hover:scale-105">
-                   <Briefcase className="w-4.5 h-4.5 text-white" />
-                </div>
-                <h3 className="text-[20px] font-black uppercase text-[#1a202c] tracking-tighter leading-none flex-1 border-b-[3px] border-slate-200 pb-1 whitespace-nowrap overflow-hidden text-ellipsis">
-                  Projects
-                </h3>
+          {/* Projects */}
+          {projects && projects.length > 0 && (
+            <section className="mb-6 relative pl-10 text-left">
+              <div className="absolute left-0 top-0 w-7 h-7 bg-white border border-gray-200 shadow-sm rounded-full flex items-center justify-center z-10 overflow-hidden p-1.5">
+                <Briefcase className="w-full h-full text-blue-600" />
               </div>
-
-              <div className="flex flex-col gap-4 pl-[72px]">
-                {(projects || []).map((proj, idx) => (
-                  <div key={idx} className="relative flex flex-col gap-3.5">
-                    <div className="absolute -left-[56px] top-[8px] w-3 h-3 rounded-full bg-white border-2 border-[#cbd5e0] z-20" />
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-center gap-3.5 flex-nowrap overflow-hidden">
-                        <h4 className="text-[16px] font-extrabold text-[#2d3748] tracking-tight leading-tight whitespace-nowrap underline underline-offset-[5px] decoration-slate-300 shrink-0 overflow-hidden text-ellipsis">
-                          {proj.title}
-                        </h4>
-                        <div className="flex gap-3 text-[12.5px] font-bold text-[#4a5568] whitespace-nowrap shrink-0">
-                          {['Demo', 'GitHub', 'Docs'].map(label => {
-                            const key = label === 'Docs' ? 'docs' : label.toLowerCase();
-                            return proj[key] && (
-                              <a key={label} href={proj[key]} target="_blank" rel="noreferrer" className="underline underline-offset-[3px] decoration-[#cbd5e0] hover:text-[#1a202c] transition-colors">{label}</a>
-                            );
-                          })}
-                        </div>
+              <h2 className="text-[16px] font-black uppercase tracking-widest text-gray-800 border-b border-gray-300 pb-1 mb-4">
+                Projects
+              </h2>
+              <div className="flex flex-col gap-8">
+                {projects.map((proj, idx) => (
+                  <div key={idx} className="flex flex-col gap-2">
+                    <div className="flex items-center gap-3">
+                      <h3 className="text-[15px] font-bold text-gray-900 border-b-2 border-gray-900 pb-0.5">{proj.title}</h3>
+                      <div className="flex gap-2 text-[12px] font-bold text-gray-500 underline underline-offset-2 cursor-pointer">
+                        {proj.deploy && <a href={proj.deploy}>Demo</a>}
+                        {proj.github && <a href={proj.github}>GitHub</a>}
+                        <span className="no-underline text-gray-400">Documentations</span>
                       </div>
-                      
-                      {proj.description && (
-                        <div className="flex flex-col gap-3 mt-0.5">
-                          {proj.description.toLowerCase().includes('role :') && (
-                            <div className="text-[13px] flex items-center gap-1.5 mb-0.5">
-                               <strong className="text-[#2d3748] font-bold">Role :</strong>
-                               <span className="text-[#4a5568] font-bold">{proj.description.split(/role\s*:/i)[1]?.split('\n')[0]?.trim()}</span>
-                            </div>
-                          )}
-                          <ul className="flex flex-col gap-2.5 pr-2">
-                            {proj.description.split('\n').filter(l => {
-                              const trimmed = l.trim();
-                              return trimmed.startsWith('-') || trimmed.startsWith('•') || (trimmed.length > 20 && !trimmed.toLowerCase().includes('role :'));
-                            }).map((line, lidx) => (
-                              <li key={lidx} className="text-[12.5px] font-medium text-[#4a5568] leading-relaxed text-justify flex gap-3.5 pr-4">
-                                <span className="w-[5px] h-[5px] bg-[#1a202c] rounded-full shrink-0 mt-[7.5px]" />
-                                <span>{line.replace(/^[-•]\s*/, '')}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <p className="text-[13px] font-bold text-gray-800">
+                        Role : {proj.role || 'UI/UX Designer & Backend Developer'}
+                      </p>
+                      <ul className="flex flex-col gap-1 list-disc ml-4">
+                         <li className="text-[13px] text-gray-700 font-medium leading-relaxed">
+                            {proj.description?.split('\n')[0] || proj.description}
+                         </li>
+                         {proj.description?.split('\n').slice(1).map((line, i) => (
+                           <li key={i} className="text-[13px] text-gray-700 font-medium leading-relaxed">
+                              {line.replace(/^- /, '')}
+                           </li>
+                         ))}
+                      </ul>
+                      <p className="text-[13px] font-bold text-gray-800 mt-1">
+                        Tech Stack: {proj.techStack || 'React, Node.js, Express, MongoDB'}
+                      </p>
                     </div>
                   </div>
                 ))}
               </div>
             </section>
+          )}
 
-            {/* UI/UX Design Section */}
-            {uiux && uiux.length > 0 && (
-              <section className="flex flex-col gap-6 relative z-10">
-                <div className="flex items-center gap-6">
-                  <div className="w-9 h-9 rounded-full bg-[#1a202c] flex items-center justify-center shrink-0 shadow-sm overflow-hidden z-20">
-                     <GraduationCap className="w-4.5 h-4.5 text-white" />
+          {/* UI/UX Design */}
+          {uiux && uiux.length > 0 && (
+            <section className="relative pl-10 text-left">
+              <div className="absolute left-0 top-0 w-7 h-7 bg-white border border-gray-200 shadow-sm rounded-full flex items-center justify-center z-10 overflow-hidden p-1.5">
+                <Palette className="w-full h-full text-purple-600" />
+              </div>
+              <h2 className="text-[16px] font-black uppercase tracking-widest text-gray-800 border-b border-gray-300 pb-1 mb-4">
+                UI/UX Design
+              </h2>
+              <div className="flex flex-col gap-5">
+                {uiux.map((item, idx) => (
+                  <div key={idx} className="flex flex-col gap-1">
+                    <h3 className="text-[15px] font-black text-gray-900 uppercase tracking-tight">{item.title}</h3>
+                    <p className="text-[13px] text-gray-700 font-medium leading-relaxed">
+                      {item.description}
+                    </p>
+                    {item.link && (
+                      <a href={item.link} className="text-[13px] font-bold text-gray-800 underline underline-offset-2 flex items-center gap-1">
+                        View Design
+                      </a>
+                    )}
                   </div>
-                  <h3 className="text-[20px] font-black uppercase text-[#1a202c] tracking-tighter leading-none flex-1 border-b-[3px] border-slate-200 pb-1 whitespace-nowrap overflow-hidden text-ellipsis">
-                    UI/UX Design
-                  </h3>
-                </div>
+                ))}
+              </div>
+            </section>
+          )}
 
-                <div className="flex flex-col gap-7 pl-[72px]">
-                  {uiux.map((item, idx) => (
-                    <div key={idx} className="relative flex flex-col gap-2">
-                      <div className="absolute -left-[56px] top-[8px] w-3 h-3 rounded-full bg-white border-2 border-[#cbd5e0] z-20" />
-                      <div className="flex items-center gap-2.5 flex-nowrap overflow-hidden">
-                        <h4 className="text-[14.5px] font-bold text-[#2d3748] leading-tight whitespace-nowrap shrink-0 overflow-hidden text-ellipsis">
-                          {item.title}:
-                        </h4>
-                        {item.link && (
-                          <a href={item.link} target="_blank" rel="noreferrer" className="text-[12.5px] font-bold text-[#4a5568] underline underline-offset-[3px] decoration-[#cbd5e0] hover:text-[#1a202c] transition-colors leading-tight whitespace-nowrap shrink-0">Figma</a>
-                        )}
-                      </div>
-                      <p className="text-[12.5px] font-medium text-[#4a5568] leading-relaxed text-justify mt-0.5">
-                        {item.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
-          </div>
         </main>
       </div>
     </div>
