@@ -5,6 +5,7 @@ import ProfessionalTemplate from './templates/ProfessionalTemplate';
 import CreativeTemplate from './templates/CreativeTemplate';
 import ModernTimelineTemplate from './templates/ModernTimelineTemplate';
 import ElegantTemplate from './templates/ElegantTemplate';
+import ProfessionalSerifTemplate from './templates/ProfessionalSerifTemplate';
 
 const PreviewPanel = forwardRef(({ resumeData, selectedTemplate, isFullWidth }, ref) => {
   return (
@@ -26,6 +27,8 @@ const PreviewPanel = forwardRef(({ resumeData, selectedTemplate, isFullWidth }, 
         <CreativeTemplate data={resumeData} />
       ) : selectedTemplate === 'elegant' ? (
         <ElegantTemplate data={resumeData} />
+      ) : selectedTemplate === 'professional-serif' ? (
+        <ProfessionalSerifTemplate data={resumeData} />
       ) : (
         <ModernTimelineTemplate data={resumeData} />
       )}

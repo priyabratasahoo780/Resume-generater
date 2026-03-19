@@ -243,6 +243,47 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
                     Elegant
                   </span>
                 </button>
+
+                {/* Professional Serif Card */}
+                <button
+                  onClick={() => setSelectedTemplate('professional-serif')}
+                  className={`relative flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all ${
+                    selectedTemplate === 'professional-serif'
+                      ? 'border-indigo-500 bg-indigo-50 shadow-md'
+                      : 'border-slate-200 hover:border-indigo-200 hover:bg-slate-50'
+                  }`}
+                >
+                  {selectedTemplate === 'professional-serif' && (
+                    <span className="absolute top-2 right-2 w-4 h-4 bg-indigo-500 rounded-full flex items-center justify-center">
+                      <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                      </svg>
+                    </span>
+                  )}
+                  <div className="w-12 h-16 rounded shadow-sm flex flex-col gap-1 p-1.5 overflow-hidden border border-slate-400 bg-white font-serif">
+                    <div className="w-full h-1.5 bg-slate-800 rounded-sm" />
+                    <div className="w-full h-px bg-slate-200" />
+                    <div className="flex gap-1 items-center justify-center">
+                       <div className="w-2 h-0.5 bg-slate-400" />
+                       <div className="w-2 h-0.5 bg-slate-400" />
+                       <div className="w-2 h-0.5 bg-slate-400" />
+                    </div>
+                    <div className="flex gap-1.5 flex-1">
+                       <div className="w-2/5 flex flex-col gap-1">
+                          <div className="w-full h-0.5 bg-slate-300" />
+                          <div className="w-3/4 h-0.5 bg-slate-200" />
+                       </div>
+                       <div className="w-px h-full bg-slate-200" />
+                       <div className="flex-1 flex flex-col gap-1">
+                          <div className="w-full h-0.5 bg-slate-300" />
+                          <div className="w-5/6 h-0.5 bg-slate-200" />
+                       </div>
+                    </div>
+                  </div>
+                  <span className={`text-xs font-semibold ${selectedTemplate === 'professional-serif' ? 'text-indigo-700' : 'text-slate-600'}`}>
+                    Pro Serif
+                  </span>
+                </button>
               </div>
 
               {/* Info box */}
