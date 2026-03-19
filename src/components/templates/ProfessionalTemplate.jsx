@@ -1,6 +1,6 @@
 import React from "react";
 import { Phone, Mail, Github, Linkedin } from "lucide-react";
-import { QRCodeCanvas } from 'qrcode.react';
+import { QRCodeSVG } from 'qrcode.react';
 
 const ProfessionalTemplate = ({ data }) => {
   const {
@@ -51,7 +51,7 @@ const ProfessionalTemplate = ({ data }) => {
           </div>
         </div>
         <div className="p-2 border border-slate-200 rounded-lg">
-          <QRCodeCanvas 
+          <QRCodeSVG 
             value={personalInfo?.portfolio || personalInfo?.linkedin || 'https://github.com'} 
             size={64}
             level={"H"}
