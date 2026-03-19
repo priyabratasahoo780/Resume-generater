@@ -53,7 +53,7 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
               {/* Template Selection */}
               <div className="p-6 flex flex-col gap-4">
                 <p className="text-slate-600 text-sm font-medium">Select template format:</p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-3">
                   {/* ... templates ... */}
                   {/* (Keep all card buttons here) */}
                   {/* Classic Card */}
@@ -302,18 +302,18 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
             </div>
 
             {/* Sticky Action Buttons */}
-            <div className="p-6 border-t border-slate-100 bg-white rounded-b-2xl">
-              <div className="flex gap-3">
+            <div className="p-4 sm:p-6 border-t border-slate-100 bg-white rounded-b-2xl">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={() => setShowFinishModal(false)}
-                  className="flex-1 py-2.5 border border-slate-300 text-slate-600 rounded-lg font-medium hover:bg-slate-50 transition-colors text-sm"
+                  className="w-full sm:flex-1 py-3 border border-slate-300 text-slate-600 rounded-lg font-medium hover:bg-slate-50 transition-colors text-sm"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleFinishDownload}
                   disabled={isDownloading}
-                  className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors text-sm shadow-md shadow-indigo-200"
+                  className="w-full sm:flex-1 flex items-center justify-center gap-2 py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors text-sm shadow-md shadow-indigo-200"
                 >
                   {isDownloading ? (
                     <span className="flex items-center gap-2"><Loader2 className="w-4 h-4 animate-spin" /> Generating...</span>
