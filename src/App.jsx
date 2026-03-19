@@ -302,8 +302,9 @@ function App() {
 
   if (showDevToolsWarning) {
     return (
-      <div className="fixed inset-0 z-[200] flex items-center justify-center bg-[#0a0a0a] p-6 text-center">
-        <div className="max-w-md w-full space-y-8 relative z-10 bg-[#121212] p-10 rounded-[2.5rem] border border-white/5 shadow-2xl">
+      <div className="fixed inset-0 z-[200] overflow-y-auto bg-[#0a0a0a] p-6">
+        <div className="min-h-full flex items-center justify-center py-10">
+          <div className="max-w-md w-full space-y-8 relative z-10 bg-[#121212] p-10 rounded-[2.5rem] border border-white/5 shadow-2xl">
           <div className="flex flex-col items-center">
             <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mb-6 border border-white/10">
               <Lock className="w-8 h-8 text-white/60" />
@@ -342,6 +343,7 @@ function App() {
           </div>
           
           <div className="text-[10px] text-white/10 font-medium">© 2025 Priyabrata Sahoo</div>
+          </div>
         </div>
       </div>
     );
