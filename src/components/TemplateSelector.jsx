@@ -143,10 +143,10 @@ const TemplateSelector = ({ selectedTemplate, setSelectedTemplate, onConfirm }) 
       <div className="max-w-4xl w-full flex flex-col gap-8">
         <div className="text-center space-y-2">
           <div className="inline-flex p-3 bg-indigo-500/10 rounded-2xl border border-indigo-500/20 mb-4">
-            <Layout className="w-8 h-8 text-indigo-400" />
+            <Layout className="w-6 h-6 sm:w-8 sm:h-8 text-indigo-400" />
           </div>
-          <h1 className="text-4xl font-black text-white tracking-tight">Choose Your Template</h1>
-          <p className="text-slate-400 text-lg">Select a starting point for your professional journey</p>
+          <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight">Choose Your Template</h1>
+          <p className="text-slate-400 text-sm sm:text-lg">Select a starting point for your professional journey</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -154,17 +154,17 @@ const TemplateSelector = ({ selectedTemplate, setSelectedTemplate, onConfirm }) 
             <button
               key={template.id}
               onClick={() => setSelectedTemplate(template.id)}
-              className={`relative group flex flex-col items-center gap-4 p-6 rounded-[2.5rem] border-2 transition-all duration-300 ${
+              className={`relative group flex flex-col items-center gap-4 p-4 sm:p-6 rounded-[2rem] sm:rounded-[2.5rem] border-2 transition-all duration-300 ${
                 selectedTemplate === template.id
                   ? 'bg-indigo-600/10 border-indigo-500 shadow-[0_0_40px_rgba(79,70,229,0.15)]'
                   : 'bg-white/5 border-white/10 hover:border-white/20 hover:bg-white/10'
               }`}
             >
-              <div className="w-24 h-32 bg-slate-800 rounded-xl p-2 transition-transform duration-300 group-hover:scale-110">
+              <div className="w-20 h-28 sm:w-24 sm:h-32 bg-slate-800 rounded-xl p-2 transition-transform duration-300 group-hover:scale-110">
                 {template.preview}
               </div>
               <div className="text-center">
-                <h3 className={`font-bold transition-colors ${selectedTemplate === template.id ? 'text-indigo-400' : 'text-white'}`}>
+                <h3 className={`font-bold text-sm sm:text-base transition-colors ${selectedTemplate === template.id ? 'text-indigo-400' : 'text-white'}`}>
                   {template.name}
                 </h3>
                 <p className="text-[10px] text-slate-500 mt-1 leading-relaxed">
@@ -173,8 +173,8 @@ const TemplateSelector = ({ selectedTemplate, setSelectedTemplate, onConfirm }) 
               </div>
               
               {selectedTemplate === template.id && (
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center shadow-lg border-4 border-[#0a0f1d]">
-                  <CheckCircle className="w-4 h-4 text-white" />
+                <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-6 h-6 sm:w-8 sm:h-8 bg-indigo-500 rounded-full flex items-center justify-center shadow-lg border-4 border-[#0a0f1d]">
+                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                 </div>
               )}
             </button>
@@ -185,7 +185,7 @@ const TemplateSelector = ({ selectedTemplate, setSelectedTemplate, onConfirm }) 
           <button
             onClick={onConfirm}
             disabled={!selectedTemplate}
-            className="px-12 py-4 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-white font-bold rounded-2xl shadow-xl shadow-indigo-600/20 transition-all active:scale-95 text-lg"
+            className="w-full sm:w-auto px-8 sm:px-12 py-3 sm:py-4 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-white font-bold rounded-2xl shadow-xl shadow-indigo-600/20 transition-all active:scale-95 text-base sm:text-lg"
           >
             Start Building Resume
           </button>

@@ -22,7 +22,7 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
   };
 
   return (
-    <div className="p-6 md:p-8 flex flex-col gap-8 h-full">
+    <div className="p-4 sm:p-6 md:p-8 flex flex-col gap-6 sm:gap-8 h-full">
 
       {/* ── Finish Modal ── */}
       {showFinishModal && (
@@ -323,10 +323,10 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
       {/* ── Section 1: Personal Details ── */}
       <div>
         <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-          <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
+          <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm shrink-0">1</span>
           Personal Details
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           {[
             { label: 'Full Name',     name: 'name',     type: 'text'  },
             { label: 'Job Title',     name: 'title',    type: 'text'  },
@@ -426,7 +426,7 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
                   >
                     ×
                   </button>
-                  <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-3 sm:gap-4">
                     <div className="flex flex-col gap-1.5">
                       <label className="text-[11px] font-black uppercase tracking-wider text-slate-400">Category Name</label>
                       <input
@@ -583,7 +583,7 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
         </h2>
         <div className="flex flex-col gap-6">
           {resumeData.projects.map((project, index) => (
-            <div key={index} className="p-4 border border-slate-200 rounded-lg bg-slate-50 flex flex-col gap-4 relative">
+            <div key={index} className="p-4 border border-slate-200 rounded-lg bg-slate-50 flex flex-col gap-3 sm:gap-4 relative">
               <button
                 onClick={() => {
                   const newProjects = [...resumeData.projects];
