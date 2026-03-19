@@ -1,7 +1,7 @@
 import { Phone, Mail, Globe, Github, Linkedin, Youtube, Award, GraduationCap, Briefcase, Code, User, ExternalLink, Figma } from 'lucide-react';
 
 const CreativeTemplate = ({ data }) => {
-  const { personalInfo, aboutMe, skills, projects, hackathons, uiux, experience, education, certificates, achievements } = data;
+  const { personalInfo, skills, projects, hackathons, uiux, education, certificates, achievements } = data;
 
   // Simple categorizer if format is "Category: Skill1, Skill2"
   const getCategorizedItems = (items) => {
@@ -24,7 +24,6 @@ const CreativeTemplate = ({ data }) => {
 
   const categorizedSkills = getCategorizedItems(skills);
   const categorizedCerts = getCategorizedItems(certificates);
-  const categorizedFigma = getCategorizedItems(personalInfo?.figma ? [personalInfo.figma] : []);
 
   return (
     <div className="w-full min-h-full bg-white text-[#444] font-serif flex flex-col gap-0 shadow-inner border border-slate-200">

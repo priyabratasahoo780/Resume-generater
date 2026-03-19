@@ -14,6 +14,18 @@ import {
   PlayCircle
 } from 'lucide-react';
 
+// Helper to render section title with line
+const SectionHeader = ({ title, showLinks }) => (
+  <div className="flex items-center justify-between border-b border-gray-300 pb-1 mb-3">
+    <h2 className="text-[16px] font-black uppercase tracking-widest text-gray-800">
+      {title}
+    </h2>
+    {showLinks && (
+      <span className="text-[12px] font-bold text-gray-500 underline uppercase tracking-tight">Links</span>
+    )}
+  </div>
+);
+
 const ModernTimelineTemplate = ({ data }) => {
   const { 
     personalInfo, 
@@ -49,18 +61,6 @@ const ModernTimelineTemplate = ({ data }) => {
     }
     setIsPlaying(!isPlaying);
   };
-
-  // Helper to render section title with line
-  const SectionHeader = ({ title, showLinks }) => (
-    <div className="flex items-center justify-between border-b border-gray-300 pb-1 mb-3">
-      <h2 className="text-[16px] font-black uppercase tracking-widest text-gray-800">
-        {title}
-      </h2>
-      {showLinks && (
-        <span className="text-[12px] font-bold text-gray-500 underline uppercase tracking-tight">Links</span>
-      )}
-    </div>
-  );
 
   return (
     <div className="w-full min-h-full bg-white text-gray-800 font-sans p-10 flex flex-col gap-6 leading-tight select-none">

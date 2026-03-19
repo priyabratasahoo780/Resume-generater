@@ -2,7 +2,7 @@ import React from 'react';
 import { Github, Linkedin, Youtube, Globe, Mail, Phone, MapPin, ExternalLink, Trophy, Zap, BookOpen } from 'lucide-react';
 
 const ElegantTemplate = ({ data }) => {
-  const { personalInfo, education, experience, skills, projects, achievements, hackathons, uiux, aboutMe, certificates, languages } = data;
+  const { personalInfo, education, skills, projects, achievements, hackathons, uiux, languages, certificates } = data;
 
   return (
     <div className="w-full min-h-full bg-white text-[#333] font-serif flex flex-col gap-0 shadow-inner overflow-hidden leading-tight">
@@ -119,15 +119,22 @@ const ElegantTemplate = ({ data }) => {
             </section>
           )}
 
-          {/* Certifications (2 Columns) */}
           <section className="flex flex-col gap-4">
             <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b border-black pb-1 uppercase tracking-tight w-full">
               Certifications
             </h2>
             <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-              {achievements?.map((ach, idx) => (
+              {certificates?.map((cert, idx) => (
                 <div key={idx} className="flex items-start gap-1">
                   <span className="text-[12px] font-sans font-bold text-slate-400 w-4">{idx + 1}.</span>
+                  <span className="text-[12px] font-sans text-slate-700 font-bold underline decoration-slate-200 underline-offset-[3px]">
+                    {cert}
+                  </span>
+                </div>
+              ))}
+              {achievements?.map((ach, idx) => (
+                <div key={`ach-${idx}`} className="flex items-start gap-1">
+                  <span className="text-[12px] font-sans font-bold text-slate-400 w-4">{idx + (certificates?.length || 0) + 1}.</span>
                   <span className="text-[12px] font-sans text-slate-700 font-bold underline decoration-slate-200 underline-offset-[3px]">
                     {ach}
                   </span>

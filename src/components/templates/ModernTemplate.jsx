@@ -25,7 +25,7 @@ const ModernTemplate = ({ data }) => {
     projects, 
     experience,
     education, 
-    certificates, 
+    certificates,
     achievements,
     languages = ['English (Fluent)', 'Hindi (Native)'],
     interests = ['Open Source', 'UI/UX Design', 'AI Research', 'Photography']
@@ -343,6 +343,30 @@ const ModernTemplate = ({ data }) => {
                       </div>
                     )}
                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Certificates Section */}
+        {certificates && certificates.length > 0 && (
+          <div className="flex flex-col gap-8 relative z-10">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-indigo-900 text-white rounded-2xl shadow-lg ring-4 ring-indigo-50">
+                <Award className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-black uppercase tracking-widest text-indigo-950">
+                Certifications
+              </h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ml-10">
+              {certificates.map((cert, index) => (
+                <div key={index} className="flex gap-4 items-center bg-slate-50 p-4 rounded-2xl border border-slate-100 group hover:bg-white hover:shadow-xl transition-all">
+                  <div className="p-2 bg-indigo-100 text-indigo-600 rounded-xl group-hover:scale-110 transition-transform">
+                    <Zap className="w-4 h-4" />
+                  </div>
+                  <span className="text-[13px] font-bold text-slate-700 leading-tight">{cert}</span>
                 </div>
               ))}
             </div>

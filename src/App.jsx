@@ -68,7 +68,8 @@ function App() {
       // We only run this if NOT already showing the warning to prevent loops
       if (!showDevToolsWarning) {
         const start = Date.now();
-        debugger;
+        // Layer 1: Debugger Speed Trap removed for production
+        // debugger; 
         const end = Date.now();
         
         // Increase time to 200ms to allow for some system stutter
@@ -101,7 +102,7 @@ function App() {
       window.removeEventListener('resize', handleResize);
       clearInterval(interval);
     };
-  }, []);
+  }, [isAuthenticated, showDevToolsWarning]);
 
   const handleDownload = () => {
     const element = printRef.current;
@@ -160,7 +161,7 @@ function App() {
     // Fallback in case onload doesn't fire
     setTimeout(() => {
       if (document.body.contains(iframe)) {
-        try { iframe.contentWindow.print(); } catch (_) {}
+        try { iframe.contentWindow.print(); } catch { /* ignore */ }
         setTimeout(() => {
           if (document.body.contains(iframe)) document.body.removeChild(iframe);
           setIsDownloading(false);
