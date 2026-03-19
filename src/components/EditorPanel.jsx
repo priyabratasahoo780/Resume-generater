@@ -26,8 +26,8 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
 
       {/* ── Finish Modal ── */}
       {showFinishModal && (
-        <div className="fixed inset-0 z-[100] overflow-y-auto bg-black/50 backdrop-blur-sm p-0 xs:p-4 flex flex-col items-center justify-center">
-          <div className="w-full max-w-2xl px-4 py-8 sm:py-16">
+        <div className="fixed inset-0 z-[100] overflow-y-auto bg-black/50 backdrop-blur-sm p-0 xs:p-4 flex flex-col items-center">
+          <div className="w-full max-w-2xl pt-16 sm:pt-24 pb-12 px-4">
             <div className="bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
               {/* Modal Header */}
               <div className="bg-gradient-to-r from-indigo-600 to-indigo-500 p-4 sm:p-6 text-white relative">
