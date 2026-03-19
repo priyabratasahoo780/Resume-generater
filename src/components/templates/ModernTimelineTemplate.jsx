@@ -10,14 +10,13 @@ import {
   ExternalLink, 
   Zap, 
   Code,
-  GraduationCap,
-  PlayCircle
+  GraduationCap
 } from 'lucide-react';
 
 // Helper to render section title with line
 const SectionHeader = ({ title, showLinks }) => (
   <div className="flex items-center justify-between border-b border-gray-300 pb-1 mb-3">
-    <h2 className="text-[16px] font-black uppercase tracking-widest text-gray-800">
+    <h2 className="text-[14px] font-black uppercase tracking-widest text-gray-800">
       {title}
     </h2>
     {showLinks && (
@@ -37,56 +36,15 @@ const ModernTimelineTemplate = ({ data }) => {
     languages 
   } = data || {};
 
-  const [isPlaying, setIsPlaying] = React.useState(false);
-  const audioRef = React.useRef(null);
-
-  // Initialize audio only once
-  React.useEffect(() => {
-    audioRef.current = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-    audioRef.current.loop = true;
-    
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-    };
-  }, []);
-
-  const toggleMusic = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play().catch(err => console.error("Audio play failed:", err));
-    }
-    setIsPlaying(!isPlaying);
-  };
-
   return (
     <div className="w-full min-h-full bg-white text-gray-800 font-sans p-10 flex flex-col gap-6 leading-tight select-none">
       {/* ── Header ── */}
       <header className="flex flex-col gap-1 relative">
-        {/* Music Toggle */}
-        <button 
-          onClick={toggleMusic}
-          className={`absolute right-0 top-0 p-2 rounded-full transition-all duration-300 ${
-            isPlaying ? 'bg-amber-100 text-amber-600 animate-pulse' : 'bg-yellow-50 text-amber-500 hover:bg-yellow-100'
-          }`}
-          title={isPlaying ? "Click to Pause Music" : "Click to Play Music"}
-        >
-          {isPlaying ? (
-            <PlayCircle className="w-6 h-6 fill-amber-200" />
-          ) : (
-            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-            </svg>
-          )}
-        </button>
 
-        <h1 className="text-[36px] font-black uppercase tracking-tight text-gray-900 border-b-none pr-12">
+        <h1 className="text-[28px] font-black uppercase tracking-tight text-gray-900 border-b-none pr-12">
           {personalInfo?.name || 'NAME SURNAME'}
         </h1>
-        <p className="text-[16px] font-medium text-gray-600 tracking-wide">
+        <p className="text-[14px] font-medium text-gray-600 tracking-wide">
           {personalInfo?.title || 'Job Title'}
         </p>
         <div className="h-px bg-gray-300 w-full mt-2" />
@@ -198,7 +156,7 @@ const ModernTimelineTemplate = ({ data }) => {
               <div className="absolute left-0 top-0 w-7 h-7 bg-white border border-gray-200 shadow-sm rounded-full flex items-center justify-center z-10 overflow-hidden p-1.5">
                 <Code className="w-full h-full text-indigo-600" />
               </div>
-              <h2 className="text-[16px] font-black uppercase tracking-widest text-gray-800 border-b border-gray-300 pb-1 mb-4">
+              <h2 className="text-[14px] font-black uppercase tracking-widest text-gray-800 border-b border-gray-300 pb-1 mb-2">
                 Hackathon & Team Projects
               </h2>
               <div className="flex flex-col gap-6">
@@ -227,7 +185,7 @@ const ModernTimelineTemplate = ({ data }) => {
               <div className="absolute left-0 top-0 w-7 h-7 bg-white border border-gray-200 shadow-sm rounded-full flex items-center justify-center z-10 overflow-hidden p-1.5">
                 <Briefcase className="w-full h-full text-blue-600" />
               </div>
-              <h2 className="text-[16px] font-black uppercase tracking-widest text-gray-800 border-b border-gray-300 pb-1 mb-4">
+              <h2 className="text-[14px] font-black uppercase tracking-widest text-gray-800 border-b border-gray-300 pb-1 mb-2">
                 Projects
               </h2>
               <div className="flex flex-col gap-8">
@@ -271,7 +229,7 @@ const ModernTimelineTemplate = ({ data }) => {
               <div className="absolute left-0 top-0 w-7 h-7 bg-white border border-gray-200 shadow-sm rounded-full flex items-center justify-center z-10 overflow-hidden p-1.5">
                 <Palette className="w-full h-full text-purple-600" />
               </div>
-              <h2 className="text-[16px] font-black uppercase tracking-widest text-gray-800 border-b border-gray-300 pb-1 mb-4">
+              <h2 className="text-[14px] font-black uppercase tracking-widest text-gray-800 border-b border-gray-300 pb-1 mb-2">
                 UI/UX Design
               </h2>
               <div className="flex flex-col gap-5">

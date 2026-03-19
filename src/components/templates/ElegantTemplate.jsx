@@ -9,10 +9,10 @@ const ElegantTemplate = ({ data }) => {
       {/* ── Header ── */}
       <header className="px-10 pt-8 pb-3 flex flex-col items-start gap-4">
         <div className="flex flex-col gap-0.5 w-full">
-          <h1 className="text-[42px] font-bold text-[#1a1a1a] leading-none uppercase tracking-tight font-serif">
+          <h1 className="text-[32px] font-bold text-[#1a1a1a] leading-none uppercase tracking-tight font-serif">
             {personalInfo?.name?.toUpperCase() || 'RIDHAM PATEL'}
           </h1>
-          <p className="text-[15px] font-sans font-black text-[#2D4A22] tracking-[0.25em] mt-2 uppercase">
+          <p className="text-[13px] font-sans font-black text-[#2D4A22] tracking-[0.25em] mt-2 uppercase">
             {personalInfo?.title || 'FULL STACK DEVELOPER'}
           </p>
         </div>
@@ -60,7 +60,7 @@ const ElegantTemplate = ({ data }) => {
           
           {/* Skills Section */}
           <section className="flex flex-col gap-4 mt-2">
-            <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b-[3px] border-[#2D4A22] pb-1 uppercase tracking-tight w-full font-sans">
+            <h2 className="text-[16px] font-bold text-[#1a1a1a] border-b-[3px] border-[#2D4A22] pb-1 uppercase tracking-tight w-full font-sans">
               Skills
             </h2>
             <div className="flex flex-col gap-5">
@@ -75,7 +75,7 @@ const ElegantTemplate = ({ data }) => {
                 }, {}) || {}
               ).map(([category, skillLists], idx) => (
                 <div key={idx} className="flex flex-col gap-1">
-                  <h3 className="text-[15px] font-sans font-bold text-[#2D4A22]">
+                  <h3 className="text-[13px] font-sans font-bold text-[#2D4A22]">
                     {category}
                   </h3>
                   <p className="text-[13px] font-sans text-slate-700 leading-relaxed font-medium">
@@ -120,7 +120,7 @@ const ElegantTemplate = ({ data }) => {
           )}
 
           <section className="flex flex-col gap-4">
-            <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b border-black pb-1 uppercase tracking-tight w-full">
+            <h2 className="text-[16px] font-bold text-[#1a1a1a] border-b border-black pb-1 uppercase tracking-tight w-full">
               Certifications
             </h2>
             <div className="grid grid-cols-2 gap-x-4 gap-y-2">

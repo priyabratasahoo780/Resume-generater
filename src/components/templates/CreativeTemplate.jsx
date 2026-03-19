@@ -31,7 +31,7 @@ const CreativeTemplate = ({ data }) => {
       {/* ── Header ── */}
       <header className="bg-slate-50 px-14 pt-4 pb-3 flex justify-between items-center border-b border-white">
         <div className="flex flex-col gap-1">
-          <h1 className="text-[42px] font-medium text-[#444] tracking-tight border-b-2 border-[#444] pb-1.5 px-1 leading-none whitespace-nowrap overflow-hidden text-ellipsis">
+          <h1 className="text-[32px] font-medium text-[#444] tracking-tight border-b-2 border-[#444] pb-1.5 px-1 leading-none whitespace-nowrap overflow-hidden text-ellipsis">
             {personalInfo?.name?.toUpperCase() || 'VASARA SUJAL'}
           </h1>
         </div>
@@ -80,7 +80,7 @@ const CreativeTemplate = ({ data }) => {
           
           {/* Skills */}
           <section className="flex flex-col gap-6">
-            <h3 className="text-[20px] font-medium uppercase text-[#444] tracking-wider border-b border-[#ccc] pb-0.5 w-full italic">
+            <h3 className="text-[16px] font-medium uppercase text-[#444] tracking-wider border-b border-[#ccc] pb-0.5 w-full italic">
               Skills
             </h3>
             <div className="flex flex-col gap-6">

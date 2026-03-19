@@ -1,0 +1,16 @@
+﻿
+> resume@0.0.0 lint
+> eslint .
+
+
+C:\Users\priyabrata\Desktop\Resume\src\App.jsx
+  164:53  error  Empty block statement  no-empty
+
+C:\Users\priyabrata\Desktop\Resume\src\components\templates\ModernTimelineTemplate.jsx
+  46:20  error  'toggleMusic' is not defined  no-undef
+  48:13  error  'isPlaying' is not defined    no-undef
+  50:18  error  'isPlaying' is not defined    no-undef
+  52:12  error  'isPlaying' is not defined    no-undef
+
+Γ£û 5 problems (5 errors, 0 warnings)
+

@@ -58,7 +58,7 @@ const ModernTemplate = ({ data }) => {
             </div>
           </div>
           <div className="flex flex-col gap-2 mt-2">
-            <h1 className="text-3xl font-black leading-tight tracking-tight text-white drop-shadow-sm">
+            <h1 className="text-2xl font-black leading-tight tracking-tight text-white drop-shadow-sm">
               {personalInfo?.name || 'Your Name'}
             </h1>
             <div className="h-1 w-12 bg-indigo-400 mx-auto rounded-full mb-1"></div>

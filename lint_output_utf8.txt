@@ -1,0 +1,183 @@
+﻿
+> resume@0.0.0 lint
+> eslint .
+
+
+C:\Users\priyabrata\Desktop\Resume\Resume-generater\src\App.jsx
+  68:54  error  '_' is defined but never used  no-unused-vars
+  68:57  error  Empty block statement          no-empty
+
+C:\Users\priyabrata\Desktop\Resume\src\App.jsx
+   71:9   error    Unexpected 'debugger' statement                                                                                                                 no-debugger
+  104:6   warning  React Hook useEffect has missing dependencies: 'isAuthenticated' and 'showDevToolsWarning'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  163:54  error    '_' is defined but never used                                                                                                                   no-unused-vars
+  163:57  error    Empty block statement                                                                                                                           no-empty
+
+C:\Users\priyabrata\Desktop\Resume\src\components\PasswordProtection.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\priyabrata\Desktop\Resume\src\components\templates\CreativeTemplate.jsx
+   4:25  error  'aboutMe' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u           no-unused-vars
+   4:70  error  'experience' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u        no-unused-vars
+  27:9   error  'categorizedFigma' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\priyabrata\Desktop\Resume\src\components\templates\ElegantTemplate.jsx
+  5:36   error  'experience' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u    no-unused-vars
+  5:98   error  'aboutMe' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u       no-unused-vars
+  5:107  error  'certificates' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\priyabrata\Desktop\Resume\src\components\templates\ModernTemplate.jsx
+  28:5  error  'certificates' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\priyabrata\Desktop\Resume\src\components\templates\ModernTimelineTemplate.jsx
+  101:14  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+   99 |           {/* Contact */}
+  100 |           <section>
+> 101 |             <SectionHeader title="Contact" />
+      |              ^^^^^^^^^^^^^ This component is created during render
+  102 |             <div className="flex flex-col gap-3">
+  103 |               {personalInfo?.email && (
+  104 |                 <div className="flex items-center gap-3">
+
+  52 |
+  53 |   // Helper to render section title with line
+> 54 |   const SectionHeader = ({ title, showLinks }) => (
+     |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 55 |     <div className="flex items-center justify-between border-b border-gray-300 pb-1 mb-3">
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 56 |       <h2 className="text-[16px] font-black uppercase tracking-widest text-gray-800">
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 57 |         {title}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 58 |       </h2>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 59 |       {showLinks && (
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 60 |         <span className="text-[12px] font-bold text-gray-500 underline uppercase tracking-tight">Links</span>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 61 |       )}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 62 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 63 |   );
+     | ^^^^ The component is created during render here
+  64 |
+  65 |   return (
+  66 |     <div className="w-full min-h-full bg-white text-gray-800 font-sans p-10 flex flex-col gap-6 leading-tight select-none">                                                                      react-hooks/static-components
+  154:14  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  152 |           {/* Skills */}
+  153 |           <section>
+> 154 |             <SectionHeader title="Skills" />
+      |              ^^^^^^^^^^^^^ This component is created during render
+  155 |             <ul className="flex flex-col gap-1.5 list-disc ml-4">
+  156 |               {skills?.map((skill, idx) => (
+  157 |                 <li key={idx} className="text-[13px] font-medium text-gray-700">
+
+  52 |
+  53 |   // Helper to render section title with line
+> 54 |   const SectionHeader = ({ title, showLinks }) => (
+     |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 55 |     <div className="flex items-center justify-between border-b border-gray-300 pb-1 mb-3">
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 56 |       <h2 className="text-[16px] font-black uppercase tracking-widest text-gray-800">
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 57 |         {title}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 58 |       </h2>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 59 |       {showLinks && (
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 60 |         <span className="text-[12px] font-bold text-gray-500 underline uppercase tracking-tight">Links</span>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 61 |       )}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 62 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 63 |   );
+     | ^^^^ The component is created during render here
+  64 |
+  65 |   return (
+  66 |     <div className="w-full min-h-full bg-white text-gray-800 font-sans p-10 flex flex-col gap-6 leading-tight select-none">                            react-hooks/static-components
+  166:14  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  164 |           {/* Certificates */}
+  165 |           <section>
+> 166 |             <SectionHeader title="Certificate" showLinks />
+      |              ^^^^^^^^^^^^^ This component is created during render
+  167 |             <ul className="flex flex-col gap-1.5 list-disc ml-4">
+  168 |               {certificates?.map((cert, idx) => (
+  169 |                 <li key={idx} className="text-[13px] font-medium text-gray-700">
+
+  52 |
+  53 |   // Helper to render section title with line
+> 54 |   const SectionHeader = ({ title, showLinks }) => (
+     |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 55 |     <div className="flex items-center justify-between border-b border-gray-300 pb-1 mb-3">
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 56 |       <h2 className="text-[16px] font-black uppercase tracking-widest text-gray-800">
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 57 |         {title}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 58 |       </h2>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 59 |       {showLinks && (
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 60 |         <span className="text-[12px] font-bold text-gray-500 underline uppercase tracking-tight">Links</span>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 61 |       )}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 62 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 63 |   );
+     | ^^^^ The component is created during render here
+  64 |
+  65 |   return (
+  66 |     <div className="w-full min-h-full bg-white text-gray-800 font-sans p-10 flex flex-col gap-6 leading-tight select-none">  react-hooks/static-components
+  178:14  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  176 |           {/* Languages */}
+  177 |           <section>
+> 178 |             <SectionHeader title="Languages" />
+      |              ^^^^^^^^^^^^^ This component is created during render
+  179 |             <ul className="flex flex-col gap-1.5 list-disc ml-4">
+  180 |               {languages?.map((lang, idx) => (
+  181 |                 <li key={idx} className="text-[13px] font-medium text-gray-700 uppercase">
+
+  52 |
+  53 |   // Helper to render section title with line
+> 54 |   const SectionHeader = ({ title, showLinks }) => (
+     |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 55 |     <div className="flex items-center justify-between border-b border-gray-300 pb-1 mb-3">
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 56 |       <h2 className="text-[16px] font-black uppercase tracking-widest text-gray-800">
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 57 |         {title}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 58 |       </h2>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 59 |       {showLinks && (
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 60 |         <span className="text-[12px] font-bold text-gray-500 underline uppercase tracking-tight">Links</span>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 61 |       )}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 62 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 63 |   );
+     | ^^^^ The component is created during render here
+  64 |
+  65 |   return (
+  66 |     <div className="w-full min-h-full bg-white text-gray-800 font-sans p-10 flex flex-col gap-6 leading-tight select-none">          react-hooks/static-components
+
+Γ£û 18 problems (17 errors, 1 warning)
+
