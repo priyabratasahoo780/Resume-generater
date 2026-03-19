@@ -23,7 +23,7 @@ const Header = ({ handlePrint, isDownloading, selectedTemplate, setSelectedTempl
         </h1>
       </div>
       
-      <div className="flex-1 flex items-center justify-center overflow-x-auto no-scrollbar py-1">
+      <div className="flex-1 flex items-center justify-start sm:justify-center overflow-x-auto no-scrollbar py-1 px-2">
         <div className="flex items-center bg-slate-100/80 backdrop-blur-sm rounded-xl p-1 shadow-inner border border-slate-200/50 min-w-max">
           {templates.map((template) => (
             <button 
