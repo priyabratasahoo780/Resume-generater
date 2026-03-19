@@ -2,7 +2,7 @@ import React from 'react';
 import { Github, Linkedin, Youtube, Globe, Mail, Phone, MapPin, ExternalLink, Trophy, Zap, BookOpen } from 'lucide-react';
 
 const ElegantTemplate = ({ data }) => {
-  const { personalInfo, education, skills, projects, achievements, hackathons, uiux, languages, certificates } = data;
+  const { personalInfo, education, skills, projects, achievements, hackathons, uiux, languages, certificates, expertise } = data;
 
   return (
     <div className="w-full min-h-full bg-white text-[#333] font-serif flex flex-col gap-0 shadow-inner overflow-hidden leading-tight">
@@ -157,35 +157,23 @@ const ElegantTemplate = ({ data }) => {
         {/* ── Right Column ── */}
         <main className="flex-1 flex flex-col gap-6 mt-2">
           
-          {/* Expertise & Summary Box - Pixel Perfect Borders */}
-          <section className="bg-[#f9fafb] border-t-[3.5px] border-t-slate-800 p-5 shadow-sm">
-            <h2 className="text-[17px] font-bold text-[#1a1a1a] uppercase tracking-widest mb-3">
-              Expertise & Summary
-            </h2>
-            <div className="h-[1px] bg-slate-200 w-full mb-4" />
-            <ul className="flex flex-col gap-2.5">
-              <li className="flex items-start gap-2.5 text-[13.5px] font-sans text-slate-700 font-bold leading-normal">
-                <span className="text-[#487D39] text-sm leading-none mt-1">•</span>
-                <span>Full-stack web development with React & Node.js</span>
-              </li>
-              <li className="flex items-start gap-2.5 text-[13.5px] font-sans text-slate-700 font-bold leading-normal">
-                <span className="text-[#487D39] text-sm leading-none mt-1">•</span>
-                <span>MongoDB database management</span>
-              </li>
-              <li className="flex items-start gap-2.5 text-[13.5px] font-sans text-slate-700 font-bold leading-normal">
-                <span className="text-[#487D39] text-sm leading-none mt-1">•</span>
-                <span>Authentication & security (JWT, & role-based access)</span>
-              </li>
-              <li className="flex items-start gap-2.5 text-[13.5px] font-sans text-slate-700 font-bold leading-normal">
-                <span className="text-[#487D39] text-sm leading-none mt-1">•</span>
-                <span>RESTful API development</span>
-              </li>
-              <li className="flex items-start gap-2.5 text-[13.5px] font-sans text-slate-700 font-bold leading-normal">
-                <span className="text-[#487D39] text-sm leading-none mt-1">•</span>
-                <span>UI/UX design with Figma</span>
-              </li>
-            </ul>
-          </section>
+          {/* Expertise & Summary Box - Dynamic from state */}
+          {(expertise && expertise.length > 0) && (
+            <section className="bg-[#f9fafb] border-t-[3.5px] border-t-slate-800 p-5 shadow-sm">
+              <h2 className="text-[17px] font-bold text-[#1a1a1a] uppercase tracking-widest mb-3">
+                Expertise & Summary
+              </h2>
+              <div className="h-[1px] bg-slate-200 w-full mb-4" />
+              <ul className="flex flex-col gap-2.5">
+                {expertise.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5 text-[13.5px] font-sans text-slate-700 font-bold leading-normal">
+                    <span className="text-[#487D39] text-sm leading-none mt-1">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           {/* Education & Award */}
           {(education && education.length > 0) && (

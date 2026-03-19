@@ -237,6 +237,13 @@ function App() {
     achievements: [
       'Enthusiastic problem solver with competitive programming experience on LeetCode'
     ],
+    expertise: [
+      'Full-stack web development with React & Node.js',
+      'MongoDB database management',
+      'Authentication & security (JWT, & role-based access)',
+      'RESTful API development',
+      'UI/UX design with Figma'
+    ],
     languages: ['English', 'Gujarati - Native', 'Hindi']
   });
 

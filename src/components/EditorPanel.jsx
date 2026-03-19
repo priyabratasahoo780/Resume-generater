@@ -803,10 +803,53 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
 
       <div className="h-px w-full bg-slate-200" />
 
-      {/* ── Section 10: Languages ── */}
+      {/* ── Section 10: Expertise & Summary ── */}
       <div>
         <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
           <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">10</span>
+          Expertise & Summary
+        </h2>
+        <div className="flex flex-col gap-4">
+          {(resumeData.expertise || []).map((exp, index) => (
+            <div key={index} className="flex gap-2 group relative">
+              <input
+                type="text"
+                placeholder="Ex: Full-stack web development with React & Node.js..."
+                className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
+                value={exp}
+                onChange={(e) => {
+                  const newExp = [...resumeData.expertise];
+                  newExp[index] = e.target.value;
+                  setResumeData({ ...resumeData, expertise: newExp });
+                }}
+              />
+              <button
+                onClick={() => {
+                  const newExp = resumeData.expertise.filter((_, i) => i !== index);
+                  setResumeData({ ...resumeData, expertise: newExp });
+                }}
+                className="p-2 text-slate-400 hover:text-red-500 transition-colors"
+                title="Remove bullet"
+              >
+                ×
+              </button>
+            </div>
+          ))}
+          <button
+            onClick={() => setResumeData({ ...resumeData, expertise: [...(resumeData.expertise || []), ''] })}
+            className="w-full py-2 border-2 border-dashed border-slate-300 rounded-lg text-slate-500 hover:border-indigo-400 hover:text-indigo-600 transition-all font-medium"
+          >
+            + Add Summary Bullet
+          </button>
+        </div>
+      </div>
+
+      <div className="h-px w-full bg-slate-200" />
+
+      {/* ── Section 11: Languages ── */}
+      <div>
+        <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+          <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">11</span>
           Languages
           {selectedTemplate === 'classic' && (
             <span className="text-[10px] text-indigo-500 font-bold uppercase tracking-tight bg-indigo-50 px-2 py-1 rounded-full ml-2">Not in Classic</span>
@@ -830,10 +873,10 @@ const EditorPanel = ({ resumeData, setResumeData, handleDownload, isDownloading,
 
       <div className="h-px w-full bg-slate-200" />
 
-      {/* ── Section 11: UI/UX Design ── */}
+      {/* ── Section 12: UI/UX Design ── */}
       <div>
         <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-          <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">11</span>
+          <span className="bg-indigo-100 text-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">12</span>
           UI/UX Design
           {selectedTemplate === 'classic' && (
             <span className="text-[10px] text-indigo-500 font-bold uppercase tracking-tight bg-indigo-50 px-2 py-1 rounded-full ml-2">Not in Classic</span>
