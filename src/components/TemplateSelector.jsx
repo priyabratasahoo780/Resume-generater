@@ -109,6 +109,32 @@ const TemplateSelector = ({ selectedTemplate, setSelectedTemplate, onConfirm }) 
           </div>
         </div>
       )
+    },
+    {
+      id: 'professional-serif',
+      name: 'Pro Serif',
+      description: 'Dual-column serif layout with social bar.',
+      preview: (
+        <div className="w-full h-full rounded-sm flex flex-col gap-1 p-1.5 overflow-hidden border border-slate-200 bg-white font-serif">
+          <div className="w-full h-1.5 bg-slate-800 rounded-sm" />
+          <div className="w-full h-px bg-slate-200" />
+          <div className="flex gap-1 items-center justify-center">
+             <div className="w-2 h-0.5 bg-slate-400" />
+             <div className="w-2 h-0.5 bg-slate-400" />
+          </div>
+          <div className="flex gap-1.5 flex-1">
+             <div className="w-2/5 flex flex-col gap-1">
+                <div className="w-full h-0.5 bg-slate-300" />
+                <div className="w-3/4 h-0.5 bg-slate-200" />
+             </div>
+             <div className="w-px h-full bg-slate-200" />
+             <div className="flex-1 flex flex-col gap-1">
+                <div className="w-full h-0.5 bg-slate-300" />
+                <div className="w-5/6 h-0.5 bg-slate-200" />
+             </div>
+          </div>
+        </div>
+      )
     }
   ];
 

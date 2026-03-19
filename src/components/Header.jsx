@@ -21,7 +21,8 @@ const Header = ({ handlePrint, isDownloading, selectedTemplate, setSelectedTempl
             { id: 'professional', name: 'Professional' },
             { id: 'creative', name: 'Creative' },
             { id: 'timeline', name: 'Timeline' },
-            { id: 'elegant', name: 'Elegant' }
+            { id: 'elegant', name: 'Elegant' },
+            { id: 'professional-serif', name: 'Pro Serif' }
           ].map((template) => (
             <button 
               key={template.id}
