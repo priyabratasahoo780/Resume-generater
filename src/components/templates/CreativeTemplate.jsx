@@ -112,10 +112,15 @@ const CreativeTemplate = ({ data }) => {
                   <ul className="flex flex-col gap-2 pl-4">
                     <li className="text-[14px] font-sans text-[#555] flex items-start gap-4 leading-snug">
                        <span className="w-1.5 h-1.5 bg-[#444] rounded-full shrink-0 mt-2" />
-                       <div className="flex flex-col">
-                          <span>{edu.degree}</span>
-                          <span className="text-[#888]">{edu.duration}</span>
-                       </div>
+                        <div className="flex flex-col">
+                           <span>{edu.degree}</span>
+                           <div className="flex justify-between items-center w-full">
+                             <span className="text-[#888]">{edu.duration}</span>
+                             {edu.score && (
+                               <span className="text-[12px] font-bold text-[#444]">CGPA : {edu.score}</span>
+                             )}
+                           </div>
+                        </div>
                     </li>
                   </ul>
                 </div>

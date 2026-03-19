@@ -33,7 +33,8 @@ const ModernTimelineTemplate = ({ data }) => {
     hackathons, 
     uiux, 
     certificates, 
-    languages 
+    languages,
+    education
   } = data || {};
 
   return (
@@ -142,6 +143,29 @@ const ModernTimelineTemplate = ({ data }) => {
               ))}
             </ul>
           </section>
+
+          {/* Education */}
+          {education && education.length > 0 && (
+            <section>
+              <SectionHeader title="Education" />
+              <div className="flex flex-col gap-4">
+                {education.map((edu, idx) => (
+                  <div key={idx} className="flex flex-col gap-1">
+                    <div className="flex justify-between items-start">
+                      <h4 className="text-[14px] font-black text-gray-900 leading-tight">{edu.institution}</h4>
+                    </div>
+                    <p className="text-[12px] text-gray-600 font-bold italic line-clamp-1">{edu.degree}</p>
+                    <div className="flex justify-between items-center text-[11px] font-bold text-gray-500 uppercase tracking-tight">
+                      <span>{edu.duration}</span>
+                    </div>
+                    {edu.score && (
+                      <p className="text-[12px] text-indigo-600 font-black mt-1">CGPA : {edu.score}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </aside>
 
         {/* ── Right Content (67%) ── */}

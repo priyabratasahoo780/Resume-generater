@@ -173,8 +173,8 @@ const ProfessionalTemplate = ({ data }) => {
                       {edu.degree}
                     </p>
                     {edu.score && (
-                      <p className="text-[10px] text-slate-400 mt-0.5 italic">
-                        {edu.score}
+                      <p className="text-[10px] text-slate-400 mt-0.5 font-bold italic text-indigo-600">
+                        CGPA : {edu.score}
                       </p>
                     )}
                   </div>

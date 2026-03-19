@@ -158,7 +158,7 @@ const ClassicTemplate = ({ data }) => {
                   <span className="text-[12px] font-medium text-slate-600">[{edu.duration}]</span>
                 </div>
                 {edu.score && (
-                  <p className="text-[12px] text-slate-600">{edu.score}</p>
+                  <p className="text-[12px] text-slate-600 font-bold">CGPA : {edu.score}</p>
                 )}
               </div>
             ))}

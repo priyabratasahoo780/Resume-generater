@@ -189,6 +189,9 @@ const ElegantTemplate = ({ data }) => {
                       <span className="text-[14px] font-sans font-black text-[#487D39]">{edu.duration}</span>
                     </div>
                     <p className="text-[13px] font-sans text-slate-500 italic font-bold">{edu.degree}</p>
+                    {edu.score && (
+                      <p className="text-[12px] font-sans font-black text-[#487D39]">CGPA : {edu.score}</p>
+                    )}
                   </div>
                 ))}
               </div>

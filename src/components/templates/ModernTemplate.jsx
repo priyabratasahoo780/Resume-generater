@@ -338,7 +338,7 @@ const ModernTemplate = ({ data }) => {
                     {edu.score && (
                       <div className="flex items-center gap-3">
                          <div className="text-[12px] font-black text-indigo-700 bg-indigo-50/80 px-4 py-1.5 rounded-xl border border-indigo-200/50 shadow-sm">
-                          Grade: <span className="text-indigo-900">{edu.score}</span>
+                          CGPA : <span className="text-indigo-900">{edu.score}</span>
                         </div>
                       </div>
                     )}
