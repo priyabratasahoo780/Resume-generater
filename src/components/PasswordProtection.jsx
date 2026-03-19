@@ -30,7 +30,8 @@ const PasswordProtection = ({ onAuthenticated }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900 overflow-hidden">
+    <div className="fixed inset-0 z-[100] overflow-y-auto bg-slate-900">
+      <div className="min-h-full flex items-center justify-center p-6">
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-indigo-500/10 rounded-full blur-[120px]" />
@@ -115,6 +116,7 @@ const PasswordProtection = ({ onAuthenticated }) => {
           </div>
         </div>
       </Motion.div>
+      </div>
     </div>
   );
 };

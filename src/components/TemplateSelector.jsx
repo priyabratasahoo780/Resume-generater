@@ -139,7 +139,8 @@ const TemplateSelector = ({ selectedTemplate, setSelectedTemplate, onConfirm }) 
   ];
 
   return (
-    <div className="fixed inset-0 z-[110] bg-slate-900/95 backdrop-blur-md flex items-center justify-center p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-[110] overflow-y-auto bg-slate-900/95 backdrop-blur-md p-6">
+      <div className="min-h-full flex flex-col items-center justify-start sm:justify-center py-10">
       <div className="max-w-4xl w-full flex flex-col gap-8">
         <div className="text-center space-y-2">
           <div className="inline-flex p-3 bg-indigo-500/10 rounded-2xl border border-indigo-500/20 mb-4">
@@ -189,6 +190,7 @@ const TemplateSelector = ({ selectedTemplate, setSelectedTemplate, onConfirm }) 
           >
             Start Building Resume
           </button>
+        </div>
         </div>
       </div>
     </div>
