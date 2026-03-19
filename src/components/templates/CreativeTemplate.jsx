@@ -29,9 +29,9 @@ const CreativeTemplate = ({ data }) => {
     <div className="w-full min-h-full bg-white text-[#444] font-serif flex flex-col gap-0 shadow-inner border border-slate-200">
       
       {/* ── Header ── */}
-      <header className="bg-slate-50 px-14 pt-4 pb-3 flex justify-between items-center border-b border-white">
+      <header className="bg-slate-50 px-8 pt-3 pb-2 flex justify-between items-center border-b border-white">
         <div className="flex flex-col gap-1">
-          <h1 className="text-[32px] font-medium text-[#444] tracking-tight border-b-2 border-[#444] pb-1.5 px-1 leading-none whitespace-nowrap overflow-hidden text-ellipsis">
+          <h1 className="text-[24px] font-medium text-[#444] tracking-tight border-b-2 border-[#444] pb-1 px-1 leading-none whitespace-nowrap overflow-hidden text-ellipsis">
             {personalInfo?.name?.toUpperCase() || 'VASARA SUJAL'}
           </h1>
         </div>
@@ -74,13 +74,13 @@ const CreativeTemplate = ({ data }) => {
         ))}
       </div>
 
-      <div className="flex px-14 py-3 gap-8">
+      <div className="flex px-8 py-2 gap-6">
         {/* ── Left Column ── */}
         <aside className="w-[30%] flex flex-col gap-5 shrink-0">
           
           {/* Skills */}
           <section className="flex flex-col gap-6">
-            <h3 className="text-[16px] font-medium uppercase text-[#444] tracking-wider border-b border-[#ccc] pb-0.5 w-full italic">
+            <h3 className="text-[14px] font-medium uppercase text-[#444] tracking-wider border-b border-[#ccc] pb-0.5 w-full italic">
               Skills
             </h3>
             <div className="flex flex-col gap-6">
@@ -89,7 +89,7 @@ const CreativeTemplate = ({ data }) => {
                   <h4 className="font-sans font-bold text-[#444] text-[16px] leading-tight">{category} :</h4>
                   <ul className="flex flex-col gap-2.5 pl-4">
                     {items.map((skill, j) => (
-                      <li key={j} className="text-[14px] font-sans text-[#555] flex items-start gap-4 leading-snug">
+                        <li className="text-[12px] font-sans text-[#555] flex items-start gap-4 leading-snug">
                         <span className="w-1.5 h-1.5 bg-[#444] rounded-full shrink-0 mt-[7px]" />
                         {skill}
                       </li>
@@ -237,13 +237,14 @@ const CreativeTemplate = ({ data }) => {
                   <div key={idx} className="flex flex-col gap-2">
                     <div className="flex items-center gap-4 min-w-0">
                       <span className="w-1.5 h-1.5 bg-[#444] rounded-full shrink-0" />
-                      <h4 className="text-[17px] font-bold text-[#444] italic leading-tight whitespace-nowrap overflow-hidden text-ellipsis">{item.title}</h4>
+                      <h4 className="text-[14px] font-bold text-[#444] italic leading-tight whitespace-nowrap overflow-hidden text-ellipsis">{item.title}</h4>
                       {item.link && (
                         <a href={item.link} className="text-xs font-sans font-bold text-[#888] underline underline-offset-4 decoration-[#ddd]">Figma</a>
                       )}
                     </div>
                     {item.description && (
-                      <p className="text-[14px] font-sans text-[#666] leading-relaxed pl-5 italic">{item.description}</p>
+                      <p className="text-[12px] font-sans text-[#666] leading-relaxed italic border-l border-[#eee] pl-4">
+{item.description}</p>
                     )}
                   </div>
                 ))}

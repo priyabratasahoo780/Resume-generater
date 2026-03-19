@@ -16,7 +16,7 @@ import {
 // Helper to render section title with line
 const SectionHeader = ({ title, showLinks }) => (
   <div className="flex items-center justify-between border-b border-gray-300 pb-1 mb-3">
-    <h2 className="text-[14px] font-black uppercase tracking-widest text-gray-800">
+    <h2 className="text-[12px] font-black uppercase tracking-widest text-gray-800">
       {title}
     </h2>
     {showLinks && (
@@ -37,11 +37,11 @@ const ModernTimelineTemplate = ({ data }) => {
   } = data || {};
 
   return (
-    <div className="w-full min-h-full bg-white text-gray-800 font-sans p-10 flex flex-col gap-6 leading-tight select-none">
+    <div className="w-full min-h-full bg-white text-gray-800 font-sans p-8 flex flex-col gap-4 leading-tight select-none">
       {/* ── Header ── */}
       <header className="flex flex-col gap-1 relative">
 
-        <h1 className="text-[28px] font-black uppercase tracking-tight text-gray-900 border-b-none pr-12">
+        <h1 className="text-[24px] font-black uppercase tracking-tight text-gray-900 border-b-none pr-12">
           {personalInfo?.name || 'NAME SURNAME'}
         </h1>
         <p className="text-[14px] font-medium text-gray-600 tracking-wide">
@@ -50,7 +50,7 @@ const ModernTimelineTemplate = ({ data }) => {
         <div className="h-px bg-gray-300 w-full mt-2" />
       </header>
 
-      <div className="flex gap-10">
+      <div className="flex gap-8">
         {/* ── Left Sidebar (33%) ── */}
         <aside className="w-[33%] flex flex-col gap-8">
           
@@ -156,7 +156,7 @@ const ModernTimelineTemplate = ({ data }) => {
               <div className="absolute left-0 top-0 w-7 h-7 bg-white border border-gray-200 shadow-sm rounded-full flex items-center justify-center z-10 overflow-hidden p-1.5">
                 <Code className="w-full h-full text-indigo-600" />
               </div>
-              <h2 className="text-[14px] font-black uppercase tracking-widest text-gray-800 border-b border-gray-300 pb-1 mb-2">
+              <h2 className="text-[12px] font-black uppercase tracking-widest text-gray-800 border-b border-gray-300 pb-1 mb-2">
                 Hackathon & Team Projects
               </h2>
               <div className="flex flex-col gap-6">
@@ -170,7 +170,7 @@ const ModernTimelineTemplate = ({ data }) => {
                         {hack.github && <a href={hack.github}>GitHub</a>}
                       </div>
                     </div>
-                    <p className="text-[13px] leading-relaxed text-gray-700 font-medium">
+                    <p className="text-[11px] leading-relaxed text-gray-700 font-medium">
                       {hack.description}
                     </p>
                   </div>
@@ -185,7 +185,7 @@ const ModernTimelineTemplate = ({ data }) => {
               <div className="absolute left-0 top-0 w-7 h-7 bg-white border border-gray-200 shadow-sm rounded-full flex items-center justify-center z-10 overflow-hidden p-1.5">
                 <Briefcase className="w-full h-full text-blue-600" />
               </div>
-              <h2 className="text-[14px] font-black uppercase tracking-widest text-gray-800 border-b border-gray-300 pb-1 mb-2">
+              <h2 className="text-[12px] font-black uppercase tracking-widest text-gray-800 border-b border-gray-300 pb-1 mb-2">
                 Projects
               </h2>
               <div className="flex flex-col gap-8">
@@ -204,7 +204,7 @@ const ModernTimelineTemplate = ({ data }) => {
                         Role : {proj.role || 'UI/UX Designer & Backend Developer'}
                       </p>
                       <ul className="flex flex-col gap-1 list-disc ml-4">
-                         <li className="text-[13px] text-gray-700 font-medium leading-relaxed">
+                          <li className="text-[11px] text-gray-700 font-medium leading-relaxed">
                             {proj.description?.split('\n')[0] || proj.description}
                          </li>
                          {proj.description?.split('\n').slice(1).map((line, i) => (
@@ -229,7 +229,7 @@ const ModernTimelineTemplate = ({ data }) => {
               <div className="absolute left-0 top-0 w-7 h-7 bg-white border border-gray-200 shadow-sm rounded-full flex items-center justify-center z-10 overflow-hidden p-1.5">
                 <Palette className="w-full h-full text-purple-600" />
               </div>
-              <h2 className="text-[14px] font-black uppercase tracking-widest text-gray-800 border-b border-gray-300 pb-1 mb-2">
+              <h2 className="text-[12px] font-black uppercase tracking-widest text-gray-800 border-b border-gray-300 pb-1 mb-2">
                 UI/UX Design
               </h2>
               <div className="flex flex-col gap-5">

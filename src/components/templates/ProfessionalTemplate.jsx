@@ -15,11 +15,11 @@ const ProfessionalTemplate = ({ data }) => {
   } = data;
 
   return (
-    <div className="w-full min-h-full bg-white text-slate-800 font-sans p-10 flex flex-col gap-6 overflow-hidden">
+    <div className="w-full min-h-full bg-white text-slate-800 font-sans p-8 flex flex-col gap-4 overflow-hidden">
       {/* Header Section */}
       <div className="flex justify-between items-start border-b-2 border-slate-100 pb-6">
         <div className="flex flex-col gap-1">
-          <h1 className="text-4xl font-extrabold uppercase tracking-tight text-slate-900">
+          <h1 className="text-3xl font-extrabold uppercase tracking-tight text-slate-900">
             {personalInfo?.name || "Your Name"}
           </h1>
           <p className="text-indigo-600 font-semibold tracking-wide uppercase text-sm">
@@ -61,14 +61,14 @@ const ProfessionalTemplate = ({ data }) => {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4">
         {/* About Me */}
         {aboutMe && (
           <section>
             <h2 className="bg-indigo-50 text-indigo-900 px-3 py-1 font-bold uppercase text-xs tracking-widest mb-2 inline-block rounded">
               About Me
             </h2>
-            <p className="text-[13px] leading-relaxed text-slate-600 text-justify border-l-2 border-indigo-100 pl-4 ml-1">
+            <p className="text-[12px] leading-relaxed text-slate-600 text-justify border-l-2 border-indigo-100 pl-4 ml-1">
               {aboutMe}
             </p>
           </section>

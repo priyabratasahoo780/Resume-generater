@@ -7,12 +7,12 @@ const ElegantTemplate = ({ data }) => {
   return (
     <div className="w-full min-h-full bg-white text-[#333] font-serif flex flex-col gap-0 shadow-inner overflow-hidden leading-tight">
       {/* ── Header ── */}
-      <header className="px-10 pt-8 pb-3 flex flex-col items-start gap-4">
+      <header className="px-8 pt-5 pb-2 flex flex-col items-start gap-3">
         <div className="flex flex-col gap-0.5 w-full">
-          <h1 className="text-[32px] font-bold text-[#1a1a1a] leading-none uppercase tracking-tight font-serif">
+          <h1 className="text-[24px] font-bold text-[#1a1a1a] leading-none uppercase tracking-tight font-serif">
             {personalInfo?.name?.toUpperCase() || 'RIDHAM PATEL'}
           </h1>
-          <p className="text-[13px] font-sans font-black text-[#2D4A22] tracking-[0.25em] mt-2 uppercase">
+          <p className="text-[12px] font-sans font-black text-[#2D4A22] tracking-[0.2em] mt-1.5 uppercase">
             {personalInfo?.title || 'FULL STACK DEVELOPER'}
           </p>
         </div>
@@ -54,13 +54,13 @@ const ElegantTemplate = ({ data }) => {
         </div>
       </header>
 
-      <div className="flex px-10 py-2 gap-8">
+      <div className="flex px-8 py-1 gap-6">
         {/* ── Left Column ── */}
         <aside className="w-[42%] flex flex-col gap-6">
           
           {/* Skills Section */}
           <section className="flex flex-col gap-4 mt-2">
-            <h2 className="text-[16px] font-bold text-[#1a1a1a] border-b-[3px] border-[#2D4A22] pb-1 uppercase tracking-tight w-full font-sans">
+            <h2 className="text-[14px] font-bold text-[#1a1a1a] border-b-[2px] border-[#2D4A22] pb-0.5 uppercase tracking-tight w-full font-sans">
               Skills
             </h2>
             <div className="flex flex-col gap-5">
@@ -78,7 +78,7 @@ const ElegantTemplate = ({ data }) => {
                   <h3 className="text-[13px] font-sans font-bold text-[#2D4A22]">
                     {category}
                   </h3>
-                  <p className="text-[13px] font-sans text-slate-700 leading-relaxed font-medium">
+                  <p className="text-[11px] font-sans text-slate-700 leading-relaxed font-medium">
                     {skillLists.join(', ')}
                   </p>
                 </div>
@@ -103,7 +103,7 @@ const ElegantTemplate = ({ data }) => {
                          {hack.subtitle2 && <p className="text-[12px] font-sans text-slate-500 font-medium italic -mt-1">{hack.subtitle2}</p>}
                       </div>
                     </div>
-                    <p className="text-[13px] font-sans text-slate-600 leading-snug font-medium ml-5">
+                    <p className="text-[11px] font-sans text-slate-600 leading-snug font-medium ml-5">
                       {hack.description}
                     </p>
                     <div className="flex gap-3 ml-5 text-[11px] font-sans font-bold text-slate-500 underline decoration-slate-200 underline-offset-4 decoration-1">
@@ -247,7 +247,7 @@ const ElegantTemplate = ({ data }) => {
                     <h4 className="text-[16px] font-bold text-[#1a1a1a] font-serif leading-tight">
                       {proj.title}
                     </h4>
-                    <p className="text-[13px] font-sans text-slate-600 leading-snug font-bold">
+                    <p className="text-[11px] font-sans text-slate-600 leading-snug font-bold">
                       {proj.description || 'Top metalged tool using React and Fabric.js state management.'}
                     </p>
                     <div className="flex gap-3 text-[11px] font-sans font-bold text-slate-500 underline decoration-slate-200 underline-offset-4 decoration-1 mt-1">
@@ -275,7 +275,7 @@ const ElegantTemplate = ({ data }) => {
                     <h4 className="text-[16px] font-bold text-[#1a1a1a] font-serif leading-tight">
                       {proj.title}
                     </h4>
-                    <p className="text-[13px] font-sans text-slate-600 leading-snug font-bold">
+                    <p className="text-[11px] font-sans text-slate-600 leading-snug font-bold">
                       {proj.description || 'Full stack web application built with React, Node.js, Express.js and MongoDB.'}
                     </p>
                     <div className="flex gap-3 text-[11px] font-sans font-bold text-slate-500 underline decoration-slate-200 underline-offset-4 decoration-1 mt-1">
@@ -303,7 +303,7 @@ const ElegantTemplate = ({ data }) => {
                     <h4 className="text-[16px] font-bold text-[#1a1a1a] font-serif leading-tight">
                       {proj.title}
                     </h4>
-                    <p className="text-[13px] font-sans text-slate-600 leading-snug font-bold">
+                    <p className="text-[11px] font-sans text-slate-600 leading-snug font-bold">
                       {proj.description}
                     </p>
                     <div className="flex gap-3 text-[11px] font-sans font-bold text-slate-500 underline decoration-slate-200 underline-offset-4 decoration-1 mt-1">
@@ -326,7 +326,7 @@ const ElegantTemplate = ({ data }) => {
       </div>
 
       {/* Footer Badges - Exact Same to Same Structure */}
-      <footer className="px-10 py-5 mt-auto mb-4 flex flex-col gap-3">
+      <footer className="px-8 py-2 mt-auto mb-2 flex flex-col gap-2">
          <div className="h-[2px] bg-black w-full" />
          <div className="flex justify-between items-center bg-white">
             <h3 className="text-[17px] font-bold uppercase tracking-tight whitespace-nowrap text-[#1a1a1a]">Frontend & UI/UX Projects</h3>

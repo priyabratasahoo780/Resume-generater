@@ -32,7 +32,7 @@ const ModernTemplate = ({ data }) => {
   } = data;
 
   return (
-    <div className="w-full min-h-full bg-white text-slate-800 font-sans flex drop-shadow-2xl overflow-hidden border border-slate-200">
+    <div className="flex flex-col w-full bg-white font-sans text-slate-900 min-h-full shadow-2xl relative overflow-hidden p-8 gap-8 border border-slate-200">
       
       {/* Left Sidebar */}
       <div className="w-[35%] bg-indigo-900 text-indigo-50 p-5 flex flex-col gap-5 h-full relative overflow-hidden">
@@ -58,11 +58,11 @@ const ModernTemplate = ({ data }) => {
             </div>
           </div>
           <div className="flex flex-col gap-2 mt-2">
-            <h1 className="text-2xl font-black leading-tight tracking-tight text-white drop-shadow-sm">
+            <h1 className="text-xl font-black leading-tight tracking-tight text-white drop-shadow-sm">
               {personalInfo?.name || 'Your Name'}
             </h1>
             <div className="h-1 w-12 bg-indigo-400 mx-auto rounded-full mb-1"></div>
-            <h2 className="text-sm font-black text-indigo-200 tracking-[0.3em] uppercase opacity-90">
+            <h2 className="text-xs font-black text-indigo-200 tracking-[0.2em] uppercase opacity-90">
               {personalInfo?.title || 'Your Job Title'}
             </h2>
           </div>
@@ -213,13 +213,13 @@ const ModernTemplate = ({ data }) => {
               <div className="p-3 bg-indigo-900 text-white rounded-2xl shadow-lg ring-4 ring-indigo-50">
                 <User className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-black uppercase tracking-widest text-indigo-950">
+              <h3 className="text-lg font-black uppercase tracking-widest text-indigo-950">
                 Professional Bio
               </h3>
             </div>
             <div className="pl-10 space-y-4">
               <div className="w-16 h-1 bg-gradient-to-r from-indigo-900 to-purple-600 rounded-full" />
-              <p className="text-[14px] leading-relaxed text-slate-600 text-justify font-medium">
+              <p className="text-[12px] leading-relaxed text-slate-600 text-justify font-medium">
                 {aboutMe}
               </p>
             </div>
@@ -244,14 +244,14 @@ const ModernTemplate = ({ data }) => {
                   
                   <div className="flex justify-between items-start">
                     <div className="flex flex-col gap-1">
-                      <h4 className="font-black text-slate-900 text-xl group-hover:text-indigo-700 transition-colors">
+                      <h4 className="font-black text-slate-900 text-lg group-hover:text-indigo-700 transition-colors">
                         {exp.title}
                       </h4>
                       <span className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">{exp.duration || '2024-Present'}</span>
                     </div>
                   </div>
 
-                  <p className="text-[14px] leading-relaxed text-slate-600 text-justify font-medium bg-slate-50/50 p-5 rounded-2xl border border-slate-100/50">
+                  <p className="text-[12px] leading-relaxed text-slate-600 text-justify font-medium bg-slate-50/50 p-4 rounded-xl border border-slate-100/50">
                     {exp.description}
                   </p>
                 </div>
@@ -278,7 +278,7 @@ const ModernTemplate = ({ data }) => {
                   
                   <div className="flex justify-between items-start">
                     <div className="flex flex-col gap-1">
-                      <h4 className="font-black text-slate-900 text-xl group-hover:text-indigo-700 transition-colors">
+                      <h4 className="font-black text-slate-900 text-lg group-hover:text-indigo-700 transition-colors">
                         {project.title}
                       </h4>
                       <span className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">Full-cycle Development</span>
@@ -297,7 +297,7 @@ const ModernTemplate = ({ data }) => {
                     </div>
                   </div>
 
-                  <p className="text-[14px] leading-relaxed text-slate-600 text-justify font-medium bg-slate-50/50 p-5 rounded-2xl border border-slate-100/50">
+                  <p className="text-[12px] leading-relaxed text-slate-600 text-justify font-medium bg-slate-50/50 p-4 rounded-xl border border-slate-100/50">
                     {project.description}
                   </p>
                 </div>

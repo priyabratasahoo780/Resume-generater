@@ -135,10 +135,10 @@ function App() {
       <style>
         @page { size: A4; margin: 0; }
         * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-        body { margin: 0; padding: 0; width: 21cm; font-size: 12px; line-height: 1.2; }
+        body { margin: 0; padding: 0; width: 21cm; font-size: 11px; line-height: 1.2; }
         .print-container { width: 100% !important; height: auto !important; }
         /* Reduce overall scale for print to help with 1-page fit */
-        body > div { transform: scale(0.98); transform-origin: top center; overflow: visible !important; height: auto !important; }
+        body > div { transform: scale(0.92); transform-origin: top center; overflow: visible !important; height: auto !important; }
       </style>
     `);
     iframeDoc.write('</head><body>');
