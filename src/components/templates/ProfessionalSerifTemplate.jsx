@@ -72,6 +72,18 @@ const ProfessionalSerifTemplate = ({ data }) => {
         <p className="text-[13px] text-center leading-relaxed max-w-3xl text-slate-700 mt-2 font-sans font-medium">
           {aboutMe || 'Professional summary...'}
         </p>
+        
+        {/* Expertise Bullets */}
+        {(expertise && expertise.length > 0) && (
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-2 max-w-4xl">
+            {expertise.map((item, idx) => (
+              <div key={idx} className="flex items-center gap-2 text-[12px] text-slate-600 font-bold font-sans">
+                <span className="text-indigo-400 text-lg leading-none">•</span>
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* ── Two Column Layout ── */}

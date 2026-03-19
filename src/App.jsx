@@ -137,8 +137,8 @@ function App() {
         * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
         body { margin: 0; padding: 0; width: 21cm; font-size: 11px; line-height: 1.2; }
         .print-container { width: 100% !important; height: auto !important; }
-        /* Reduce overall scale for print to help with 1-page fit */
-        body > div { transform: scale(0.92); transform-origin: top center; overflow: visible !important; height: auto !important; }
+        /* Dynamic scale will be applied via JS in iframe.onload */
+        body > div { transform-origin: top center; overflow: visible !important; height: auto !important; }
       </style>
     `);
     iframeDoc.write('</head><body>');
@@ -146,11 +146,43 @@ function App() {
     iframeDoc.write('</body></html>');
     iframeDoc.close();
 
-    // Wait for styles to load then print
+    // Wait for styles to load then calculate scale and print
     iframe.onload = () => {
       try {
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        const rootDiv = iframeDoc.body.querySelector('div');
+        
+        if (rootDiv) {
+          // Reset any previous transforms for measurement
+          rootDiv.style.transform = 'none';
+          rootDiv.style.width = '21cm';
+          
+          // A4 height is approx 1122px at 96dpi. 
+          // We target ~1110px to allow for printer margins.
+          const targetHeight = 1110; 
+          const currentHeight = rootDiv.scrollHeight;
+          
+          if (currentHeight > targetHeight) {
+            // SCALE DOWN: If content is too long
+            const scaleFactor = (targetHeight / currentHeight).toFixed(3);
+            rootDiv.style.transform = `scale(${scaleFactor})`;
+            rootDiv.style.transformOrigin = 'top center';
+          } else if (currentHeight < targetHeight * 0.85) {
+            // SCALE UP: If content is too short, increase slightly to fill page (max 1.08x)
+            const scaleFactor = Math.min(1.08, (targetHeight / currentHeight) * 0.95).toFixed(3);
+            rootDiv.style.transform = `scale(${scaleFactor})`;
+            rootDiv.style.transformOrigin = 'top center';
+          } else {
+            // OPTIONAL: Standard slight shrink if it's "just about right"
+            rootDiv.style.transform = 'scale(0.98)';
+            rootDiv.style.transformOrigin = 'top center';
+          }
+        }
+
         iframe.contentWindow.focus();
         iframe.contentWindow.print();
+      } catch (err) {
+        console.error('Print error:', err);
       } finally {
         setTimeout(() => {
           if (document.body.contains(iframe)) document.body.removeChild(iframe);
