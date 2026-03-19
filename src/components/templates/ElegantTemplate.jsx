@@ -263,33 +263,7 @@ const ElegantTemplate = ({ data }) => {
             </section>
           )}
 
-          {/* Professional Projects */}
-          {(projects && projects.length > 0) && (
-            <section className="flex flex-col gap-4">
-               <h2 className="text-[20px] font-bold text-[#1a1a1a] border-b border-black pb-1 uppercase tracking-tight w-full">
-                Professional Projects
-              </h2>
-              <div className="flex flex-col gap-5">
-                {projects?.slice(0, 2).map((proj, idx) => (
-                  <div key={idx} className="flex flex-col gap-1.5">
-                    <h4 className="text-[16px] font-bold text-[#1a1a1a] font-serif leading-tight">
-                      {proj.title}
-                    </h4>
-                    <p className="text-[11px] font-sans text-slate-600 leading-snug font-bold">
-                      {proj.description || 'Full stack web application built with React, Node.js, Express.js and MongoDB.'}
-                    </p>
-                    <div className="flex gap-3 text-[11px] font-sans font-bold text-slate-500 underline decoration-slate-200 underline-offset-4 decoration-1 mt-1">
-                      <a href={proj.github}>Github</a>
-                      <span className="text-slate-300 no-underline font-normal">|</span>
-                      <a href={proj.deploy}>Demo</a>
-                      <span className="text-slate-300 no-underline font-normal">|</span>
-                      <a href={proj.github}>PRs</a>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
+
 
            {/* Frontend & UI/UX Projects */}
            {(uiux && uiux.length > 0) && (
