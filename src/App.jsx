@@ -135,7 +135,7 @@ function App() {
       <style>
         @page { size: A4; margin: 0; }
         * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-        body { margin: 0; padding: 0; width: 21cm; font-size: 11px; line-height: 1.2; }
+        body { margin: 0; padding: 8mm 2mm; width: 21cm; font-size: 11px; line-height: 1.2; }
         .print-container { width: 100% !important; height: auto !important; }
         /* Dynamic scale will be applied via JS in iframe.onload */
         body > div { transform-origin: top center; overflow: visible !important; height: auto !important; }

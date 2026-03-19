@@ -15,7 +15,7 @@ const ProfessionalSerifTemplate = ({ data }) => {
   } = data;
 
   return (
-    <div className="w-full min-h-full bg-white text-slate-900 font-serif p-8 flex flex-col gap-6 shadow-inner print:p-0">
+    <div className="w-full min-h-full bg-white text-slate-900 font-serif p-8 flex flex-col gap-6 shadow-inner">
       
       {/* ── Header ── */}
       <header className="flex justify-between items-start border-b border-slate-300 pb-4">
