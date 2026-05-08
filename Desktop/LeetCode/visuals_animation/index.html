@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LeetCode Visualizer</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  background:#0f172a;
+  color:white;
+  padding:20px;
+  overflow-x:hidden;
+}
+
+.container{
+  max-width:1400px;
+  margin:auto;
+}
+
+.heading{
+  text-align:center;
+  font-size:50px;
+  margin-bottom:25px;
+  color:#38bdf8;
+  font-weight:bold;
+}
+
+.card{
+  background:#1e293b;
+  padding:25px;
+  border-radius:20px;
+  margin-bottom:25px;
+  box-shadow:0 0 25px rgba(0,0,0,0.5);
+}
+
+.title{
+  font-size:32px;
+  margin-bottom:20px;
+  color:#facc15;
+}
+
+.question-box{
+  background:#0f172a;
+  padding:20px;
+  border-radius:15px;
+  font-size:22px;
+  line-height:1.8;
+}
+
+.highlight{
+  color:#22c55e;
+  font-weight:bold;
+}
+
+.sentence{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:30px;
+  justify-content:center;
+}
+
+.char{
+  width:55px;
+  height:55px;
+  border-radius:12px;
+  background:#334155;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:24px;
+  position:relative;
+  transition:0.4s;
+  font-weight:bold;
+}
+
+.active{
+  transform:scale(1.2);
+  background:#22c55e !important;
+  box-shadow:0 0 25px #22c55e;
+}
+
+.space{
+  background:#ef4444 !important;
+  box-shadow:0 0 25px #ef4444;
+}
+
+.done{
+  background:#2563eb !important;
+}
+
+.pointer{
+  position:absolute;
+  top:-30px;
+  color:#facc15;
+  font-size:22px;
+  animation:bounce 1s infinite;
+}
+
+@keyframes bounce{
+  0%,100%{
+    transform:translateY(0);
+  }
+  50%{
+    transform:translateY(-8px);
+  }
+}
+
+.info{
+  display:flex;
+  gap:20px;
+  margin-top:30px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.box{
+  background:#0f172a;
+  padding:20px 30px;
+  border-radius:15px;
+  font-size:22px;
+  border:2px solid #38bdf8;
+  min-width:220px;
+  text-align:center;
+}
+
+.buttons{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+
+button{
+  padding:18px 35px;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  font-size:22px;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+.start{
+  background:#38bdf8;
+}
+
+.stop{
+  background:#ef4444;
+  color:white;
+}
+
+.resume{
+  background:#22c55e;
+}
+
+.reset{
+  background:#facc15;
+}
+
+.explain-box{
+  margin-top:35px;
+}
+
+.step{
+  background:#334155;
+  padding:18px;
+  margin-bottom:15px;
+  border-radius:14px;
+  font-size:20px;
+  animation:fade 0.5s ease;
+  border-left:6px solid #38bdf8;
+}
+
+@keyframes fade{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.result{
+  text-align:center;
+  margin-top:30px;
+  font-size:40px;
+  color:#22c55e;
+  font-weight:bold;
+}
+
+.flow{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-top:25px;
+}
+
+.flow-box{
+  background:#0f172a;
+  padding:15px 20px;
+  border-radius:12px;
+  border:2px solid #38bdf8;
+  font-size:20px;
+}
+
+.arrow{
+  font-size:30px;
+  color:#38bdf8;
+}
+
+.image-box{
+  margin-top:25px;
+  display:flex;
+  justify-content:center;
+}
+
+.image-box img{
+  width:320px;
+  border-radius:20px;
+  box-shadow:0 0 20px rgba(255,255,255,0.2);
+}
+.image-box{
+  margin-top:30px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.image-box img{
+  width:280px;
+  max-width:100%;
+  height:auto;
+  object-fit:contain;
+  border-radius:20px;
+  background:white;
+  padding:15px;
+  box-shadow:0 0 25px rgba(255,255,255,0.15);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="heading">
+🚀 Truncate Sentence Visualizer
+</div>
+
+<div class="card">
+
+<div class="title">
+📌 Problem Statement
+</div>
+
+<div class="question-box">
+
+Given a sentence <span class="highlight">s</span> and integer
+<span class="highlight">k</span>,
+return the first <span class="highlight">k words</span>.
+
+<br><br>
+
+Example:
+<br><br>
+
+s = <span class="highlight">"What is the solution"</span>
+<br>
+k = <span class="highlight">4</span>
+
+</div>
+
+<div class="flow">
+
+<div class="flow-box">
+Sentence
+</div>
+
+<div class="arrow">
+➡
+</div>
+
+<div class="flow-box">
+Count Spaces
+</div>
+
+<div class="arrow">
+➡
+</div>
+
+<div class="flow-box">
+Return First K Words
+</div>
+
+</div>
+
+<div class="image-box">
+
+<img 
+src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png"
+alt="Algorithm Illustration"
+onerror="this.style.display='none'"
+>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="title">
+🧠 Live Visual Simulation
+</div>
+
+<div class="sentence" id="sentence"></div>
+
+<div class="info">
+
+<div class="box">
+Pointer Index
+<br><br>
+<span id="index">0</span>
+</div>
+
+<div class="box">
+Space Count
+<br><br>
+<span id="spaceCount">0</span>
+</div>
+
+<div class="box">
+K Value
+<br><br>
+<span id="kValue">4</span>
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button class="start" onclick="startAnimation()">
+▶ Start
+</button>
+
+<button class="stop" onclick="stopAnimation()">
+⏸ Stop
+</button>
+
+<button class="resume" onclick="resumeAnimation()">
+⏯ Resume
+</button>
+
+<button class="reset" onclick="resetAnimation()">
+🔄 Reset
+</button>
+
+</div>
+
+<div class="result" id="result"></div>
+
+<div class="explain-box" id="explain"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const s = "What is the solution";
+const k = 4;
+
+const sentenceDiv = document.getElementById("sentence");
+
+let currentIndex = 0;
+let spaceCount = 0;
+
+let paused = false;
+let running = false;
+
+for(let i=0;i<s.length;i++){
+
+  const div = document.createElement("div");
+
+  div.classList.add("char");
+
+  div.innerHTML = s[i] === " " ? "_" : s[i];
+
+  div.id = "char-"+i;
+
+  sentenceDiv.appendChild(div);
+}
+
+async function startAnimation(){
+
+  if(running) return;
+
+  running = true;
+
+  while(currentIndex < s.length){
+
+    while(paused){
+      await sleep(200);
+    }
+
+    const current = document.getElementById(
+      "char-"+currentIndex
+    );
+
+    current.classList.add("active");
+
+    current.innerHTML += `
+      <div class="pointer">⬆</div>
+    `;
+
+    document.getElementById("index")
+    .innerHTML = currentIndex;
+
+    addExplain(
+      `👉 Pointer moved to index
+      ${currentIndex}`
+    );
+
+    await sleep(1200);
+
+    if(s[currentIndex] === " "){
+
+      current.classList.add("space");
+
+      spaceCount++;
+
+      document.getElementById("spaceCount")
+      .innerHTML = spaceCount;
+
+      addExplain(
+        `✅ SPACE FOUND at index
+        ${currentIndex}.
+        So spaceCount becomes
+        ${spaceCount}`
+      );
+
+      await sleep(1200);
+
+      if(spaceCount === k){
+
+        document.getElementById("result")
+        .innerHTML =
+        `🎉 Result:
+        "${s.substring(0,currentIndex)}"`;
+
+        addExplain(
+          `🔥 spaceCount became equal
+          to k.
+          Return substring from
+          index 0 to ${currentIndex}`
+        );
+
+        running = false;
+
+        return;
+      }
+    }
+
+    current.classList.remove("active");
+
+    current.classList.add("done");
+
+    current.innerHTML =
+    current.innerHTML.replace(
+      '<div class="pointer">⬆</div>',
+      ''
+    );
+
+    currentIndex++;
+
+    await sleep(500);
+  }
+
+  document.getElementById("result")
+  .innerHTML =
+  `🎉 Final Result:
+  "${s}"`;
+
+  addExplain(
+    `🚀 spaceCount never became
+    ${k},
+    so entire string is returned.`
+  );
+
+  running = false;
+}
+
+function stopAnimation(){
+  paused = true;
+
+  addExplain(
+    `⏸ Animation Paused.
+    Explain this step to audience.`
+  );
+}
+
+function resumeAnimation(){
+
+  paused = false;
+
+  addExplain(
+    `▶ Animation Resumed.`
+  );
+}
+
+function resetAnimation(){
+
+  paused = false;
+  running = false;
+
+  currentIndex = 0;
+  spaceCount = 0;
+
+  document.getElementById("index")
+  .innerHTML = 0;
+
+  document.getElementById("spaceCount")
+  .innerHTML = 0;
+
+  document.getElementById("result")
+  .innerHTML = "";
+
+  document.getElementById("explain")
+  .innerHTML = "";
+
+  for(let i=0;i<s.length;i++){
+
+    const current =
+    document.getElementById("char-"+i);
+
+    current.className = "char";
+
+    current.innerHTML =
+    s[i] === " " ? "_" : s[i];
+  }
+
+  addExplain(
+    `🔄 Animation Reset Successfully`
+  );
+}
+
+function addExplain(text){
+
+  const explain =
+  document.getElementById("explain");
+
+  const div =
+  document.createElement("div");
+
+  div.classList.add("step");
+
+  div.innerHTML = text;
+
+  explain.appendChild(div);
+
+  explain.scrollTop =
+  explain.scrollHeight;
+}
+
+function sleep(ms){
+  return new Promise(resolve =>
+    setTimeout(resolve, ms)
+  );
+}
+
+</script>
+
+</body>
+</html>

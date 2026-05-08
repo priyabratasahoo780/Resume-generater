@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Bit Manipulation Visualizer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:
+    radial-gradient(circle at top,
+    #1e3a8a,
+    #020617);
+
+    min-height:100vh;
+    color:white;
+    overflow-x:hidden;
+}
+
+.container{
+    width:95%;
+    max-width:1600px;
+    margin:auto;
+    padding:30px;
+}
+
+.title{
+    text-align:center;
+    font-size:65px;
+    font-weight:700;
+
+    background:
+    linear-gradient(
+    90deg,
+    #38bdf8,
+    #22c55e);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    font-size:24px;
+    color:#cbd5e1;
+    margin-bottom:40px;
+}
+
+/* INPUT AREA */
+
+.input-area{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:40px;
+}
+
+.input-area input{
+
+    width:240px;
+
+    padding:18px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:18px;
+
+    font-size:22px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    color:white;
+
+    border:
+    2px solid rgba(255,255,255,0.1);
+
+    transition:0.4s;
+}
+
+.input-area input:focus{
+
+    border:
+    2px solid #38bdf8;
+
+    box-shadow:
+    0 0 20px #38bdf8;
+}
+
+.generate{
+
+    background:#8b5cf6;
+
+    padding:18px 35px;
+
+    border:none;
+
+    border-radius:18px;
+
+    font-size:22px;
+
+    font-weight:600;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.generate:hover{
+
+    transform:scale(1.08);
+
+    box-shadow:
+    0 0 25px #8b5cf6;
+}
+
+/* TOP */
+
+.top{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:30px;
+    flex-wrap:wrap;
+    margin-bottom:35px;
+}
+
+.live-title{
+    font-size:45px;
+    color:#38bdf8;
+}
+
+.live-step{
+
+    flex:1;
+    min-width:350px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    border-left:
+    8px solid #22c55e;
+
+    border-radius:22px;
+
+    padding:25px;
+
+    font-size:30px;
+    font-weight:600;
+
+    min-height:110px;
+
+    display:flex;
+    align-items:center;
+
+    transition:0.5s;
+}
+
+/* BINARY BOXES */
+
+.binary-container{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(300px,1fr));
+
+    gap:30px;
+
+    margin-top:40px;
+}
+
+.box{
+
+    background:
+    rgba(255,255,255,0.06);
+
+    border-radius:30px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,0.5);
+}
+
+.box-title{
+    font-size:40px;
+    color:#38bdf8;
+    margin-bottom:25px;
+}
+
+.bits{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+}
+
+.bit{
+
+    width:80px;
+    height:80px;
+
+    border-radius:20px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:38px;
+    font-weight:700;
+
+    background:
+    linear-gradient(
+    145deg,
+    #1e293b,
+    #0f172a);
+
+    transition:0.5s;
+}
+
+.active{
+    background:
+    linear-gradient(
+    145deg,
+    #22c55e,
+    #15803d);
+
+    transform:
+    scale(1.15);
+
+    box-shadow:
+    0 0 25px #22c55e;
+}
+
+.carry{
+    background:
+    linear-gradient(
+    145deg,
+    #ef4444,
+    #dc2626);
+
+    box-shadow:
+    0 0 25px #ef4444;
+}
+
+/* BUTTONS */
+
+.controls{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:45px;
+}
+
+button{
+
+    border:none;
+
+    padding:18px 35px;
+
+    border-radius:18px;
+
+    font-size:22px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    color:white;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+.start{
+    background:#22c55e;
+}
+
+.pause{
+    background:#ef4444;
+}
+
+.resume{
+    background:#3b82f6;
+}
+
+.reset{
+    background:#f59e0b;
+}
+
+/* TABLE */
+
+.table-area{
+
+    margin-top:50px;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    border-radius:30px;
+
+    padding:30px;
+
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    text-align:center;
+}
+
+th{
+
+    background:#38bdf8;
+
+    color:black;
+
+    padding:18px;
+
+    font-size:24px;
+}
+
+td{
+
+    padding:18px;
+
+    font-size:22px;
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.1);
+}
+
+.highlight-row{
+    background:
+    rgba(34,197,94,0.2);
+}
+
+/* RESULT */
+
+.result{
+
+    text-align:center;
+
+    margin-top:50px;
+
+    font-size:60px;
+
+    font-weight:700;
+
+    color:#facc15;
+}
+
+/* EXPLANATION */
+
+.explanation{
+
+    margin-top:50px;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    border-radius:30px;
+
+    padding:35px;
+
+    line-height:2;
+
+    font-size:24px;
+}
+
+.explanation h2{
+    color:#38bdf8;
+    margin-bottom:20px;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    .title{
+        font-size:42px;
+    }
+
+    .live-title{
+        font-size:30px;
+    }
+
+    .bit{
+        width:55px;
+        height:55px;
+        font-size:28px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="title">
+🚀 Sum Without + Operator
+</div>
+
+<div class="subtitle">
+Bit Manipulation Visual Dry Run Simulation
+</div>
+
+<!-- INPUTS -->
+
+<div class="input-area">
+
+<input type="number"
+id="input1"
+placeholder="Enter num1"
+value="3">
+
+<input type="number"
+id="input2"
+placeholder="Enter num2"
+value="5">
+
+<button class="generate"
+onclick="generateNumbers()">
+
+🚀 Generate Simulation
+
+</button>
+
+</div>
+
+<!-- TOP -->
+
+<div class="top">
+
+<div class="live-title">
+🧠 Live Binary Simulation
+</div>
+
+<div class="live-step"
+id="stepText">
+
+Press Generate Simulation
+
+</div>
+
+</div>
+
+<!-- BINARY AREA -->
+
+<div class="binary-container">
+
+<div class="box">
+
+<div class="box-title">
+num1
+</div>
+
+<div class="bits"
+id="num1Bits"></div>
+
+</div>
+
+<div class="box">
+
+<div class="box-title">
+num2
+</div>
+
+<div class="bits"
+id="num2Bits"></div>
+
+</div>
+
+<div class="box">
+
+<div class="box-title">
+Carry
+</div>
+
+<div class="bits"
+id="carryBits"></div>
+
+</div>
+
+</div>
+
+<!-- BUTTONS -->
+
+<div class="controls">
+
+<button class="start"
+onclick="startSimulation()">
+
+▶ Start
+
+</button>
+
+<button class="pause"
+onclick="pauseSimulation()">
+
+⏸ Pause
+
+</button>
+
+<button class="resume"
+onclick="resumeSimulation()">
+
+⏯ Resume
+
+</button>
+
+<button class="reset"
+onclick="resetSimulation()">
+
+🔄 Reset
+
+</button>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="table-area">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Iteration</th>
+<th>num1</th>
+<th>num2</th>
+<th>carry</th>
+<th>Operation</th>
+</tr>
+
+</thead>
+
+<tbody id="dryRunBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- RESULT -->
+
+<div class="result"
+id="result"></div>
+
+<!-- EXPLANATION -->
+
+<div class="explanation">
+
+<h2>
+📌 How This Code Works?
+</h2>
+
+<p>
+
+✅ XOR (^) performs addition WITHOUT carry.
+
+<br>
+
+✅ AND (&) finds carry bits.
+
+<br>
+
+✅ LEFT SHIFT (<<) moves carry to the next position.
+
+<br><br>
+
+The loop continues until carry becomes 0.
+
+<br><br>
+
+At the end:
+num1 stores the final answer.
+
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+let originalNum1 = 0;
+let originalNum2 = 0;
+
+let num1 = 0;
+let num2 = 0;
+
+let iteration = 1;
+
+let paused = false;
+let running = false;
+
+function toBinary(num){
+
+    return (num >>> 0)
+    .toString(2)
+    .padStart(4,'0');
+}
+
+function renderBits(id,binary,type=""){
+
+    const container =
+    document.getElementById(id);
+
+    container.innerHTML = "";
+
+    for(let bit of binary){
+
+        const div =
+        document.createElement("div");
+
+        div.classList.add("bit");
+
+        if(type === "carry"){
+            div.classList.add("carry");
+        }
+
+        div.innerHTML = bit;
+
+        container.appendChild(div);
+    }
+}
+
+/* GENERATE INPUT */
+
+function generateNumbers(){
+
+    originalNum1 =
+    parseInt(
+    document.getElementById(
+    "input1"
+    ).value);
+
+    originalNum2 =
+    parseInt(
+    document.getElementById(
+    "input2"
+    ).value);
+
+    if(isNaN(originalNum1) ||
+       isNaN(originalNum2)){
+
+        alert(
+        "Please enter valid numbers"
+        );
+
+        return;
+    }
+
+    resetSimulation();
+
+    num1 = originalNum1;
+    num2 = originalNum2;
+
+    renderBits(
+    "num1Bits",
+    toBinary(num1)
+    );
+
+    renderBits(
+    "num2Bits",
+    toBinary(num2)
+    );
+
+    renderBits(
+    "carryBits",
+    "0000",
+    "carry"
+    );
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    `✅ Numbers Generated.
+    Press Start Simulation`;
+}
+
+/* START */
+
+async function startSimulation(){
+
+    if(running) return;
+
+    running = true;
+
+    while(num2 != 0){
+
+        while(paused){
+            await sleep(200);
+        }
+
+        let carry =
+        (num1 & num2);
+
+        addRow(
+        iteration,
+        num1,
+        num2,
+        carry,
+        "Find Carry using AND (&)"
+        );
+
+        document.getElementById(
+        "stepText"
+        ).innerHTML =
+        `👉 Iteration ${iteration}
+        → Finding Carry`;
+
+        renderBits(
+        "carryBits",
+        toBinary(carry),
+        "carry"
+        );
+
+        await sleep(2000);
+
+        num1 = num1 ^ num2;
+
+        addRow(
+        iteration,
+        num1,
+        num2,
+        carry,
+        "XOR → Add without carry"
+        );
+
+        document.getElementById(
+        "stepText"
+        ).innerHTML =
+        `⚡ XOR Operation
+        → Add without carry`;
+
+        renderBits(
+        "num1Bits",
+        toBinary(num1)
+        );
+
+        await sleep(2000);
+
+        num2 = carry << 1;
+
+        addRow(
+        iteration,
+        num1,
+        num2,
+        carry,
+        "LEFT SHIFT Carry"
+        );
+
+        document.getElementById(
+        "stepText"
+        ).innerHTML =
+        `🚀 LEFT SHIFT
+        → Move carry left`;
+
+        renderBits(
+        "num2Bits",
+        toBinary(num2)
+        );
+
+        await sleep(2000);
+
+        iteration++;
+    }
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    `✅ Carry became 0.
+    Final Answer Found`;
+
+    document.getElementById(
+    "result"
+    ).innerHTML =
+    `🎉 FINAL ANSWER = ${num1}`;
+}
+
+/* ADD TABLE ROW */
+
+function addRow(iter,n1,n2,c,op){
+
+    const row =
+    document.createElement("tr");
+
+    row.classList.add("highlight-row");
+
+    row.innerHTML = `
+    <td>${iter}</td>
+    <td>${n1}</td>
+    <td>${n2}</td>
+    <td>${c}</td>
+    <td>${op}</td>
+    `;
+
+    document.getElementById(
+    "dryRunBody"
+    ).appendChild(row);
+}
+
+/* PAUSE */
+
+function pauseSimulation(){
+
+    paused = true;
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "⏸ Simulation Paused";
+}
+
+/* RESUME */
+
+function resumeSimulation(){
+
+    paused = false;
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "▶ Simulation Resumed";
+}
+
+/* RESET */
+
+function resetSimulation(){
+
+    paused = false;
+    running = false;
+
+    iteration = 1;
+
+    num1 = originalNum1;
+    num2 = originalNum2;
+
+    renderBits(
+    "num1Bits",
+    "0000"
+    );
+
+    renderBits(
+    "num2Bits",
+    "0000"
+    );
+
+    renderBits(
+    "carryBits",
+    "0000",
+    "carry"
+    );
+
+    document.getElementById(
+    "result"
+    ).innerHTML = "";
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "Press Generate Simulation";
+
+    document.getElementById(
+    "dryRunBody"
+    ).innerHTML = "";
+}
+
+/* SLEEP */
+
+function sleep(ms){
+
+    return new Promise(resolve =>
+    setTimeout(resolve,ms));
+}
+
+</script>
+
+</body>
+</html>

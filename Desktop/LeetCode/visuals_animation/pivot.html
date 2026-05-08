@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Pivot Index Visualizer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:
+    radial-gradient(circle at top,
+    #1e3a8a,
+    #020617);
+
+    color:white;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+}
+
+.container{
+
+    width:95%;
+
+    max-width:1600px;
+
+    margin:auto;
+
+    padding:30px;
+}
+
+.title{
+
+    text-align:center;
+
+    font-size:65px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+    background:
+    linear-gradient(
+    90deg,
+    #38bdf8,
+    #22c55e);
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+
+    text-align:center;
+
+    font-size:24px;
+
+    color:#cbd5e1;
+
+    margin-bottom:40px;
+}
+
+/* INPUT */
+
+.input-area{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:40px;
+}
+
+.input-area input{
+
+    width:500px;
+
+    padding:18px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:18px;
+
+    font-size:22px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    color:white;
+
+    border:
+    2px solid rgba(255,255,255,0.1);
+}
+
+.input-area input:focus{
+
+    border:
+    2px solid #38bdf8;
+
+    box-shadow:
+    0 0 20px #38bdf8;
+}
+
+.generate{
+
+    background:#8b5cf6;
+
+    padding:18px 35px;
+
+    border:none;
+
+    border-radius:18px;
+
+    font-size:22px;
+
+    font-weight:600;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.generate:hover{
+
+    transform:scale(1.08);
+
+    box-shadow:
+    0 0 25px #8b5cf6;
+}
+
+/* STEP */
+
+.top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:30px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:35px;
+}
+
+.live-title{
+
+    font-size:45px;
+
+    color:#38bdf8;
+}
+
+.live-step{
+
+    flex:1;
+
+    min-width:350px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    border-left:
+    8px solid #22c55e;
+
+    border-radius:22px;
+
+    padding:25px;
+
+    font-size:30px;
+
+    font-weight:600;
+
+    min-height:110px;
+
+    display:flex;
+
+    align-items:center;
+}
+
+/* ARRAY */
+
+.array-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+    margin-top:50px;
+}
+
+.num-box{
+
+    width:100px;
+
+    height:100px;
+
+    border-radius:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:35px;
+
+    font-weight:700;
+
+    background:
+    linear-gradient(
+    145deg,
+    #1e293b,
+    #0f172a);
+
+    transition:0.5s;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.5);
+}
+
+.index{
+
+    font-size:16px;
+
+    color:#94a3b8;
+}
+
+.left{
+
+    background:
+    linear-gradient(
+    145deg,
+    #3b82f6,
+    #2563eb);
+
+    box-shadow:
+    0 0 30px #3b82f6;
+}
+
+.current{
+
+    background:
+    linear-gradient(
+    145deg,
+    #22c55e,
+    #15803d);
+
+    transform:
+    scale(1.2);
+
+    box-shadow:
+    0 0 35px #22c55e;
+}
+
+.right{
+
+    background:
+    linear-gradient(
+    145deg,
+    #ef4444,
+    #dc2626);
+
+    box-shadow:
+    0 0 30px #ef4444;
+}
+
+.pivot{
+
+    background:
+    linear-gradient(
+    145deg,
+    #f59e0b,
+    #d97706);
+
+    transform:
+    scale(1.3);
+
+    box-shadow:
+    0 0 40px #f59e0b;
+}
+
+/* STATS */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:25px;
+
+    margin-top:45px;
+}
+
+.stat-box{
+
+    background:
+    rgba(255,255,255,0.06);
+
+    border-radius:25px;
+
+    padding:30px;
+
+    text-align:center;
+}
+
+.stat-title{
+
+    font-size:24px;
+
+    color:#94a3b8;
+
+    margin-bottom:10px;
+}
+
+.stat-value{
+
+    font-size:50px;
+
+    font-weight:700;
+
+    color:#22c55e;
+}
+
+/* BUTTONS */
+
+.controls{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-top:45px;
+}
+
+button{
+
+    border:none;
+
+    padding:18px 35px;
+
+    border-radius:18px;
+
+    font-size:22px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    color:white;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+.start{
+    background:#22c55e;
+}
+
+.pause{
+    background:#ef4444;
+}
+
+.resume{
+    background:#3b82f6;
+}
+
+.reset{
+    background:#f59e0b;
+}
+
+/* TABLE */
+
+.table-area{
+
+    margin-top:50px;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    border-radius:30px;
+
+    padding:30px;
+
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    text-align:center;
+}
+
+th{
+
+    background:#38bdf8;
+
+    color:black;
+
+    padding:18px;
+
+    font-size:24px;
+}
+
+td{
+
+    padding:18px;
+
+    font-size:22px;
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.1);
+}
+
+/* RESULT */
+
+.result{
+
+    text-align:center;
+
+    margin-top:50px;
+
+    font-size:60px;
+
+    font-weight:700;
+
+    color:#facc15;
+}
+
+@media(max-width:700px){
+
+    .title{
+        font-size:42px;
+    }
+
+    .live-title{
+        font-size:30px;
+    }
+
+    .num-box{
+        width:70px;
+        height:70px;
+        font-size:24px;
+    }
+
+    .input-area input{
+        width:100%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="title">
+🚀 Pivot Index Visualizer
+</div>
+
+<div class="subtitle">
+3D Animated Dry Run Simulation
+</div>
+
+<!-- INPUT -->
+
+<div class="input-area">
+
+<input type="text"
+id="arrayInput"
+placeholder="Enter numbers separated by comma"
+value="1,7,3,6,5,6">
+
+<button class="generate"
+onclick="generateArray()">
+
+🚀 Generate Array
+
+</button>
+
+</div>
+
+<!-- STEP -->
+
+<div class="top">
+
+<div class="live-title">
+🧠 Live Simulation
+</div>
+
+<div class="live-step"
+id="stepText">
+
+Generate Array First
+
+</div>
+
+</div>
+
+<!-- ARRAY -->
+
+<div class="array-container"
+id="arrayContainer"></div>
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat-box">
+
+<div class="stat-title">
+Left Sum
+</div>
+
+<div class="stat-value"
+id="leftValue">
+
+0
+
+</div>
+
+</div>
+
+<div class="stat-box">
+
+<div class="stat-title">
+Right Sum
+</div>
+
+<div class="stat-value"
+id="rightValue">
+
+0
+
+</div>
+
+</div>
+
+<div class="stat-box">
+
+<div class="stat-title">
+Current Index
+</div>
+
+<div class="stat-value"
+id="indexValue">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+<!-- BUTTONS -->
+
+<div class="controls">
+
+<button class="start"
+onclick="startSimulation()">
+
+▶ Start
+
+</button>
+
+<button class="pause"
+onclick="pauseSimulation()">
+
+⏸ Pause
+
+</button>
+
+<button class="resume"
+onclick="resumeSimulation()">
+
+⏯ Resume
+
+</button>
+
+<button class="reset"
+onclick="resetSimulation()">
+
+🔄 Reset
+
+</button>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="table-area">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Index</th>
+<th>Current Number</th>
+<th>Left Sum</th>
+<th>Right Sum</th>
+<th>Status</th>
+</tr>
+
+</thead>
+
+<tbody id="dryRunBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- RESULT -->
+
+<div class="result"
+id="result"></div>
+
+</div>
+
+<script>
+
+let nums = [];
+
+let paused = false;
+let running = false;
+
+function generateArray(){
+
+    nums =
+    document.getElementById(
+    "arrayInput"
+    ).value
+    .split(",")
+    .map(Number);
+
+    if(nums.some(isNaN)){
+
+        alert(
+        "Please enter valid numbers"
+        );
+
+        return;
+    }
+
+    resetSimulation();
+
+    renderArray();
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "✅ Array Generated. Press Start";
+}
+
+function renderArray(){
+
+    const container =
+    document.getElementById(
+    "arrayContainer"
+    );
+
+    container.innerHTML = "";
+
+    nums.forEach((num,index)=>{
+
+        const div =
+        document.createElement("div");
+
+        div.classList.add("num-box");
+
+        div.innerHTML = `
+        <div>${num}</div>
+        <div class="index">
+        index ${index}
+        </div>
+        `;
+
+        container.appendChild(div);
+    });
+}
+
+async function startSimulation(){
+
+    if(running) return;
+
+    running = true;
+
+    let sum = 0;
+
+    for(let n of nums){
+        sum += n;
+    }
+
+    let left = 0;
+
+    let boxes =
+    document.querySelectorAll(".num-box");
+
+    for(let i=0;i<nums.length;i++){
+
+        while(paused){
+            await sleep(200);
+        }
+
+        boxes.forEach(box=>{
+            box.className = "num-box";
+        });
+
+        for(let j=0;j<i;j++){
+            boxes[j].classList.add("left");
+        }
+
+        for(let j=i+1;j<nums.length;j++){
+            boxes[j].classList.add("right");
+        }
+
+        boxes[i].classList.add("current");
+
+        let right =
+        sum - nums[i] - left;
+
+        document.getElementById(
+        "leftValue"
+        ).innerHTML = left;
+
+        document.getElementById(
+        "rightValue"
+        ).innerHTML = right;
+
+        document.getElementById(
+        "indexValue"
+        ).innerHTML = i;
+
+        document.getElementById(
+        "stepText"
+        ).innerHTML =
+        `👉 Checking index ${i}`;
+
+        addRow(
+        i,
+        nums[i],
+        left,
+        right,
+        left == right
+        ? "Pivot Found"
+        : "Not Equal"
+        );
+
+        await sleep(2500);
+
+        if(left == right){
+
+            boxes[i]
+            .classList.remove("current");
+
+            boxes[i]
+            .classList.add("pivot");
+
+            document.getElementById(
+            "stepText"
+            ).innerHTML =
+            `🎉 Pivot Index Found`;
+
+            document.getElementById(
+            "result"
+            ).innerHTML =
+            `🏆 PIVOT INDEX = ${i}`;
+
+            return;
+        }
+
+        left += nums[i];
+    }
+
+    document.getElementById(
+    "result"
+    ).innerHTML =
+    "❌ NO PIVOT INDEX FOUND";
+}
+
+function addRow(index,num,left,right,status){
+
+    const row =
+    document.createElement("tr");
+
+    row.innerHTML = `
+    <td>${index}</td>
+    <td>${num}</td>
+    <td>${left}</td>
+    <td>${right}</td>
+    <td>${status}</td>
+    `;
+
+    document.getElementById(
+    "dryRunBody"
+    ).appendChild(row);
+}
+
+function pauseSimulation(){
+
+    paused = true;
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "⏸ Simulation Paused";
+}
+
+function resumeSimulation(){
+
+    paused = false;
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "▶ Simulation Resumed";
+}
+
+function resetSimulation(){
+
+    paused = false;
+    running = false;
+
+    document.getElementById(
+    "result"
+    ).innerHTML = "";
+
+    document.getElementById(
+    "dryRunBody"
+    ).innerHTML = "";
+
+    document.getElementById(
+    "leftValue"
+    ).innerHTML = 0;
+
+    document.getElementById(
+    "rightValue"
+    ).innerHTML = 0;
+
+    document.getElementById(
+    "indexValue"
+    ).innerHTML = 0;
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "Generate Array First";
+}
+
+function sleep(ms){
+
+    return new Promise(resolve =>
+    setTimeout(resolve,ms));
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LCP Ultimate Visualizer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:
+    radial-gradient(circle at top,
+    #1e3a8a,
+    #020617);
+
+    color:white;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+.header{
+    text-align:center;
+    padding:40px 20px;
+}
+
+.header h1{
+    font-size:60px;
+
+    background:
+    linear-gradient(90deg,#38bdf8,#22c55e);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.header p{
+    color:#cbd5e1;
+    margin-top:10px;
+    font-size:22px;
+}
+
+.tabs{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+    padding:20px;
+}
+
+.tab-btn{
+    padding:18px 28px;
+    border:none;
+    border-radius:16px;
+    background:#1e293b;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.4s;
+}
+
+.tab-btn:hover{
+    transform:scale(1.05);
+}
+
+.tab-btn.active{
+    background:#22c55e;
+    box-shadow:0 0 25px #22c55e;
+}
+
+.simulation{
+    display:none;
+    padding:40px;
+    width:95%;
+    max-width:1400px;
+    margin:auto;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    backdrop-filter:blur(14px);
+
+    border-radius:30px;
+
+    margin-top:30px;
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,0.5);
+}
+
+.simulation.active{
+    display:block;
+    animation:fade 0.7s ease;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.sim-title{
+    font-size:45px;
+    margin-bottom:30px;
+    color:#38bdf8;
+    text-align:center;
+}
+
+/* Simulation 1 */
+
+.sort-container{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+    perspective:1000px;
+}
+
+.sort-card{
+    width:220px;
+    height:120px;
+
+    background:
+    linear-gradient(145deg,#1e293b,#0f172a);
+
+    border-radius:25px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:35px;
+    font-weight:bold;
+
+    transition:1s;
+
+    transform-style:preserve-3d;
+
+    box-shadow:
+    0 20px 40px rgba(0,0,0,0.5);
+}
+
+.sort-card.active{
+    transform:
+    rotateY(20deg)
+    scale(1.15);
+
+    background:
+    linear-gradient(145deg,#22c55e,#15803d);
+}
+
+/* Simulation 2 */
+
+.row{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:30px;
+}
+
+.box{
+    width:80px;
+    height:80px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#1e293b;
+
+    border-radius:16px;
+
+    font-size:38px;
+
+    transition:0.5s;
+}
+
+.match{
+    background:#22c55e;
+    transform:scale(1.15);
+    box-shadow:0 0 25px #22c55e;
+}
+
+.fail{
+    background:#ef4444;
+}
+
+/* Simulation 3 */
+
+.neon-panel{
+    padding:50px;
+
+    background:
+    rgba(255,255,255,0.04);
+
+    border-radius:30px;
+
+    box-shadow:
+    0 0 50px rgba(0,255,255,0.2);
+}
+
+.word{
+    font-size:65px;
+    margin:20px;
+    text-align:center;
+    animation:float 2s infinite alternate;
+}
+
+.highlight{
+    color:#22c55e;
+    text-shadow:0 0 25px #22c55e;
+}
+
+@keyframes float{
+    from{transform:translateY(0)}
+    to{transform:translateY(-15px)}
+}
+
+/* Simulation 4 */
+
+.dryrun{
+    text-align:center;
+    font-size:45px;
+    line-height:2;
+}
+
+.pointer{
+    color:#facc15;
+    animation:bounce 1s infinite;
+}
+
+@keyframes bounce{
+    50%{transform:translateY(-10px)}
+}
+
+/* Simulation 5 */
+
+.badges{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.badge{
+    padding:20px 30px;
+    border-radius:18px;
+    background:#22c55e;
+    font-size:28px;
+}
+
+.prefix{
+    text-align:center;
+    margin-top:80px;
+    font-size:70px;
+    color:#38bdf8;
+}
+
+.code-box{
+    background:black;
+    padding:35px;
+    border-radius:25px;
+    margin-top:50px;
+    font-size:28px;
+    line-height:2;
+}
+
+.run-btn{
+    display:block;
+    margin:40px auto;
+    padding:18px 35px;
+    border:none;
+    border-radius:16px;
+    background:#38bdf8;
+    color:black;
+    font-size:22px;
+    cursor:pointer;
+}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🚀 Longest Common Prefix Visualizer</h1>
+    <p>5 Advanced Visual Simulations • Realistic DSA Animations</p>
+</div>
+
+<div class="tabs">
+
+<button class="tab-btn active"
+onclick="openSim(1)">
+1️⃣ Sorting 3D
+</button>
+
+<button class="tab-btn"
+onclick="openSim(2)">
+2️⃣ Matrix Compare
+</button>
+
+<button class="tab-btn"
+onclick="openSim(3)">
+3️⃣ Neon UI
+</button>
+
+<button class="tab-btn"
+onclick="openSim(4)">
+4️⃣ Dry Run
+</button>
+
+<button class="tab-btn"
+onclick="openSim(5)">
+5️⃣ Interview View
+</button>
+
+</div>
+
+<!-- Simulation 1 -->
+
+<div class="simulation active" id="sim1">
+
+<h2 class="sim-title">
+3D Sorting Animation
+</h2>
+
+<div class="sort-container" id="sortContainer"></div>
+
+<button class="run-btn"
+onclick="runSortSimulation()">
+▶ Run Simulation
+</button>
+
+<h1 id="sortOutput"
+style="text-align:center;color:#22c55e;margin-top:40px;">
+</h1>
+
+</div>
+
+<!-- Simulation 2 -->
+
+<div class="simulation" id="sim2">
+
+<h2 class="sim-title">
+Matrix Character Comparison
+</h2>
+
+<div class="row" id="r1"></div>
+<div class="row" id="r2"></div>
+
+<button class="run-btn"
+onclick="runMatrixSimulation()">
+▶ Run Simulation
+</button>
+
+</div>
+
+<!-- Simulation 3 -->
+
+<div class="simulation" id="sim3">
+
+<h2 class="sim-title">
+Cyberpunk Neon UI
+</h2>
+
+<div class="neon-panel">
+
+<div class="word">
+<span class="highlight">fl</span>ower
+</div>
+
+<div class="word">
+<span class="highlight">fl</span>ow
+</div>
+
+<div class="word">
+<span class="highlight">fl</span>ight
+</div>
+
+</div>
+
+</div>
+
+<!-- Simulation 4 -->
+
+<div class="simulation" id="sim4">
+
+<h2 class="sim-title">
+Dry Run Animation
+</h2>
+
+<div class="dryrun" id="dryrunText"></div>
+
+<button class="run-btn"
+onclick="runDryRun()">
+▶ Start Dry Run
+</button>
+
+</div>
+
+<!-- Simulation 5 -->
+
+<div class="simulation" id="sim5">
+
+<h2 class="sim-title">
+Interview Visualization
+</h2>
+
+<div class="badges">
+<div class="badge">flower</div>
+<div class="badge">flow</div>
+<div class="badge">flight</div>
+</div>
+
+<div class="prefix">
+Common Prefix = fl
+</div>
+
+<div class="code-box">
+Time Complexity: O(n log n)<br>
+Space Complexity: O(1)
+</div>
+
+</div>
+
+<script>
+
+function openSim(num){
+
+    document.querySelectorAll('.simulation')
+    .forEach(sim=>{
+        sim.classList.remove('active');
+    });
+
+    document.querySelectorAll('.tab-btn')
+    .forEach(btn=>{
+        btn.classList.remove('active');
+    });
+
+    document.getElementById(
+    `sim${num}`
+    ).classList.add('active');
+
+    event.target.classList.add('active');
+}
+
+/* Simulation 1 */
+
+const strs=["flower","flow","flight"];
+
+const sortContainer=
+document.getElementById('sortContainer');
+
+strs.forEach(str=>{
+
+    const div=document.createElement('div');
+
+    div.className='sort-card';
+
+    div.innerHTML=str;
+
+    sortContainer.appendChild(div);
+});
+
+async function runSortSimulation(){
+
+    let sorted=[...strs].sort();
+
+    document.querySelectorAll('.sort-card')
+    .forEach((card,i)=>{
+        card.innerHTML=sorted[i];
+    });
+
+    await sleep(1000);
+
+    let first=sorted[0];
+    let last=sorted[sorted.length-1];
+
+    document.querySelectorAll('.sort-card')[0]
+    .classList.add('active');
+
+    document.querySelectorAll('.sort-card')[2]
+    .classList.add('active');
+
+    let i=0;
+
+    while(i<first.length && first[i]===last[i]){
+        i++;
+        await sleep(700);
+    }
+
+    document.getElementById('sortOutput')
+    .innerHTML=`Prefix = ${first.substr(0,i)}`;
+}
+
+/* Simulation 2 */
+
+const first='flight';
+const last='flower';
+
+for(let ch of first){
+
+    const div=document.createElement('div');
+
+    div.className='box';
+
+    div.innerHTML=ch;
+
+    r1.appendChild(div);
+}
+
+for(let ch of last){
+
+    const div=document.createElement('div');
+
+    div.className='box';
+
+    div.innerHTML=ch;
+
+    r2.appendChild(div);
+}
+
+async function runMatrixSimulation(){
+
+    let b1=document.querySelectorAll('#r1 .box');
+    let b2=document.querySelectorAll('#r2 .box');
+
+    for(let i=0;i<Math.min(first.length,last.length);i++){
+
+        await sleep(700);
+
+        if(first[i]===last[i]){
+
+            b1[i].classList.add('match');
+            b2[i].classList.add('match');
+        }
+        else{
+
+            b1[i].classList.add('fail');
+            b2[i].classList.add('fail');
+
+            break;
+        }
+    }
+}
+
+/* Simulation 4 */
+
+async function runDryRun(){
+
+    let first='flight';
+    let last='flower';
+
+    let i=0;
+
+    while(i<first.length && first[i]===last[i]){
+
+        dryrunText.innerHTML=
+        `${first}<br>${last}<br><br>`+
+        '&nbsp;'.repeat(i*2)+
+        '<span class="pointer">⬆</span>';
+
+        await sleep(1000);
+
+        i++;
+    }
+
+    dryrunText.innerHTML +=
+    `<br><br>Answer = ${first.substr(0,i)}`;
+}
+
+function sleep(ms){
+    return new Promise(r=>setTimeout(r,ms));
+}
+
+</script>
+
+</body>
+</html>
+```
