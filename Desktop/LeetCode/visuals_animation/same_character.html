@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Array Strings Equal Visualizer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:
+    radial-gradient(circle at top,
+    #1e3a8a,
+    #020617);
+
+    color:white;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+}
+
+.container{
+
+    width:95%;
+
+    max-width:1700px;
+
+    margin:auto;
+
+    padding:30px;
+}
+
+.title{
+
+    text-align:center;
+
+    font-size:65px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+    background:
+    linear-gradient(
+    90deg,
+    #38bdf8,
+    #22c55e);
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+
+    text-align:center;
+
+    font-size:24px;
+
+    color:#cbd5e1;
+
+    margin-bottom:40px;
+}
+
+/* INPUTS */
+
+.input-area{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:40px;
+}
+
+.input-area input{
+
+    width:400px;
+
+    padding:18px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:18px;
+
+    font-size:22px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    color:white;
+
+    border:
+    2px solid rgba(255,255,255,0.1);
+}
+
+.input-area input:focus{
+
+    border:
+    2px solid #38bdf8;
+
+    box-shadow:
+    0 0 20px #38bdf8;
+}
+
+.generate{
+
+    background:#8b5cf6;
+
+    padding:18px 35px;
+
+    border:none;
+
+    border-radius:18px;
+
+    font-size:22px;
+
+    font-weight:600;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.generate:hover{
+
+    transform:scale(1.08);
+
+    box-shadow:
+    0 0 25px #8b5cf6;
+}
+
+/* LIVE STEP */
+
+.top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:30px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:35px;
+}
+
+.live-title{
+
+    font-size:45px;
+
+    color:#38bdf8;
+}
+
+.live-step{
+
+    flex:1;
+
+    min-width:350px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    border-left:
+    8px solid #22c55e;
+
+    border-radius:22px;
+
+    padding:25px;
+
+    font-size:28px;
+
+    font-weight:600;
+
+    min-height:110px;
+
+    display:flex;
+
+    align-items:center;
+}
+
+/* STRING CONTAINERS */
+
+.main-area{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(500px,1fr));
+
+    gap:40px;
+
+    margin-top:40px;
+}
+
+.word-box{
+
+    background:
+    rgba(255,255,255,0.06);
+
+    border-radius:30px;
+
+    padding:30px;
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,0.5);
+}
+
+.word-title{
+
+    text-align:center;
+
+    font-size:38px;
+
+    margin-bottom:25px;
+
+    color:#38bdf8;
+}
+
+.chars{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+}
+
+.char{
+
+    width:80px;
+
+    height:80px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:35px;
+
+    font-weight:700;
+
+    background:
+    linear-gradient(
+    145deg,
+    #1e293b,
+    #0f172a);
+
+    transition:0.5s;
+
+    transform-style:preserve-3d;
+}
+
+.active{
+
+    background:
+    linear-gradient(
+    145deg,
+    #3b82f6,
+    #2563eb);
+
+    transform:
+    scale(1.2)
+    rotateY(20deg);
+
+    box-shadow:
+    0 0 30px #3b82f6;
+}
+
+.match{
+
+    background:
+    linear-gradient(
+    145deg,
+    #22c55e,
+    #15803d);
+
+    transform:
+    scale(1.2);
+
+    box-shadow:
+    0 0 30px #22c55e;
+}
+
+.fail{
+
+    background:
+    linear-gradient(
+    145deg,
+    #ef4444,
+    #dc2626);
+
+    transform:
+    scale(1.2);
+
+    box-shadow:
+    0 0 30px #ef4444;
+}
+
+/* POINTERS */
+
+.pointer-area{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:25px;
+
+    margin-top:45px;
+}
+
+.pointer-box{
+
+    background:
+    rgba(255,255,255,0.06);
+
+    border-radius:25px;
+
+    padding:30px;
+
+    text-align:center;
+}
+
+.pointer-title{
+
+    font-size:24px;
+
+    color:#94a3b8;
+
+    margin-bottom:10px;
+}
+
+.pointer-value{
+
+    font-size:50px;
+
+    font-weight:700;
+
+    color:#22c55e;
+}
+
+/* BUTTONS */
+
+.controls{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-top:45px;
+}
+
+button{
+
+    border:none;
+
+    padding:18px 35px;
+
+    border-radius:18px;
+
+    font-size:22px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    color:white;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+.start{
+    background:#22c55e;
+}
+
+.pause{
+    background:#ef4444;
+}
+
+.resume{
+    background:#3b82f6;
+}
+
+.reset{
+    background:#f59e0b;
+}
+
+/* TABLE */
+
+.table-area{
+
+    margin-top:50px;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    border-radius:30px;
+
+    padding:30px;
+
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    text-align:center;
+}
+
+th{
+
+    background:#38bdf8;
+
+    color:black;
+
+    padding:18px;
+
+    font-size:22px;
+}
+
+td{
+
+    padding:18px;
+
+    font-size:20px;
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.1);
+}
+
+/* RESULT */
+
+.result{
+
+    text-align:center;
+
+    margin-top:50px;
+
+    font-size:60px;
+
+    font-weight:700;
+
+    color:#facc15;
+}
+
+@media(max-width:700px){
+
+    .title{
+        font-size:42px;
+    }
+
+    .char{
+        width:60px;
+        height:60px;
+        font-size:28px;
+    }
+
+    .input-area input{
+        width:100%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="title">
+🚀 Array Strings Equal
+</div>
+
+<div class="subtitle">
+3D Pointer Animation Simulation
+</div>
+
+<!-- INPUT -->
+
+<div class="input-area">
+
+<input type="text"
+id="word1Input"
+placeholder='Example: ab,c'
+value="ab,c">
+
+<input type="text"
+id="word2Input"
+placeholder='Example: a,bc'
+value="a,bc">
+
+<button class="generate"
+onclick="generateWords()">
+
+🚀 Generate Simulation
+
+</button>
+
+</div>
+
+<!-- STEP -->
+
+<div class="top">
+
+<div class="live-title">
+🧠 Live Simulation
+</div>
+
+<div class="live-step"
+id="stepText">
+
+Generate Strings First
+
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main-area">
+
+<div class="word-box">
+
+<div class="word-title">
+word1
+</div>
+
+<div class="chars"
+id="word1Chars"></div>
+
+</div>
+
+<div class="word-box">
+
+<div class="word-title">
+word2
+</div>
+
+<div class="chars"
+id="word2Chars"></div>
+
+</div>
+
+</div>
+
+<!-- POINTERS -->
+
+<div class="pointer-area">
+
+<div class="pointer-box">
+
+<div class="pointer-title">
+i
+</div>
+
+<div class="pointer-value"
+id="iValue">
+
+0
+
+</div>
+
+</div>
+
+<div class="pointer-box">
+
+<div class="pointer-title">
+j
+</div>
+
+<div class="pointer-value"
+id="jValue">
+
+0
+
+</div>
+
+</div>
+
+<div class="pointer-box">
+
+<div class="pointer-title">
+p1
+</div>
+
+<div class="pointer-value"
+id="p1Value">
+
+0
+
+</div>
+
+</div>
+
+<div class="pointer-box">
+
+<div class="pointer-title">
+p2
+</div>
+
+<div class="pointer-value"
+id="p2Value">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+<!-- BUTTONS -->
+
+<div class="controls">
+
+<button class="start"
+onclick="startSimulation()">
+
+▶ Start
+
+</button>
+
+<button class="pause"
+onclick="pauseSimulation()">
+
+⏸ Pause
+
+</button>
+
+<button class="resume"
+onclick="resumeSimulation()">
+
+⏯ Resume
+
+</button>
+
+<button class="reset"
+onclick="resetSimulation()">
+
+🔄 Reset
+
+</button>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="table-area">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Step</th>
+<th>word1 char</th>
+<th>word2 char</th>
+<th>Comparison</th>
+<th>Action</th>
+<th>i</th>
+<th>j</th>
+<th>p1</th>
+<th>p2</th>
+</tr>
+
+</thead>
+
+<tbody id="dryRunBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- RESULT -->
+
+<div class="result"
+id="result"></div>
+
+</div>
+
+<script>
+
+let word1 = [];
+let word2 = [];
+
+let flat1 = [];
+let flat2 = [];
+
+let paused = false;
+let running = false;
+
+function generateWords(){
+
+    word1 =
+    document.getElementById(
+    "word1Input"
+    ).value
+    .split(",");
+
+    word2 =
+    document.getElementById(
+    "word2Input"
+    ).value
+    .split(",");
+
+    resetSimulation();
+
+    flat1 = word1.join("").split("");
+    flat2 = word2.join("").split("");
+
+    renderChars(
+    "word1Chars",
+    flat1
+    );
+
+    renderChars(
+    "word2Chars",
+    flat2
+    );
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "✅ Strings Generated. Press Start";
+}
+
+function renderChars(id,array){
+
+    const container =
+    document.getElementById(id);
+
+    container.innerHTML = "";
+
+    array.forEach(ch=>{
+
+        const div =
+        document.createElement("div");
+
+        div.classList.add("char");
+
+        div.innerHTML = ch;
+
+        container.appendChild(div);
+    });
+}
+
+async function startSimulation(){
+
+    if(running) return;
+
+    running = true;
+
+    let i = 0;
+    let j = 0;
+
+    let p1 = 0;
+    let p2 = 0;
+
+    let step = 1;
+
+    while(i < word1.length &&
+          j < word2.length){
+
+        while(paused){
+            await sleep(200);
+        }
+
+        const c1 =
+        word1[i][p1];
+
+        const c2 =
+        word2[j][p2];
+
+        let index1 =
+        getFlatIndex(
+        word1,
+        i,
+        p1
+        );
+
+        let index2 =
+        getFlatIndex(
+        word2,
+        j,
+        p2
+        );
+
+        let chars1 =
+        document.querySelectorAll(
+        "#word1Chars .char"
+        );
+
+        let chars2 =
+        document.querySelectorAll(
+        "#word2Chars .char"
+        );
+
+        chars1.forEach(c=>{
+            c.className = "char";
+        });
+
+        chars2.forEach(c=>{
+            c.className = "char";
+        });
+
+        chars1[index1]
+        .classList.add("active");
+
+        chars2[index2]
+        .classList.add("active");
+
+        updatePointers(
+        i,j,p1,p2
+        );
+
+        document.getElementById(
+        "stepText"
+        ).innerHTML =
+        `👉 Comparing '${c1}'
+         and '${c2}'`;
+
+        await sleep(2000);
+
+        if(c1 != c2){
+
+            chars1[index1]
+            .classList.add("fail");
+
+            chars2[index2]
+            .classList.add("fail");
+
+            addRow(
+            step,
+            c1,
+            c2,
+            "Not Equal ❌",
+            "Return False",
+            i,j,p1,p2
+            );
+
+            document.getElementById(
+            "result"
+            ).innerHTML =
+            "❌ FALSE";
+
+            return;
+        }
+
+        chars1[index1]
+        .classList.remove("active");
+
+        chars2[index2]
+        .classList.remove("active");
+
+        chars1[index1]
+        .classList.add("match");
+
+        chars2[index2]
+        .classList.add("match");
+
+        addRow(
+        step,
+        c1,
+        c2,
+        "Equal ✅",
+        "Move pointers",
+        i,j,p1,p2
+        );
+
+        p1++;
+        p2++;
+
+        if(p1 == word1[i].length){
+
+            i++;
+            p1 = 0;
+        }
+
+        if(p2 == word2[j].length){
+
+            j++;
+            p2 = 0;
+        }
+
+        step++;
+
+        await sleep(2000);
+    }
+
+    let ans =
+    i == word1.length &&
+    j == word2.length;
+
+    document.getElementById(
+    "result"
+    ).innerHTML =
+    ans
+    ? "🎉 TRUE"
+    : "❌ FALSE";
+}
+
+function getFlatIndex(arr,i,p){
+
+    let count = 0;
+
+    for(let x=0;x<i;x++){
+        count += arr[x].length;
+    }
+
+    return count + p;
+}
+
+function updatePointers(i,j,p1,p2){
+
+    document.getElementById(
+    "iValue"
+    ).innerHTML = i;
+
+    document.getElementById(
+    "jValue"
+    ).innerHTML = j;
+
+    document.getElementById(
+    "p1Value"
+    ).innerHTML = p1;
+
+    document.getElementById(
+    "p2Value"
+    ).innerHTML = p2;
+}
+
+function addRow(
+step,c1,c2,compare,
+action,i,j,p1,p2){
+
+    const row =
+    document.createElement("tr");
+
+    row.innerHTML = `
+    <td>${step}</td>
+    <td>'${c1}'</td>
+    <td>'${c2}'</td>
+    <td>${compare}</td>
+    <td>${action}</td>
+    <td>${i}</td>
+    <td>${j}</td>
+    <td>${p1}</td>
+    <td>${p2}</td>
+    `;
+
+    document.getElementById(
+    "dryRunBody"
+    ).appendChild(row);
+}
+
+function pauseSimulation(){
+
+    paused = true;
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "⏸ Simulation Paused";
+}
+
+function resumeSimulation(){
+
+    paused = false;
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "▶ Simulation Resumed";
+}
+
+function resetSimulation(){
+
+    paused = false;
+    running = false;
+
+    document.getElementById(
+    "result"
+    ).innerHTML = "";
+
+    document.getElementById(
+    "dryRunBody"
+    ).innerHTML = "";
+
+    updatePointers(0,0,0,0);
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "Generate Strings First";
+}
+
+function sleep(ms){
+
+    return new Promise(resolve =>
+    setTimeout(resolve,ms));
+}
+
+</script>
+
+</body>
+</html>

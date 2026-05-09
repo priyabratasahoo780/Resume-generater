@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Count Odd Numbers Visualizer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:
+    radial-gradient(circle at top,
+    #1e3a8a,
+    #020617);
+
+    color:white;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+}
+
+.container{
+
+    width:95%;
+
+    max-width:1700px;
+
+    margin:auto;
+
+    padding:30px;
+}
+
+.title{
+
+    text-align:center;
+
+    font-size:65px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+    background:
+    linear-gradient(
+    90deg,
+    #38bdf8,
+    #22c55e);
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+
+    text-align:center;
+
+    font-size:24px;
+
+    color:#cbd5e1;
+
+    margin-bottom:40px;
+}
+
+/* INPUT */
+
+.input-area{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:40px;
+}
+
+.input-area input{
+
+    width:220px;
+
+    padding:18px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:18px;
+
+    font-size:22px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    color:white;
+
+    border:
+    2px solid rgba(255,255,255,0.1);
+}
+
+.input-area input:focus{
+
+    border:
+    2px solid #38bdf8;
+
+    box-shadow:
+    0 0 20px #38bdf8;
+}
+
+.generate{
+
+    background:#8b5cf6;
+
+    padding:18px 35px;
+
+    border:none;
+
+    border-radius:18px;
+
+    font-size:22px;
+
+    font-weight:600;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.generate:hover{
+
+    transform:scale(1.08);
+
+    box-shadow:
+    0 0 25px #8b5cf6;
+}
+
+/* TOP */
+
+.top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:30px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:35px;
+}
+
+.live-title{
+
+    font-size:45px;
+
+    color:#38bdf8;
+}
+
+.live-step{
+
+    flex:1;
+
+    min-width:350px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    border-left:
+    8px solid #22c55e;
+
+    border-radius:22px;
+
+    padding:25px;
+
+    font-size:28px;
+
+    font-weight:600;
+
+    min-height:110px;
+
+    display:flex;
+
+    align-items:center;
+}
+
+/* NUMBER BOXES */
+
+.numbers{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+    margin-top:50px;
+}
+
+.num-box{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:22px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:36px;
+
+    font-weight:700;
+
+    background:
+    linear-gradient(
+    145deg,
+    #1e293b,
+    #0f172a);
+
+    transition:0.5s;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.5);
+}
+
+.current{
+
+    background:
+    linear-gradient(
+    145deg,
+    #3b82f6,
+    #2563eb);
+
+    transform:
+    scale(1.15);
+
+    box-shadow:
+    0 0 30px #3b82f6;
+}
+
+.odd{
+
+    background:
+    linear-gradient(
+    145deg,
+    #22c55e,
+    #15803d);
+
+    transform:
+    scale(1.18);
+
+    box-shadow:
+    0 0 35px #22c55e;
+}
+
+.even{
+
+    background:
+    linear-gradient(
+    145deg,
+    #ef4444,
+    #dc2626);
+
+    box-shadow:
+    0 0 25px #ef4444;
+}
+
+/* STATS */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:25px;
+
+    margin-top:45px;
+}
+
+.stat-box{
+
+    background:
+    rgba(255,255,255,0.06);
+
+    border-radius:25px;
+
+    padding:30px;
+
+    text-align:center;
+}
+
+.stat-title{
+
+    font-size:24px;
+
+    color:#94a3b8;
+
+    margin-bottom:10px;
+}
+
+.stat-value{
+
+    font-size:50px;
+
+    font-weight:700;
+
+    color:#22c55e;
+}
+
+/* BUTTONS */
+
+.controls{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-top:45px;
+}
+
+button{
+
+    border:none;
+
+    padding:18px 35px;
+
+    border-radius:18px;
+
+    font-size:22px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    color:white;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+.start{
+    background:#22c55e;
+}
+
+.pause{
+    background:#ef4444;
+}
+
+.resume{
+    background:#3b82f6;
+}
+
+.reset{
+    background:#f59e0b;
+}
+
+/* TABLE */
+
+.table-area{
+
+    margin-top:50px;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    border-radius:30px;
+
+    padding:30px;
+
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    text-align:center;
+}
+
+th{
+
+    background:#38bdf8;
+
+    color:black;
+
+    padding:18px;
+
+    font-size:22px;
+}
+
+td{
+
+    padding:18px;
+
+    font-size:20px;
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.1);
+}
+
+/* RESULT */
+
+.result{
+
+    text-align:center;
+
+    margin-top:50px;
+
+    font-size:60px;
+
+    font-weight:700;
+
+    color:#facc15;
+}
+
+@media(max-width:700px){
+
+    .title{
+        font-size:42px;
+    }
+
+    .num-box{
+        width:65px;
+        height:65px;
+        font-size:26px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="title">
+🚀 Count Odd Numbers
+</div>
+
+<div class="subtitle">
+3D Animated Visual Simulation
+</div>
+
+<!-- INPUT -->
+
+<div class="input-area">
+
+<input type="number"
+id="lowInput"
+placeholder="Low"
+value="3">
+
+<input type="number"
+id="highInput"
+placeholder="High"
+value="7">
+
+<button class="generate"
+onclick="generateNumbers()">
+
+🚀 Generate Simulation
+
+</button>
+
+</div>
+
+<!-- STEP -->
+
+<div class="top">
+
+<div class="live-title">
+🧠 Live Simulation
+</div>
+
+<div class="live-step"
+id="stepText">
+
+Generate Numbers First
+
+</div>
+
+</div>
+
+<!-- NUMBERS -->
+
+<div class="numbers"
+id="numbersContainer"></div>
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat-box">
+
+<div class="stat-title">
+Current Number
+</div>
+
+<div class="stat-value"
+id="currentNum">
+
+0
+
+</div>
+
+</div>
+
+<div class="stat-box">
+
+<div class="stat-title">
+Odd Count
+</div>
+
+<div class="stat-value"
+id="oddCount">
+
+0
+
+</div>
+
+</div>
+
+<div class="stat-box">
+
+<div class="stat-title">
+Formula Result
+</div>
+
+<div class="stat-value"
+id="formulaResult">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+<!-- BUTTONS -->
+
+<div class="controls">
+
+<button class="start"
+onclick="startSimulation()">
+
+▶ Start
+
+</button>
+
+<button class="pause"
+onclick="pauseSimulation()">
+
+⏸ Pause
+
+</button>
+
+<button class="resume"
+onclick="resumeSimulation()">
+
+⏯ Resume
+
+</button>
+
+<button class="reset"
+onclick="resetSimulation()">
+
+🔄 Reset
+
+</button>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="table-area">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Current Number</th>
+<th>Odd / Even</th>
+<th>Odd Count</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="dryRunBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- RESULT -->
+
+<div class="result"
+id="result"></div>
+
+</div>
+
+<script>
+
+let low = 0;
+let high = 0;
+
+let paused = false;
+let running = false;
+
+function generateNumbers(){
+
+    low =
+    parseInt(
+    document.getElementById(
+    "lowInput"
+    ).value);
+
+    high =
+    parseInt(
+    document.getElementById(
+    "highInput"
+    ).value);
+
+    resetSimulation();
+
+    const container =
+    document.getElementById(
+    "numbersContainer"
+    );
+
+    container.innerHTML = "";
+
+    for(let i=low;i<=high;i++){
+
+        const div =
+        document.createElement("div");
+
+        div.classList.add("num-box");
+
+        div.innerHTML = i;
+
+        container.appendChild(div);
+    }
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "✅ Numbers Generated. Press Start";
+}
+
+async function startSimulation(){
+
+    if(running) return;
+
+    running = true;
+
+    let count = 0;
+
+    const boxes =
+    document.querySelectorAll(
+    ".num-box"
+    );
+
+    for(let i=0;i<boxes.length;i++){
+
+        while(paused){
+            await sleep(200);
+        }
+
+        boxes.forEach(box=>{
+            box.className = "num-box";
+        });
+
+        boxes[i]
+        .classList.add("current");
+
+        let num =
+        low + i;
+
+        document.getElementById(
+        "currentNum"
+        ).innerHTML = num;
+
+        document.getElementById(
+        "stepText"
+        ).innerHTML =
+        `👉 Checking ${num}`;
+
+        await sleep(1200);
+
+        if(num % 2 != 0){
+
+            count++;
+
+            boxes[i]
+            .classList.remove("current");
+
+            boxes[i]
+            .classList.add("odd");
+
+            addRow(
+            num,
+            "Odd ✅",
+            count,
+            "Count Increased"
+            );
+        }
+        else{
+
+            boxes[i]
+            .classList.remove("current");
+
+            boxes[i]
+            .classList.add("even");
+
+            addRow(
+            num,
+            "Even ❌",
+            count,
+            "Ignored"
+            );
+        }
+
+        document.getElementById(
+        "oddCount"
+        ).innerHTML = count;
+
+        await sleep(1000);
+    }
+
+    let formula =
+    Math.floor((high - low)/2);
+
+    if(low % 2 != 0 ||
+       high % 2 != 0){
+        formula++;
+    }
+
+    document.getElementById(
+    "formulaResult"
+    ).innerHTML =
+    formula;
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "🎉 Formula Calculation Completed";
+
+    document.getElementById(
+    "result"
+    ).innerHTML =
+    `🏆 TOTAL ODD NUMBERS = ${formula}`;
+}
+
+function addRow(
+num,type,count,action){
+
+    const row =
+    document.createElement("tr");
+
+    row.innerHTML = `
+    <td>${num}</td>
+    <td>${type}</td>
+    <td>${count}</td>
+    <td>${action}</td>
+    `;
+
+    document.getElementById(
+    "dryRunBody"
+    ).appendChild(row);
+}
+
+function pauseSimulation(){
+
+    paused = true;
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "⏸ Simulation Paused";
+}
+
+function resumeSimulation(){
+
+    paused = false;
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "▶ Simulation Resumed";
+}
+
+function resetSimulation(){
+
+    paused = false;
+    running = false;
+
+    document.getElementById(
+    "dryRunBody"
+    ).innerHTML = "";
+
+    document.getElementById(
+    "result"
+    ).innerHTML = "";
+
+    document.getElementById(
+    "currentNum"
+    ).innerHTML = 0;
+
+    document.getElementById(
+    "oddCount"
+    ).innerHTML = 0;
+
+    document.getElementById(
+    "formulaResult"
+    ).innerHTML = 0;
+
+    document.getElementById(
+    "stepText"
+    ).innerHTML =
+    "Generate Numbers First";
+}
+
+function sleep(ms){
+
+    return new Promise(resolve =>
+    setTimeout(resolve,ms));
+}
+
+</script>
+
+</body>
+</html>
